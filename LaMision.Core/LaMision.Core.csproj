@@ -6,4 +6,18 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="isz-ClimaticsLang" Version="1.1.0" />
+    <PackageReference Include="isz-Desiring" Version="1.1.13" />
+    <PackageReference Include="isz-ItemTypes" Version="1.0.2" />
+    <PackageReference Include="isz-Languager" Version="3.1.0" />
+    <PackageReference Include="isz-Stories" Version="1.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Elements\" />
+    <Folder Include="Lang\" />
+    <Folder Include="Vaults\" />
+  </ItemGroup>
+
 </Project>

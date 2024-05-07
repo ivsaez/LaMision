@@ -1,4 +1,5 @@
 ﻿@page "/counter"
+@using LaMision.Core
 
 <PageTitle>Counter</PageTitle>
 
@@ -13,6 +14,7 @@
 
     private void IncrementCount()
     {
-        currentCount++;
+        var calculator = new Calculator();
+        currentCount = calculator.Sum(currentCount, 1);
     }
 }

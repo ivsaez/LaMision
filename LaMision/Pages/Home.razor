@@ -1,7 +1,77 @@
 ﻿@page "/"
+@using ClimaticsLang.Lang
+@using ItemsLang.Lang
+@using LaMision.Core
+@using LaMision.Core.Lang
+@using LaMision.Core.Vaults
+@using Languager
+@using MappingLang.Lang
+@using Outputer.Choicing
+@using Stories
 
-<PageTitle>Home</PageTitle>
+<PageTitle>La Misión (Rayuela de arena 2024)</PageTitle>
 
-<h1>Hello, LaMision!</h1>
+<p role="contentinfo">@Text</p>
 
-Welcome to your new app.
+<div>
+    @if (interaction is null || !interaction.HasChoices || interaction.Choices.IsEmpty)
+    {
+        <div role="option">
+            <button @onclick="Continue">Continuar</button>
+        </div>
+    }
+    else
+    {
+        foreach (var option in interaction.Choices.Options)
+        {
+            <div role="option">
+                <button @onclick="() => onOptionSelected(option.Index)">@option.Value</button>
+            </div>
+        }
+    }
+</div>
+
+@code {
+    private string Text { get; set; } = string.Empty;
+
+    private GameInteraction? interaction = null;
+    private Input input = Input.Void;
+
+    private Game game = new Game(
+            Language.ES,
+            WorldBuilder.Build(),
+            new DictionaryProvider[]
+            {
+                new MisionDictionaryProvider(),
+                new ItemsDictionaryProvider(),
+                new MappingDictionaryProvider(),
+                new ClimaticsDictionaryProvider()
+            },
+            new StoriesVault[]
+            {
+                BasicVault.Get()
+            });
+
+    protected override void OnInitialized()
+    {
+        var output = game.Start();
+        Text = output.ToString();
+    }
+
+    private void onOptionSelected(int index)
+    {
+        input = new Input(index, interaction!.Choices.Range);
+        interaction = game.NextAction(input);
+
+        if (interaction.HasText)
+            Text = interaction.Output.ToString();
+    }
+
+    private void Continue()
+    {
+        interaction = game.NextAction(Input.Void);
+
+        if (interaction.HasText)
+            Text = interaction.Output.ToString();
+    }
+}

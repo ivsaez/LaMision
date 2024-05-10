@@ -2,7 +2,7 @@
 
 namespace LaMision.Core.Lang
 {
-    public class AdventureDictionaryProvider : DictionaryProvider
+    public class MisionDictionaryProvider : DictionaryProvider
     {
         protected override IDictionaryLoader Spanish => new SpanishDictionaryLoader();
     }

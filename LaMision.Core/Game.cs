@@ -66,7 +66,7 @@ namespace LaMision.Core
 
         public Output Start()
         {
-            return Output.FromTexts("initial".trans());
+            return Output.FromTexts("initial_1".trans(), "initial_2".trans(), "initial_3".trans());
         }
 
         public GameInteraction NextAction(Input input)

@@ -175,101 +175,97 @@ namespace LaMision.Core.Vaults
                     .SetAsRoot()
                 .Finish();
 
-            var saludo = StoryletBuilder.Create("saludo")
-                .BeingSingle()
-                .ForHumans()
-                .WithDescriptor("saluted")
-                .WithAgentsScope()
-                .WithPreconditions((pre) => pre.EveryoneConscious() && pre.EverythingInMainPlace())
-                .WithInteraction((world, roles) =>
-                {
-                    var main = roles.Get<MisionAgent>(Descriptor.MainRole);
-                    var saluted = roles.Get<MisionAgent>("saluted");
+            //var saludo = StoryletBuilder.Create("saludo")
+            //    .BeingSingle()
+            //    .ForHumans()
+            //    .WithDescriptor("saluted")
+            //    .WithAgentsScope()
+            //    .WithPreconditions((pre) => pre.EveryoneConscious() && pre.EverythingInMainPlace())
+            //    .WithInteraction((world, roles) =>
+            //    {
+            //        var main = roles.Get<MisionAgent>(Descriptor.MainRole);
+            //        var saluted = roles.Get<MisionAgent>("saluted");
 
-                    return Output.FromSpeech(main.Name, "saludo_text".trans(saluted.Name));
-                })
-                    .WithSubinteraction((world, roles) =>
-                    {
-                        var main = roles.Get<MisionAgent>(Descriptor.MainRole);
-                        var saluted = roles.Get<MisionAgent>("saluted");
+            //        return Output.FromSpeech(main.Name, "saludo_text".trans(saluted.Name));
+            //    })
+            //        .WithSubinteraction((world, roles) =>
+            //        {
+            //            var main = roles.Get<MisionAgent>(Descriptor.MainRole);
+            //            var saluted = roles.Get<MisionAgent>("saluted");
 
-                        return Output.FromSpeech(saluted.Name, "respuesta_text".trans(main.Name));
-                    })
-                    .WithDriver("saluted")
-                    .Build()
-                .WithDriver(Descriptor.MainRole)
-                .SetAsRoot()
-                .Finish();
+            //            return Output.FromSpeech(saluted.Name, "respuesta_text".trans(main.Name));
+            //        })
+            //        .WithDriver("saluted")
+            //        .Build()
+            //    .WithDriver(Descriptor.MainRole)
+            //    .SetAsRoot()
+            //    .Finish();
 
-            var pedirse = StoryletBuilder.Create("pedirse")
-                .ForMachines()
-                .WithAgentsScope()
-                .WithPreconditions((pre) => pre.EveryoneConscious())
-                .WithInteraction((world, roles) =>
-                {
-                    var main = roles.Get<MisionAgent>(Descriptor.MainRole);
+            //var pedirse = StoryletBuilder.Create("pedirse")
+            //    .ForMachines()
+            //    .WithAgentsScope()
+            //    .WithPreconditions((pre) => pre.EveryoneConscious())
+            //    .WithInteraction((world, roles) =>
+            //    {
+            //        var main = roles.Get<MisionAgent>(Descriptor.MainRole);
 
-                    return new Output(
-                        new Pharagraph("pedirse_text".trans(main.Name)),
-                        new Conversation().With(main.Name, "pedirse_conversation".trans())
-                        );
-                })
-                    .WithDriver(Descriptor.MainRole)
-                    .SetAsRoot()
-                .Finish();
+            //        return new Output(
+            //            new Pharagraph("pedirse_text".trans(main.Name)),
+            //            new Conversation().With(main.Name, "pedirse_conversation".trans())
+            //            );
+            //    })
+            //        .WithDriver(Descriptor.MainRole)
+            //        .SetAsRoot()
+            //    .Finish();
 
-            var sacamoco = StoryletBuilder.Create("sacamoco")
-                .ForMachines()
-                .WithAgentsScope()
-                .WithPreconditions((pre) => pre.EveryoneConscious())
-                .WithInteraction((world, roles) =>
-                {
-                    var main = roles.Get<MisionAgent>(Descriptor.MainRole);
+            //var sacamoco = StoryletBuilder.Create("sacamoco")
+            //    .ForMachines()
+            //    .WithAgentsScope()
+            //    .WithPreconditions((pre) => pre.EveryoneConscious())
+            //    .WithInteraction((world, roles) =>
+            //    {
+            //        var main = roles.Get<MisionAgent>(Descriptor.MainRole);
 
-                    return Output.FromTexts("sacamoco_text".trans(main.Name));
-                })
-                    .WithDriver(Descriptor.MainRole)
-                    .SetAsRoot()
-                .Finish();
+            //        return Output.FromTexts("sacamoco_text".trans(main.Name));
+            //    })
+            //        .WithDriver(Descriptor.MainRole)
+            //        .SetAsRoot()
+            //    .Finish();
 
-            var estornudo = StoryletBuilder.Create("estornudo")
-                .ForHumans()
-                .WithAgentsScope()
-                .WithPreconditions((pre) => pre.EveryoneConscious())
-                .WithInteraction((world, roles) =>
-                {
-                    var main = roles.Get<MisionAgent>(Descriptor.MainRole);
+            //var estornudo = StoryletBuilder.Create("estornudo")
+            //    .ForHumans()
+            //    .WithAgentsScope()
+            //    .WithPreconditions((pre) => pre.EveryoneConscious())
+            //    .WithInteraction((world, roles) =>
+            //    {
+            //        var main = roles.Get<MisionAgent>(Descriptor.MainRole);
 
-                    return Output.FromTexts("estornudo_1_text".trans(main.Name));
-                })
-                    .WithDriver(Descriptor.MainRole)
-                    .WithSubinteraction((world, roles) =>
-                    {
-                        var main = roles.Get<MisionAgent>(Descriptor.MainRole);
+            //        return Output.FromTexts("estornudo_1_text".trans(main.Name));
+            //    })
+            //        .WithDriver(Descriptor.MainRole)
+            //        .WithSubinteraction((world, roles) =>
+            //        {
+            //            var main = roles.Get<MisionAgent>(Descriptor.MainRole);
 
-                        return Output.FromTexts("estornudo_2_text".trans(main.Name));
-                    })
-                        .Build()
-                    .WithSubinteraction((world, roles) =>
-                    {
-                        var main = roles.Get<MisionAgent>(Descriptor.MainRole);
+            //            return Output.FromTexts("estornudo_2_text".trans(main.Name));
+            //        })
+            //            .Build()
+            //        .WithSubinteraction((world, roles) =>
+            //        {
+            //            var main = roles.Get<MisionAgent>(Descriptor.MainRole);
 
-                        return Output.FromTexts("estornudo_3_text".trans(main.Name));
-                    })
-                        .Build()
-                    .SetAsRoot()
-                .Finish();
+            //            return Output.FromTexts("estornudo_3_text".trans(main.Name));
+            //        })
+            //            .Build()
+            //        .SetAsRoot()
+            //    .Finish();
 
             return new StoriesVault(
                 mirar_mapped,
                 mirar_item,
                 ir,
                 coger,
-                dejar,
-                saludo,
-                pedirse,
-                sacamoco,
-                estornudo);
+                dejar);
         }
     }
 }

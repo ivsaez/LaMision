@@ -3,7 +3,6 @@ using Agents;
 using Items;
 using ItemTypes;
 using Mapping;
-using Outputer;
 using StateMachine;
 using Worlding;
 
@@ -18,65 +17,59 @@ namespace LaMision.Core
                 .EndState()
                 .Build());
 
-            world.Time.IncreaseHours(10);
+            world.Time.IncreaseHours(17);
 
-            var bedRoom = new MisionMapped("bedRoom", Externality.Internal, Genere.Masculine, Number.Singular);
-            var corridor = new MisionMapped("corridor", Externality.Internal, Genere.Masculine, Number.Singular);
+            var salita = new MisionMapped("salita", Externality.Internal, Genere.Femenine, Number.Singular);
 
-            world.Map.Add(bedRoom);
-            world.Map.Add(corridor);
+            world.Map.Add(salita);
 
-            world.Map.Connect(bedRoom, corridor, Direction.East_West);
+            //world.Map.Connect(bedRoom, corridor, Direction.East_West);
 
-            var todi = new MisionAgent("todi", "Todivio", "Belmonte", Importance.Main);
-            todi.BecomeHuman();
-            var crispin = new MisionAgent("crispin", "Crispin", "Clander", Importance.None);
+            var sujeto = new MisionAgent("sujeto", "Mirko", "Kazinsky", Importance.Main);
+            sujeto.BecomeHuman();
 
-            world.Agents.Add(todi);
-            world.Agents.Add(crispin);
+            //var crispin = new MisionAgent("crispin", "Crispin", "Clander", Importance.None);
 
-            world.Map.Ubicate(todi, bedRoom);
-            world.Map.Ubicate(crispin, bedRoom);
+            world.Agents.Add(sujeto);
 
-            var bed = new ArticledFurniture("bed", 400, 100, false, Genere.Femenine, Number.Singular);
-            var table = new ArticledFurniture("table", 300, 50, false, Genere.Femenine, Number.Singular);
-            var window = new ArticledFurniture("window", 25, 5, true, Genere.Femenine, Number.Singular);
-            var rock = new ArticledItem("rock", 1, 1, Genere.Femenine, Number.Singular);
-            var mochila = new ArticledContainerItem("mochila", 120, 1, Genere.Femenine, Number.Singular, 120, 50);
-            var bolsa = new ArticledContainerItem("bolsa", 120, 1, Genere.Femenine, Number.Singular, 120, 50);
-            var cuadro = new ArticledFurniture("cuadro", 25, 5, false, Genere.Masculine, Number.Singular);
-            var lampara = new ArticledEnlightedFurniture("lampara", 25, 5, Genere.Femenine, Number.Singular);
-            var humo = new SimpleFurniture("humo", 25, 5, false)
-                .WithTurnPassed((world, turns) =>
-                {
-                    return Output.FromTexts("Tik tak");
-                });
-            lampara.Switch.TurnOn();
+            world.Map.Ubicate(sujeto, salita);
 
-            world.Items.Add(bed);
-            world.Items.Add(table);
-            world.Items.Add(window);
-            world.Items.Add(rock);
-            world.Items.Add(mochila);
-            world.Items.Add(bolsa);
-            world.Items.Add(cuadro);
-            world.Items.Add(lampara);
-            world.Items.Add(humo);
+            var rinonera = new ArticledContainerItem("rinonera", 40, 1, Genere.Femenine, Number.Singular, 40, 20);
 
-            bedRoom.Items.Add(bed);
-            bedRoom.Items.Add(table);
-            bedRoom.Items.Add(window);
-            bedRoom.Items.Add(rock);
-            bedRoom.Items.Add(humo);
+            var tarjetaBlanca = new ArticledItem("tarjetaBlanca", 1, 1, Genere.Femenine, Number.Singular);
+            var fluorescenteSalita = new ArticledEnlightedFurniture("fluorescenteSalita", 10, 5, Genere.Masculine, Number.Singular);
+            fluorescenteSalita.Switch.TurnOn();
+            var mesaSalita = new ArticledFurniture("mesaSalita", 150, 20, false, Genere.Femenine, Number.Singular);
+            var escotilla = new ArticledFurniture("escotilla", 200, 60, false, Genere.Femenine, Number.Singular);
+            var puertaSalita = new ArticledFurniture("puertaSalita", 200, 20, false, Genere.Femenine, Number.Singular);
 
-            bedRoom.Items.Hide(bed, table, window);
+            //var bed = new ArticledFurniture("bed", 400, 100, false, Genere.Femenine, Number.Singular);
+            //var window = new ArticledFurniture("window", 25, 5, true, Genere.Femenine, Number.Singular);
+            //var bolsa = new ArticledContainerItem("bolsa", 120, 1, Genere.Femenine, Number.Singular, 120, 50);
+            //var cuadro = new ArticledFurniture("cuadro", 25, 5, false, Genere.Masculine, Number.Singular);
+            //var lampara = new ArticledEnlightedFurniture("lampara", 25, 5, Genere.Femenine, Number.Singular);
+            //var humo = new SimpleFurniture("humo", 25, 5, false)
+            //    .WithTurnPassed((world, turns) =>
+            //    {
+            //        return Output.FromTexts("Tik tak");
+            //    });
+            //lampara.Switch.TurnOn();
 
-            corridor.Items.Add(cuadro);
-            corridor.Items.Add(lampara);
-            corridor.Items.Hide(cuadro, lampara);
+            world.Items.Add(rinonera);
+            world.Items.Add(tarjetaBlanca);
+            world.Items.Add(fluorescenteSalita);
+            world.Items.Add(mesaSalita);
+            world.Items.Add(escotilla);
+            world.Items.Add(puertaSalita);
 
-            todi.Carrier.SetBack(mochila, world.Items);
-            crispin.Carrier.SetBack(bolsa, world.Items);
+            salita.Items.Add(fluorescenteSalita);
+            salita.Items.Add(tarjetaBlanca);
+            salita.Items.Add(mesaSalita);
+            salita.Items.Add(escotilla);
+            salita.Items.Add(puertaSalita);
+            salita.Items.Hide(fluorescenteSalita, mesaSalita, escotilla, puertaSalita);
+
+            sujeto.Carrier.SetBack(rinonera, world.Items);
 
             return world;
         }

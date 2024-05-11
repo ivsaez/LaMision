@@ -6,18 +6,30 @@
 @using LaMision.Core.Vaults
 @using Languager
 @using MappingLang.Lang
+@using Outputer
 @using Outputer.Choicing
 @using Stories
 
 <PageTitle>La Misión (Rayuela de arena 2024)</PageTitle>
 
-<p role="contentinfo">@Text</p>
+@if(output is not null)
+{
+    foreach (var item in output.Pharagraphs)
+    {
+        <p role="contentinfo">@item.ToString()</p>
+    }
+
+    foreach (var item in output.Conversations)
+    {
+        <p role="contentinfo">@item.ToString()</p>
+    }
+}
 
 <div>
     @if (interaction is null || !interaction.HasChoices || interaction.Choices.IsEmpty)
     {
         <div role="option">
-            <button @onclick="Continue">Continuar</button>
+            <button class="btn btn-primary" @onclick="Continue">Continuar</button>
         </div>
     }
     else
@@ -25,14 +37,14 @@
         foreach (var option in interaction.Choices.Options)
         {
             <div role="option">
-                <button @onclick="() => onOptionSelected(option.Index)">@option.Value</button>
+                <button class="btn btn-primary" @onclick="() => onOptionSelected(option.Index)">@option.Value</button>
             </div>
         }
     }
 </div>
 
 @code {
-    private string Text { get; set; } = string.Empty;
+    private Output? output;
 
     private GameInteraction? interaction = null;
     private Input input = Input.Void;
@@ -43,6 +55,8 @@
             new DictionaryProvider[]
             {
                 new MisionDictionaryProvider(),
+                new MisionItemsDictionaryProvider(),
+                new MisionMappedsProvider(),
                 new ItemsDictionaryProvider(),
                 new MappingDictionaryProvider(),
                 new ClimaticsDictionaryProvider()
@@ -54,8 +68,7 @@
 
     protected override void OnInitialized()
     {
-        var output = game.Start();
-        Text = output.ToString();
+        output = game.Start();
     }
 
     private void onOptionSelected(int index)
@@ -64,7 +77,7 @@
         interaction = game.NextAction(input);
 
         if (interaction.HasText)
-            Text = interaction.Output.ToString();
+            output = interaction.Output;
     }
 
     private void Continue()
@@ -72,6 +85,6 @@
         interaction = game.NextAction(Input.Void);
 
         if (interaction.HasText)
-            Text = interaction.Output.ToString();
+            output = interaction.Output;
     }
 }

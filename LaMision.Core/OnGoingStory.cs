@@ -63,7 +63,13 @@ namespace LaMision.Core
             checkNotEmpty();
 
             var desirer = story!.Driver.Cast<IDesirer>();
-            int decision = desirer!.Decider.Decide(world, lastStep!.Choices, rolledStorylet!.Roles, desirer.Desires, desires);
+            int decision = desirer!.Decider.Decide(
+                world, 
+                lastStep!.Choices, 
+                rolledStorylet!.Roles, 
+                historic, 
+                desirer.Desires, 
+                desires);
             return new Input(decision);
         }
 

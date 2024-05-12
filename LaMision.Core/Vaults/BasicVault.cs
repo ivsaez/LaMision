@@ -25,19 +25,19 @@ namespace LaMision.Core.Vaults
                 .WithDescriptor("place")
                 .WithMappedsScope()
                 .WithPreconditions((pre) => pre.EveryoneConscious() && pre.RoleInPlace(Descriptor.MainRole, "place"))
-                .WithInteraction((world, roles) =>
+                .WithInteraction((post) =>
                 {
-                    var main = roles.Get<MisionAgent>(Descriptor.MainRole);
-                    var origin = world.Map.GetUbication(main);
+                    var main = post.Main;
+                    var origin = post.MainPlace;
 
                     var mappedDescriptor = new MappedDescriptor(origin);
 
-                    var climaticsDescriptor = new TimeDescriptor(world.Time);
+                    var climaticsDescriptor = new TimeDescriptor(post.World.Time);
 
                     return Output.FromTexts(mappedDescriptor.GetEntireDescription(
                             main,
-                            world.Existents,
-                            world.Time.IsLight,
+                            post.World.Existents,
+                            post.World.Time.IsLight,
                             climaticsDescriptor.RandomOutsideDescription));
                 })
                     .WithDriver(Descriptor.MainRole)
@@ -60,9 +60,9 @@ namespace LaMision.Core.Vaults
                         && (pre.Historic.HasHappened(new Snapshot("mirar_mapped", main.Id, place.Id))
                             || pre.HasHappened("dejar", Descriptor.MainRole, "thing"));
                 })
-                .WithInteraction((world, roles) =>
+                .WithInteraction((post) =>
                 {
-                    var item = roles.Get<WorldItem>("thing");
+                    var item = post.Item("thing");
 
                     var itemDescriptor = new ItemDescriptor(item);
 
@@ -81,13 +81,13 @@ namespace LaMision.Core.Vaults
                     pre.EveryoneConscious()
                     && !pre.RoleInPlace(Descriptor.MainRole, "place")
                     && pre.IsExit("place"))
-                .WithInteraction((world, roles) =>
+                .WithInteraction((post) =>
                 {
-                    var main = roles.Get<MisionAgent>(Descriptor.MainRole);
-                    var place = world.Map.GetUbication(main);
-                    var destination = roles.Get<MisionMapped>("place");
+                    var main = post.Main;
+                    var place = post.MainPlace;
+                    var destination = post.Mapped("place");
 
-                    var movementResult = world.Map.Move(main, place, destination, world.Items);
+                    var movementResult = post.World.Map.Move(main, place, destination, post.World.Items);
 
                     var mappedDescriptor = new MappedDescriptor(destination);
 
@@ -119,15 +119,15 @@ namespace LaMision.Core.Vaults
                         && (pre.Historic.HasHappened(new Snapshot("mirar_mapped", main.Id, place.Id))
                             || pre.HasHappened("dejar", Descriptor.MainRole, "thing"));
                 })
-                .WithInteraction((world, roles) =>
+                .WithInteraction((post) =>
                 {
-                    var main = roles.Get<MisionAgent>(Descriptor.MainRole);
-                    var item = roles.Get<WorldItem>("thing");
-                    var place = world.Map.GetUbication(main);
+                    var main = post.Main;
+                    var item = post.Item("thing");
+                    var place = post.MainPlace;
 
                     var itemDescriptor = new ItemDescriptor(item);
 
-                    var baggingResult = main.Cast<ICarrier>().Carrier.Take(item, world.Items);
+                    var baggingResult = main.Cast<ICarrier>().Carrier.Take(item, post.World.Items);
                     if (!baggingResult.HasBag)
                         return Output.FromTexts("coger_nobag".trans(main.Name, itemDescriptor.ArticledName(true)));
 
@@ -158,15 +158,15 @@ namespace LaMision.Core.Vaults
                         && pre.RoleOwns(Descriptor.MainRole, "thing")
                         && !main.Cast<ICarrier>().Carrier.GetCarrieds(pre.World.Items).Back!.Equals(item);
                 })
-                .WithInteraction((world, roles) =>
+                .WithInteraction((post) =>
                 {
-                    var main = roles.Get<MisionAgent>(Descriptor.MainRole);
-                    var item = roles.Get<WorldItem>("thing");
-                    var place = world.Map.GetUbication(main);
+                    var main = post.Main;
+                    var item = post.Item("thing");
+                    var place = post.MainPlace;
 
                     var itemDescriptor = new ItemDescriptor(item);
 
-                    main.Cast<ICarrier>().Carrier.Leave(item, world.Items);
+                    main.Cast<ICarrier>().Carrier.Leave(item, post.World.Items);
                     place.Items.Add(item);
 
                     return Output.FromTexts("dejar".trans(main.Name, itemDescriptor.ArticledName(true)));

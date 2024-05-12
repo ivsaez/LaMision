@@ -30,7 +30,7 @@ namespace LaMision.Core
             var sujeto = new MisionAgent("sujeto", "Mirko", "Kazinsky", Importance.Main);
             sujeto.BecomeHuman();
 
-            var comandante = new MisionAgent("comandante", "Endric", "Hoffmann", Importance.None);
+            var comandante = new MisionAgent("comandante", "Comandante", "Hoffmann", Importance.None);
 
             world.Agents.Add(sujeto);
             world.Agents.Add(comandante);
@@ -47,17 +47,12 @@ namespace LaMision.Core
             var escotilla = new ArticledFurniture("escotilla", 200, 60, false, Genere.Femenine, Number.Singular);
             var puertaSalita = new ArticledFurniture("puertaSalita", 200, 20, false, Genere.Femenine, Number.Singular);
 
-            //var bed = new ArticledFurniture("bed", 400, 100, false, Genere.Femenine, Number.Singular);
             //var window = new ArticledFurniture("window", 25, 5, true, Genere.Femenine, Number.Singular);
-            //var bolsa = new ArticledContainerItem("bolsa", 120, 1, Genere.Femenine, Number.Singular, 120, 50);
-            //var cuadro = new ArticledFurniture("cuadro", 25, 5, false, Genere.Masculine, Number.Singular);
-            //var lampara = new ArticledEnlightedFurniture("lampara", 25, 5, Genere.Femenine, Number.Singular);
             //var humo = new SimpleFurniture("humo", 25, 5, false)
             //    .WithTurnPassed((world, turns) =>
             //    {
             //        return Output.FromTexts("Tik tak");
             //    });
-            //lampara.Switch.TurnOn();
 
             world.Items.Add(rinonera);
             world.Items.Add(tarjetaBlanca);

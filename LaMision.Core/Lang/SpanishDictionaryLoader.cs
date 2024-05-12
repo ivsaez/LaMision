@@ -27,6 +27,15 @@ namespace LaMision.Core.Lang
             new Word("ir", "Te desplazas hacia {1}."),
             new Word("ir_door", "No puedes ir hacia {1} sin antes abrir la puerta."),
 
+            new Word("mensajeLevanta_1_interaction_description", "Suena una locución"),
+            new Word("mensajeLevanta_text_1", "Se oye un mensaje por toda la sala proveniente de una voz masculina algo distorsionada."),
+            new Word("mensajeLevanta_text_2", "La voz retumba de nuevo, algo menos distorsionada."),
+            new Word("mensajeLevanta_voz_1", "Le habla el comandante Hoffmann. Tiene que levantarse. Recuerde la misión."),
+            new Word("mensajeLevanta_voz_2", "Al habla el comandante Hoffmann. Levante del suelo recluta Kazinsky."),
+            new Word("mensajeLevanta_voz_3", "Comandante Hoffmann al habla. Tiene que levantarse."),
+            new Word("mensajeLevanta_voz_4", "Le habla el comandante Hoffmann. ¡Arriba recluta!."),
+            new Word("mensajeLevanta_voz_5", "Al habla el comandante Hoffmann. La misión aguarda, debe levantarse inmediatamente."),
+
             //new Word("saludo_1_interaction_description", "{main} saluda a {saluted}."),
             //new Word("saludo_11_interaction_description", "{saluted} saluda a {main}."),
             //new Word("saludo_text", "Buenas {0}."),

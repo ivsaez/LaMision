@@ -12,18 +12,26 @@
 
 <PageTitle>La Misión (Rayuela de arena 2024)</PageTitle>
 
-@if(output is not null)
-{
-    foreach (var item in output.Pharagraphs)
+<div>
+    @if (output is not null)
     {
-        <p role="contentinfo">@item.ToString()</p>
+        foreach (var item in output.All)
+        {
+            if (item is Conversation)
+            {
+                var conversation = item as Conversation;
+                foreach (var subitem in conversation!.All)
+                {
+                    <p role="contentinfo">@subitem.ToString()</p>
+                }
+            }
+            else
+            {
+                <p role="contentinfo">@item.ToString()</p>
+            }
+        }
     }
-
-    foreach (var item in output.Conversations)
-    {
-        <p role="contentinfo">@item.ToString()</p>
-    }
-}
+</div>
 
 <div>
     @if (interaction is null || !interaction.HasChoices || interaction.Choices.IsEmpty)

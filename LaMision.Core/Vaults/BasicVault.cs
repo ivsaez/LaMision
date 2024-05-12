@@ -52,9 +52,9 @@ namespace LaMision.Core.Vaults
                 .WithItemsScope()
                 .WithPreconditions((pre) =>
                 {
-                    var main = pre.Roles.Get<MisionAgent>(Descriptor.MainRole);
-                    var place = pre.World.Map.GetUbication(main);
-                    var item = pre.Roles.Get<IWorldItem>("thing");
+                    var main = pre.Main;
+                    var place = pre.MainPlace;
+                    var item = pre.Item("thing");
 
                     return pre.EveryoneConscious()
                         && (pre.EverythingInMainPlace() || pre.RoleOwns(Descriptor.MainRole, "thing"))
@@ -153,8 +153,8 @@ namespace LaMision.Core.Vaults
                 .WithItemsScope()
                 .WithPreconditions((pre) =>
                 {
-                    var main = pre.Roles.Get<MisionAgent>(Descriptor.MainRole);
-                    var item = pre.Roles.Get<IItem>("thing");
+                    var main = pre.Main;
+                    var item = pre.Item("thing");
 
                     return pre.EveryoneConscious()
                         && pre.RoleOwns(Descriptor.MainRole, "thing")
@@ -183,12 +183,10 @@ namespace LaMision.Core.Vaults
                 .WithAgentsScope()
                 .WithPreconditions((pre) =>
                 {
-                    var main = pre.Roles.Get<MisionAgent>(Descriptor.MainRole);
-
                     return pre.EveryoneConscious()
-                        && (main.Position.Machine.CurrentState == Position.Lying
-                        || main.Position.Machine.CurrentState == Position.Sitting
-                        || main.Position.Machine.CurrentState == Position.Kneeing);
+                        && (pre.PositionIs(Descriptor.MainRole, Position.Lying)
+                        || pre.PositionIs(Descriptor.MainRole, Position.Sitting)
+                        || pre.PositionIs(Descriptor.MainRole, Position.Kneeing));
                 })
                 .WithInteraction((post) =>
                 {

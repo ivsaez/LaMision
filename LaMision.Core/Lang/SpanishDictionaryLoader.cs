@@ -39,6 +39,9 @@ namespace LaMision.Core.Lang
             new Word("levantarse_1_interaction_description", "Levantarte"),
             new Word("levantarse_text", "Te levantas del suelo y te pones de pie."),
 
+            new Word("abrirEscotilla_1_interaction_description", "Abrir {thing}"),
+            new Word("abrirEscotilla_text", "Intentas abrir la escotilla pero enseguida te das cuenta de que no es posible. No hay ningun asidero para poder estirar, es completamente lisa. Además parece extremadamente pesada. Seguramente se abre con algún sistema mecánico."),
+
 
             //new Word("saludo_1_interaction_description", "{main} saluda a {saluted}."),
             //new Word("saludo_11_interaction_description", "{saluted} saluda a {main}."),

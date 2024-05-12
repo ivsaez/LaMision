@@ -29,6 +29,7 @@ namespace LaMision.Core
 
             var sujeto = new MisionAgent("sujeto", "Mirko", "Kazinsky", Importance.Main);
             sujeto.BecomeHuman();
+            sujeto.Position.Machine.Transite(Position.Lying);
 
             var comandante = new MisionAgent("comandante", "Comandante", "Hoffmann", Importance.None);
 

@@ -28,8 +28,8 @@ namespace LaMision.Core.Vaults
                 .WithAgentsScope()
                 .WithPreconditions((pre) => 
                 {
-                    return pre.EveryoneConscious()
-                    && !pre.World.Knowledge.Exists(Sentence.Build("FirstUp", "Mirko"));
+                    var sujeto = pre.World.Agents.GetOne("sujeto");
+                    return sujeto.Position.Machine.CurrentState != Position.Standing;
                 })
                 .WithInteraction((post) =>
                 {

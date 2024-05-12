@@ -36,6 +36,10 @@ namespace LaMision.Core.Lang
             new Word("mensajeLevanta_voz_4", "Le habla el comandante Hoffmann. ¡Arriba recluta!."),
             new Word("mensajeLevanta_voz_5", "Al habla el comandante Hoffmann. La misión aguarda, debe levantarse inmediatamente."),
 
+            new Word("levantarse_1_interaction_description", "Levantarte"),
+            new Word("levantarse_text", "Te levantas del suelo y te pones de pie."),
+
+
             //new Word("saludo_1_interaction_description", "{main} saluda a {saluted}."),
             //new Word("saludo_11_interaction_description", "{saluted} saluda a {main}."),
             //new Word("saludo_text", "Buenas {0}."),

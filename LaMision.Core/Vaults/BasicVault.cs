@@ -1,4 +1,5 @@
 ﻿using AgentBody;
+using Agents;
 using Agents.Extensions;
 using ClimaticsLang;
 using Items;
@@ -112,6 +113,7 @@ namespace LaMision.Core.Vaults
                     var place = pre.World.Map.GetUbication(main);
 
                     return pre.EveryoneConscious()
+                        && main.Position.Machine.CurrentState == Position.Standing
                         && main is ICarrier
                         && place.Items.Has(item)
                         && item is not IFurniture
@@ -170,6 +172,31 @@ namespace LaMision.Core.Vaults
                     place.Items.Add(item);
 
                     return Output.FromTexts("dejar".trans(main.Name, itemDescriptor.ArticledName(true)));
+                })
+                    .WithDriver(Descriptor.MainRole)
+                    .SetAsRoot()
+                .Finish();
+
+            var levantarse = StoryletBuilder.Create("levantarse")
+                .BeingRepeteable()
+                .ForHumans()
+                .WithAgentsScope()
+                .WithPreconditions((pre) =>
+                {
+                    var main = pre.Roles.Get<MisionAgent>(Descriptor.MainRole);
+
+                    return pre.EveryoneConscious()
+                        && (main.Position.Machine.CurrentState == Position.Lying
+                        || main.Position.Machine.CurrentState == Position.Sitting
+                        || main.Position.Machine.CurrentState == Position.Kneeing);
+                })
+                .WithInteraction((post) =>
+                {
+                    var main = post.Main;
+                    var done = main.Position.Machine.Transite(Position.Standing);
+                    Console.WriteLine(done);
+
+                    return Output.FromTexts("levantarse_text".trans());
                 })
                     .WithDriver(Descriptor.MainRole)
                     .SetAsRoot()
@@ -265,7 +292,8 @@ namespace LaMision.Core.Vaults
                 mirar_item,
                 ir,
                 coger,
-                dejar);
+                dejar,
+                levantarse);
         }
     }
 }

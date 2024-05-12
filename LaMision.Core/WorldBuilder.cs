@@ -20,19 +20,23 @@ namespace LaMision.Core
             world.Time.IncreaseHours(17);
 
             var salita = new MisionMapped("salita", Externality.Internal, Genere.Femenine, Number.Singular);
+            var radio = new MisionMapped("radio", Externality.Internal, Genere.Femenine, Number.Singular);
 
             world.Map.Add(salita);
+            world.Map.Add(radio);
 
             //world.Map.Connect(bedRoom, corridor, Direction.East_West);
 
             var sujeto = new MisionAgent("sujeto", "Mirko", "Kazinsky", Importance.Main);
             sujeto.BecomeHuman();
 
-            //var crispin = new MisionAgent("crispin", "Crispin", "Clander", Importance.None);
+            var comandante = new MisionAgent("comandante", "Endric", "Hoffmann", Importance.None);
 
             world.Agents.Add(sujeto);
+            world.Agents.Add(comandante);
 
             world.Map.Ubicate(sujeto, salita);
+            world.Map.Ubicate(comandante, radio);
 
             var rinonera = new ArticledContainerItem("rinonera", 40, 1, Genere.Femenine, Number.Singular, 40, 20);
 

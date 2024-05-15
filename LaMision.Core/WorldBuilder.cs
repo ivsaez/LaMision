@@ -13,7 +13,8 @@ namespace LaMision.Core
         public static World Build()
         {
             var world = new World(MachineBuilder.Create()
-                .WithState("Initial")
+                .WithState(States.Initial)
+                    .WithTransition(States.Mision)
                 .EndState()
                 .Build());
 
@@ -41,12 +42,12 @@ namespace LaMision.Core
 
             var rinonera = new ArticledContainerItem("rinonera", 40, 1, Genere.Femenine, Number.Singular, 40, 20);
 
-            var tarjetaBlanca = new ArticledItem("tarjetaBlanca", 1, 1, Genere.Femenine, Number.Singular);
+            var tarjetaBlanca = new Tarjeta("tarjetaBlanca", 1, 1, Genere.Femenine, Number.Singular);
             var fluorescenteSalita = new ArticledEnlightedFurniture("fluorescenteSalita", 10, 5, Genere.Masculine, Number.Singular);
             fluorescenteSalita.Switch.TurnOn();
             var mesaSalita = new ArticledFurniture("mesaSalita", 150, 20, false, Genere.Femenine, Number.Singular);
             var escotilla = new ArticledFurniture("escotilla", 200, 60, false, Genere.Femenine, Number.Singular);
-            var puertaSalita = new ArticledFurniture("puertaSalita", 200, 20, false, Genere.Femenine, Number.Singular);
+            var puertaSalita = new Puerta("puertaSalita", 200, 20, false, Genere.Femenine, Number.Singular, tarjetaBlanca);
 
             //var window = new ArticledFurniture("window", 25, 5, true, Genere.Femenine, Number.Singular);
             //var humo = new SimpleFurniture("humo", 25, 5, false)
@@ -73,5 +74,11 @@ namespace LaMision.Core
 
             return world;
         }
+    }
+
+    public static class States
+    {
+        public static readonly string Initial = "Initial";
+        public static readonly string Mision = "Mision";
     }
 }

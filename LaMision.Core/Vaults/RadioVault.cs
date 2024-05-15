@@ -1,20 +1,10 @@
-﻿using AgentBody;
-using Agents;
-using Agents.Extensions;
-using ClimaticsLang;
-using Items;
-using ItemsLang;
-using LaMision.Core.Elements;
+﻿using Agents;
 using Languager.Extensions;
-using Logic;
-using Mapping;
-using MappingLang;
 using Outputer;
 using Rand;
 using Rolling;
 using Stories;
 using Stories.Builders;
-using Worlding;
 
 namespace LaMision.Core.Vaults
 {
@@ -22,11 +12,13 @@ namespace LaMision.Core.Vaults
     {
         public static StoriesVault Get()
         {
-            var mensajeLevanta = StoryletBuilder.Create("mensajeLevanta")
+            return new StoriesVault(
+                StoryletBuilder.Create("mensajeLevanta")
                 .BeingRepeteable()
                 .ForMachines()
                 .WithAgentsScope()
-                .WithPreconditions((pre) => 
+                .WithEnvPreconditions(pre => pre.IsState(States.Initial))
+                .WithPreconditions((pre) =>
                 {
                     var sujeto = pre.World.Agents.GetOne("sujeto");
                     return sujeto.Position.Machine.CurrentState != Position.Standing;
@@ -42,7 +34,7 @@ namespace LaMision.Core.Vaults
                     return new Output(
                         new Pharagraph(text),
                         new Conversation()
-                            .With(main.Name, new string[] 
+                            .With(main.Name, new string[]
                             {
                                 "mensajeLevanta_voz_1".trans(),
                                 "mensajeLevanta_voz_2".trans(),
@@ -54,10 +46,43 @@ namespace LaMision.Core.Vaults
                 })
                     .WithDriver(Descriptor.MainRole)
                     .SetAsRoot()
-                .Finish();
+                .Finish(),
 
-            return new StoriesVault(
-                mensajeLevanta);
+                StoryletBuilder.Create("mision")
+                .BeingGlobalSingle()
+                .ForMachines()
+                .WithAgentsScope()
+                .WithEnvPreconditions(pre => pre.IsState(States.Initial))
+                .WithPreconditions((pre) =>
+                {
+                    var sujeto = pre.World.Agents.GetOne("sujeto");
+                    return sujeto.Position.Machine.CurrentState == Position.Standing;
+                })
+                .WithInteraction((post) =>
+                {
+                    post.World.State.Transite(States.Mision);
+                    var main = post.Main;
+                    var sujeto = post.World.Agents.GetOne("sujeto");
+
+                    return new Output(
+                        new Pharagraph("mision_text".trans()),
+                        new Conversation()
+                            .With(main.Name, "mision_text_1".trans())
+                            .With(sujeto.Name, "mision_text_2".trans())
+                            .With(main.Name, "mision_text_3".trans())
+                            .With(sujeto.Name, "mision_text_4".trans())
+                            .With(main.Name, "mision_text_5".trans())
+                            .With(sujeto.Name, "mision_text_6".trans())
+                            .With(main.Name, "mision_text_7".trans())
+                            .With(sujeto.Name, "mision_text_8".trans())
+                            .With(main.Name, "mision_text_9".trans())
+                            .With(sujeto.Name, "mision_text_10".trans())
+                            .With(main.Name, "mision_text_11".trans()));
+                })
+                    .WithDriver(Descriptor.MainRole)
+                    .SetAsRoot()
+                .Finish()
+                );
         }
     }
 }

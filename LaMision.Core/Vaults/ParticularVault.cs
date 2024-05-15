@@ -8,6 +8,7 @@ using Items.Extensions;
 using Items;
 using ItemsLang;
 using Rand;
+using Mapping;
 
 namespace LaMision.Core.Vaults
 {
@@ -84,7 +85,12 @@ namespace LaMision.Core.Vaults
                         _ => throw new NotSupportedException()
                     };
 
-                    return new Output(text, new Pharagraph(openText));
+                    var view = door.Connect(post.World);
+
+                    return new Output(
+                        text, 
+                        new Pharagraph(openText), 
+                        new Pharagraph(view));
                 })
                     .WithDriver(Descriptor.MainRole)
                     .SetAsRoot()

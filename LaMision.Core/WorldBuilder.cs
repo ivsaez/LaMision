@@ -5,6 +5,7 @@ using ItemTypes;
 using Mapping;
 using StateMachine;
 using Worlding;
+using Languager.Extensions;
 
 namespace LaMision.Core
 {
@@ -20,13 +21,13 @@ namespace LaMision.Core
 
             world.Time.IncreaseHours(17);
 
-            var salita = new MisionMapped("salita", Externality.Internal, Genere.Femenine, Number.Singular);
             var radio = new MisionMapped("radio", Externality.Internal, Genere.Femenine, Number.Singular);
+            var salita = new MisionMapped("salita", Externality.Internal, Genere.Femenine, Number.Singular);
+            var pasillo = new MisionMapped("pasillo", Externality.Internal, Genere.Masculine, Number.Singular);
 
-            world.Map.Add(salita);
             world.Map.Add(radio);
-
-            //world.Map.Connect(bedRoom, corridor, Direction.East_West);
+            world.Map.Add(salita);
+            world.Map.Add(pasillo);
 
             var sujeto = new MisionAgent("sujeto", "Mirko", "Kazinsky", Importance.Main);
             sujeto.BecomeHuman();
@@ -47,7 +48,19 @@ namespace LaMision.Core
             fluorescenteSalita.Switch.TurnOn();
             var mesaSalita = new ArticledFurniture("mesaSalita", 150, 20, false, Genere.Femenine, Number.Singular);
             var escotilla = new ArticledFurniture("escotilla", 200, 60, false, Genere.Femenine, Number.Singular);
-            var puertaSalita = new Puerta("puertaSalita", 200, 20, false, Genere.Femenine, Number.Singular, tarjetaBlanca);
+            var puertaSalita = new Puerta("puertaSalita", 200, 20, false, Genere.Femenine, Number.Singular, tarjetaBlanca)
+                .WithConnection(world =>
+                {
+                    var salita = world.Map.Get("salita");
+                    var pasillo = world.Map.Get("pasillo");
+
+                    if (salita.Exits.Has(pasillo))
+                        return string.Empty;
+
+                    world.Map.Connect(pasillo, salita, Direction.North_South);
+
+                    return "pasillo_view".trans();
+                });
 
             //var window = new ArticledFurniture("window", 25, 5, true, Genere.Femenine, Number.Singular);
             //var humo = new SimpleFurniture("humo", 25, 5, false)

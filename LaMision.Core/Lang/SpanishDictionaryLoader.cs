@@ -27,6 +27,14 @@ namespace LaMision.Core.Lang
             new Word("ir", "Te desplazas hacia {1}."),
             new Word("ir_door", "No puedes ir hacia {1} sin antes abrir la puerta."),
 
+            new Word("abrir_1_interaction_description", "Abrir {openable}"),
+            new Word("abrir_text", "Te dispones a abrir {0}."),
+            new Word("abrir_invalidKey", "Parece ser que {0} no sirve para abrir {1}."),
+            new Word("abrir_sucess", "Abres {0} sin problema."),
+
+            new Word("cerrar_1_interaction_description", "Cerrar {openable}"),
+            new Word("cerrar_text", "Cierras {0}."),
+
             new Word("mensajeLevanta_1_interaction_description", "Suena una locución"),
             new Word("mensajeLevanta_text_1", "Se oye un mensaje por toda la sala proveniente de una voz masculina algo distorsionada."),
             new Word("mensajeLevanta_text_2", "La voz retumba de nuevo, algo menos distorsionada."),

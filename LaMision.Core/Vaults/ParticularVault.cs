@@ -94,7 +94,8 @@ namespace LaMision.Core.Vaults
                 })
                     .WithDriver(Descriptor.MainRole)
                     .SetAsRoot()
-                .Finish());
+                .Finish()
+                );
         }
     }
 }

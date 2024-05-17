@@ -6,6 +6,7 @@ using Mapping;
 using StateMachine;
 using Worlding;
 using Languager.Extensions;
+using Items.Extensions;
 
 namespace LaMision.Core
 {
@@ -42,6 +43,7 @@ namespace LaMision.Core
             world.Map.Ubicate(comandante, radio);
 
             var rinonera = new ArticledContainerItem("rinonera", 40, 1, Genere.Femenine, Number.Singular, 40, 20);
+            var dispositivo = new ArticledFurniture("dispositivo", 2, 1, false, Genere.Masculine, Number.Singular);
 
             var tarjetaBlanca = new Tarjeta("tarjetaBlanca", 1, 1, Genere.Femenine, Number.Singular);
             var fluorescenteSalita = new ArticledEnlightedFurniture("fluorescenteSalita", 10, 5, Genere.Masculine, Number.Singular);
@@ -62,12 +64,10 @@ namespace LaMision.Core
                     return "pasillo_view".trans();
                 });
 
-            //var window = new ArticledFurniture("window", 25, 5, true, Genere.Femenine, Number.Singular);
-            //var humo = new SimpleFurniture("humo", 25, 5, false)
-            //    .WithTurnPassed((world, turns) =>
-            //    {
-            //        return Output.FromTexts("Tik tak");
-            //    });
+            var luzPasillo = new ArticledEnlightedFurniture("luzPasillo", 2, 2, Genere.Femenine, Number.Singular);
+            luzPasillo.Switch.TurnOn();
+            var taquilla = new ArticledContainerOpenableFurniture("taquilla", 600, 20, false, Genere.Femenine, Number.Singular, 600, 100);
+            var trajePlastico = new ArticledFurniture("trajePlastico", 100, 5, false, Genere.Masculine, Number.Singular);
 
             world.Items.Add(rinonera);
             world.Items.Add(tarjetaBlanca);
@@ -75,13 +75,25 @@ namespace LaMision.Core
             world.Items.Add(mesaSalita);
             world.Items.Add(escotilla);
             world.Items.Add(puertaSalita);
+            world.Items.Add(luzPasillo);
+            world.Items.Add(taquilla);
+            world.Items.Add(trajePlastico);
+            world.Items.Add(dispositivo);
 
             salita.Items.Add(fluorescenteSalita);
             salita.Items.Add(tarjetaBlanca);
             salita.Items.Add(mesaSalita);
             salita.Items.Add(escotilla);
             salita.Items.Add(puertaSalita);
-            salita.Items.Hide(fluorescenteSalita, mesaSalita, escotilla, puertaSalita);
+            salita.Items.Add(dispositivo);
+            salita.Items.Hide(fluorescenteSalita, mesaSalita, escotilla, puertaSalita, dispositivo);
+
+            pasillo.Items.Add(luzPasillo);
+            pasillo.Items.Add(taquilla);
+            pasillo.Items.Add(dispositivo);
+            pasillo.Items.Add(puertaSalita);
+            taquilla.Cast<IContainer>().Inventory.Add(trajePlastico, world.Items);
+            pasillo.Items.Hide(luzPasillo, taquilla, dispositivo, puertaSalita);
 
             sujeto.Carrier.SetBack(rinonera, world.Items);
 

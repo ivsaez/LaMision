@@ -27,8 +27,8 @@ namespace LaMision.Core.Lang
             new Word("puertaSalita_name", "puerta de la salita"),
             new Word("puertaSalita_description", "Es una puerta de color blanco con un enorme número 5 escrito en el medio. No hay ningún pomo o maneta visibles."),
 
-            new Word("luzPasillo_name", "luz"),
-            new Word("luzPasillo_description", "Es un bulbo ovalado que emite una constante luz de color rojo de muy poca intensidad, como si se tratara de una luz de emergencia."),
+            new Word("luzRoja_name", "luz"),
+            new Word("luzRoja_description", "Es un bulbo ovalado que emite una constante luz de color rojo de muy poca intensidad, como si se tratara de una luz de emergencia."),
 
             new Word("taquilla_name", "taquilla"),
             new Word("taquilla_description", "Es una taquilla metálica de aproximadamente metro y medio de altura. Está casi al final del pasillo apoyada contra la pared."),
@@ -38,6 +38,25 @@ namespace LaMision.Core.Lang
 
             new Word("puertaPasillo_name", "puerta del pasillo"),
             new Word("puertaPasillo_description", "Es una puerta de color gris, completamente lisa. No hay ningún pomo o maneta visibles."),
+
+            new Word("mesaSalon_name", "mesa del salón"),
+            new Word("mesaSalon_description", "Es una mesa de cámping plegable, con la superfície de plástico y las patas metálicas."),
+
+            new Word("silla_name", "silla"),
+            new Word("silla_description", "Es una plegable de color negro."),
+
+            new Word("sofa_name", "sofa"),
+            new Word("sofa_description", "Es un sofá de tres plazas de color marrón. El tejido parece imitación de cuero."),
+
+            new Word("tarjetaAzul_name", "tarjeta azul"),
+            new Word("tarjetaAzul_description", "Es una tarjeta de plástico de color azul. Es completamente lisa, no hay ninguna inscripción"),
+
+            new Word("puertaDormitorio_name", "puerta de la pared oeste del salón"),
+            new Word("puertaDormitorio_description", "Es una puerta de color gris, completamente lisa. No hay ningún pomo o maneta visibles."),
+
+            new Word("puertaLavabo_name", "puerta de la pared este del salón"),
+            new Word("puertaLavabo_description", "Es una puerta de color gris, completamente lisa. No hay ningún pomo o maneta visibles."),
+
         };
     }
 }

@@ -68,13 +68,16 @@ namespace LaMision.Core.Vaults
                     var tarjetaDescriptor = new ItemDescriptor(tarjeta!);
                     var doorDescriptor = new ItemDescriptor(door!);
 
-                    var text = new Pharagraph(
+                    var texts = new List<string> 
+                    {
                         "acercarTarjetaPuerta_text".trans(
-                            tarjetaDescriptor.ArticledName(true),
-                            doorDescriptor.ArticledName(true)));
+                        tarjetaDescriptor.ArticledName(true),
+                        doorDescriptor.ArticledName(true))
+                    };
 
                     var openResult = door!.Openable.Open(tarjeta);
-                    var openText = openResult switch
+
+                    texts.Add(openResult switch
                     {
                         OpenResult.Success => new string[]
                         {
@@ -87,14 +90,12 @@ namespace LaMision.Core.Vaults
                         OpenResult.UnneededKey => throw new NotSupportedException(),
                         OpenResult.NotNeeded => throw new NotSupportedException(),
                         _ => throw new NotSupportedException()
-                    };
+                    });
 
-                    var view = door.Connect(post.World);
+                    if(openResult == OpenResult.Success)
+                        texts.Add(door.Connect(post.World));
 
-                    return new Output(
-                        text, 
-                        new Pharagraph(openText), 
-                        new Pharagraph(view));
+                    return Output.FromTexts(texts.ToArray());
                 })
                     .WithDriver(Descriptor.MainRole)
                     .SetAsRoot()

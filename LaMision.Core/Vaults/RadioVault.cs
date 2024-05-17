@@ -48,6 +48,34 @@ namespace LaMision.Core.Vaults
                     .SetAsRoot()
                 .Finish(),
 
+                StoryletBuilder.Create("mensajeLevanta2")
+                .BeingRepeteable()
+                .ForMachines()
+                .WithAgentsScope()
+                .WithEnvPreconditions(pre => pre.IsState(States.Mision))
+                .WithPreconditions((pre) =>
+                {
+                    var sujeto = pre.World.Agents.GetOne("sujeto");
+                    return sujeto.Position.Machine.CurrentState != Position.Standing;
+                })
+                .WithInteraction((post) =>
+                {
+                    return new Output(
+                        new Pharagraph("mensajeLevanta2_text_1".trans()),
+                        new Conversation()
+                            .With(post.Main.Name, new string[]
+                            {
+                                "mensajeLevanta2_voz_1".trans(),
+                                "mensajeLevanta2_voz_2".trans(),
+                                "mensajeLevanta2_voz_3".trans(),
+                                "mensajeLevanta2_voz_4".trans(),
+                            }.Random())
+                        );
+                })
+                    .WithDriver(Descriptor.MainRole)
+                    .SetAsRoot()
+                .Finish(),
+
                 StoryletBuilder.Create("mision")
                 .BeingGlobalSingle()
                 .ForMachines()

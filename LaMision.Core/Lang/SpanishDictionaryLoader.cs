@@ -47,6 +47,12 @@ namespace LaMision.Core.Lang
             new Word("levantarse_1_interaction_description", "Levantarte"),
             new Word("levantarse_text", "Te levantas del suelo y te pones de pie."),
 
+            new Word("agacharse_1_interaction_description", "Agacharte"),
+            new Word("agacharse_text", "Te agachas apoyando una rodilla en el suelo."),
+
+            new Word("tumbarse_1_interaction_description", "Tumbarte"),
+            new Word("tumbarse_text", "Te tumbas en el suelo."),
+
             new Word("abrirEscotilla_1_interaction_description", "Abrir {thing}"),
             new Word("abrirEscotilla_text", "Intentas abrir la escotilla pero enseguida te das cuenta de que no es posible. No hay ningun asidero para poder estirar, es completamente lisa. Además parece extremadamente pesada. Seguramente se abre con algún sistema mecánico."),
 
@@ -80,6 +86,13 @@ namespace LaMision.Core.Lang
 
             new Word("cogerTraje_1_interaction_description", "Coger {thing}"),
             new Word("cogerTraje_text", "Intentas coger el traje, pero el plástico está algo deshecho por el calor. Si intentas tirar de él se romperá. De repente caes en la cuenta de que hace mucho calor en el pasillo."),
+
+            new Word("mensajeLevanta2_1_interaction_description", "Suena una locución"),
+            new Word("mensajeLevanta2_text_1", "Suena la voz del Comandante por el altavoz del dispositivo."),
+            new Word("mensajeLevanta2_voz_1", "No es momento de descansar recluta."),
+            new Word("mensajeLevanta2_voz_2", "No se duerma ahora Kazinsky. Recuerde la misión."),
+            new Word("mensajeLevanta2_voz_3", "¡Arriba! ¡Levante!"),
+            new Word("mensajeLevanta2_voz_4", "¡Muévase Kazinsky! No hay tiempo para descansar."),
 
             //new Word("saludo_1_interaction_description", "{main} saluda a {saluted}."),
             //new Word("saludo_11_interaction_description", "{saluted} saluda a {main}."),

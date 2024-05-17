@@ -299,9 +299,48 @@ namespace LaMision.Core.Vaults
                 {
                     var main = post.Main;
                     var done = main.Position.Machine.Transite(Position.Standing);
-                    Console.WriteLine(done);
 
                     return Output.FromTexts("levantarse_text".trans());
+                })
+                    .WithDriver(Descriptor.MainRole)
+                    .SetAsRoot()
+                .Finish(),
+
+                StoryletBuilder.Create("agacharse")
+                .BeingRepeteable()
+                .ForHumans()
+                .WithAgentsScope()
+                .WithPreconditions((pre) =>
+                {
+                    return pre.EveryoneConscious()
+                        && pre.PositionIs(Descriptor.MainRole, Position.Standing);
+                })
+                .WithInteraction((post) =>
+                {
+                    var main = post.Main;
+                    var done = main.Position.Machine.Transite(Position.Kneeing);
+
+                    return Output.FromTexts("agacharse_text".trans());
+                })
+                    .WithDriver(Descriptor.MainRole)
+                    .SetAsRoot()
+                .Finish(),
+
+                StoryletBuilder.Create("tumbarse")
+                .BeingRepeteable()
+                .ForHumans()
+                .WithAgentsScope()
+                .WithPreconditions((pre) =>
+                {
+                    return pre.EveryoneConscious()
+                        && pre.PositionIs(Descriptor.MainRole, Position.Standing);
+                })
+                .WithInteraction((post) =>
+                {
+                    var main = post.Main;
+                    var done = main.Position.Machine.Transite(Position.Lying);
+
+                    return Output.FromTexts("tumbarse_text".trans());
                 })
                     .WithDriver(Descriptor.MainRole)
                     .SetAsRoot()

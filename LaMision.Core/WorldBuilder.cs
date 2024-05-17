@@ -25,10 +25,12 @@ namespace LaMision.Core
             var radio = new MisionMapped("radio", Externality.Internal, Genere.Femenine, Number.Singular);
             var salita = new MisionMapped("salita", Externality.Internal, Genere.Femenine, Number.Singular);
             var pasillo = new MisionMapped("pasillo", Externality.Internal, Genere.Masculine, Number.Singular);
+            var salon = new MisionMapped("salon", Externality.Internal, Genere.Masculine, Number.Singular);
 
             world.Map.Add(radio);
             world.Map.Add(salita);
             world.Map.Add(pasillo);
+            world.Map.Add(salon);
 
             var sujeto = new MisionAgent("sujeto", "Mirko", "Kazinsky", Importance.Main);
             sujeto.BecomeHuman();
@@ -68,6 +70,19 @@ namespace LaMision.Core
             luzPasillo.Switch.TurnOn();
             var taquilla = new ArticledContainerOpenableFurniture("taquilla", 600, 20, false, Genere.Femenine, Number.Singular, 600, 100);
             var trajePlastico = new ArticledFurniture("trajePlastico", 100, 5, false, Genere.Masculine, Number.Singular);
+            var puertaPasillo = new Puerta("puertaPasillo", 200, 20, false, Genere.Femenine, Number.Singular, tarjetaBlanca)
+                .WithConnection(world =>
+                {
+                    var pasillo = world.Map.Get("pasillo");
+                    var salon = world.Map.Get("salon");
+
+                    if (pasillo.Exits.Has(salon))
+                        return string.Empty;
+
+                    world.Map.Connect(salon, pasillo, Direction.North_South);
+
+                    return "salon_view".trans();
+                });
 
             world.Items.Add(rinonera);
             world.Items.Add(tarjetaBlanca);
@@ -79,6 +94,7 @@ namespace LaMision.Core
             world.Items.Add(taquilla);
             world.Items.Add(trajePlastico);
             world.Items.Add(dispositivo);
+            world.Items.Add(puertaPasillo);
 
             salita.Items.Add(fluorescenteSalita);
             salita.Items.Add(tarjetaBlanca);
@@ -92,8 +108,9 @@ namespace LaMision.Core
             pasillo.Items.Add(taquilla);
             pasillo.Items.Add(dispositivo);
             pasillo.Items.Add(puertaSalita);
+            pasillo.Items.Add(puertaPasillo);
             taquilla.Cast<IContainer>().Inventory.Add(trajePlastico, world.Items);
-            pasillo.Items.Hide(luzPasillo, taquilla, dispositivo, puertaSalita);
+            pasillo.Items.Hide(luzPasillo, taquilla, dispositivo, puertaSalita, puertaPasillo);
 
             sujeto.Carrier.SetBack(rinonera, world.Items);
 

@@ -8,7 +8,8 @@ using Items.Extensions;
 using Items;
 using ItemsLang;
 using Rand;
-using Mapping;
+using Agents.Extensions;
+using Agents;
 
 namespace LaMision.Core.Vaults
 {
@@ -46,14 +47,17 @@ namespace LaMision.Core.Vaults
                 .WithEnvPreconditions((pre) => pre.IsState(States.Mision))
                 .WithPreconditions((pre) =>
                 {
+                    var door = pre.Item("door");
+
                     return pre.EveryoneStanding()
                         && pre.EveryoneConscious()
                         && pre.MainPlaceIsEnlighted()
                         && pre.Item("tarjeta") is Tarjeta
-                        && pre.Item("door") is Puerta
-                        && pre.Item("door").Cast<IOpenable>().Openable.IsClosed
+                        && door is Puerta
+                        && door.Cast<IOpenable>().Openable.IsClosed
                         && pre.RoleOwns(Descriptor.MainRole, "tarjeta")
-                        && pre.MainPlace.Items.Has(pre.Item("door"));
+                        && pre.MainPlace.Items.Has(door)
+                        && pre.Historic.HasHappened(new Snapshot("mirar_item", pre.Main.Id, door.Id));
                 })
                 .WithInteraction((post) =>
                 {
@@ -91,6 +95,31 @@ namespace LaMision.Core.Vaults
                         text, 
                         new Pharagraph(openText), 
                         new Pharagraph(view));
+                })
+                    .WithDriver(Descriptor.MainRole)
+                    .SetAsRoot()
+                .Finish(),
+
+                StoryletBuilder.Create("cogerTraje")
+                .BeingGlobalSingle()
+                .ForHumans()
+                .WithDescriptor("thing")
+                .WithItemsScope()
+                .WithPreconditions((pre) =>
+                {
+                    var main = pre.Main;
+                    var item = pre.Item("thing");
+                    var place = pre.World.Map.GetUbication(main);
+
+                    return pre.EveryoneConscious()
+                        && main.Position.Machine.CurrentState == Position.Standing
+                        && item.Id == "trajePlastico"
+                        && pre.MainPlaceIsEnlighted()
+                        && (pre.Historic.HasHappened(new Snapshot("mirar_item", main.Id, item.Id)));
+                })
+                .WithInteraction((post) =>
+                {
+                    return Output.FromTexts("cogerTraje_text".trans());
                 })
                     .WithDriver(Descriptor.MainRole)
                     .SetAsRoot()

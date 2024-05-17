@@ -81,6 +81,35 @@ namespace LaMision.Core.Vaults
                 })
                     .WithDriver(Descriptor.MainRole)
                     .SetAsRoot()
+                .Finish(),
+
+                 StoryletBuilder.Create("mensajePasillo")
+                .BeingRepeteable()
+                .ForMachines()
+                .WithAgentsScope()
+                .WithEnvPreconditions(pre => pre.IsState(States.Mision))
+                .WithPreconditions((pre) =>
+                {
+                    var sujeto = pre.World.Agents.GetOne("sujeto");
+
+                    return pre.World.Map.GetUbication(sujeto).Id == "pasillo";
+                })
+                .WithInteraction((post) =>
+                {
+                    return new Output(
+                        new Pharagraph("mensajePasillo_text_1".trans()),
+                        new Conversation()
+                            .With(post.Main.Name, new string[]
+                            {
+                                "mensajePasillo_voz_1".trans(),
+                                "mensajePasillo_voz_2".trans(),
+                                "mensajePasillo_voz_3".trans(),
+                                "mensajePasillo_voz_4".trans(),
+                            }.Random())
+                        );
+                })
+                    .WithDriver(Descriptor.MainRole)
+                    .SetAsRoot()
                 .Finish()
                 );
         }

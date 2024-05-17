@@ -71,6 +71,16 @@ namespace LaMision.Core.Lang
             new Word("mision_text_10", "Entendido comandante. Arreglar la conexión y pulsar el botón."),
             new Word("mision_text_11", "Adelante Kazinsky, confiamos en usted."),
 
+            new Word("mensajePasillo_1_interaction_description", "Suena una locución"),
+            new Word("mensajePasillo_text_1", "Suena la voz del Comandante por el altavoz del dispositivo."),
+            new Word("mensajePasillo_voz_1", "Avance por el pasillo. No se detenga."),
+            new Word("mensajePasillo_voz_2", "¡Muévase Kazinsky! No hay tiempo."),
+            new Word("mensajePasillo_voz_3", "No se entretenga en el pasillo. Muévase."),
+            new Word("mensajePasillo_voz_4", "No se detenga en el pasillo, el enemigo está cerca."),
+
+            new Word("cogerTraje_1_interaction_description", "Coger {thing}"),
+            new Word("cogerTraje_text", "Intentas coger el traje, pero el plástico está algo deshecho por el calor. Si intentas tirar de él se romperá. De repente caes en la cuenta de que hace mucho calor en el pasillo."),
+
             //new Word("saludo_1_interaction_description", "{main} saluda a {saluted}."),
             //new Word("saludo_11_interaction_description", "{saluted} saluda a {main}."),
             //new Word("saludo_text", "Buenas {0}."),

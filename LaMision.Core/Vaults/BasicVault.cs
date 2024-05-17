@@ -314,13 +314,17 @@ namespace LaMision.Core.Vaults
                 .WithItemsScope()
                 .WithPreconditions((pre) =>
                 {
+                    var main = pre.Main;
+                    var place = pre.MainPlace;
+
                     return pre.EveryoneStanding()
                         && pre.EverythingInMainPlace()
                         && pre.MainPlaceIsEnlighted()
                         && pre.EveryoneConscious()
                         && pre.Item("openable") is not Puerta
                         && pre.Item("openable") is IOpenable
-                        && pre.Item("openable").Cast<IOpenable>().Openable.IsClosed;
+                        && pre.Item("openable").Cast<IOpenable>().Openable.IsClosed
+                        && pre.Historic.HasHappened(new Snapshot("mirar_mapped", main.Id, place.Id));
                 })
                 .WithInteraction((post) =>
                 {

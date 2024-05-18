@@ -6,7 +6,6 @@ using Mapping;
 using StateMachine;
 using Worlding;
 using Languager.Extensions;
-using Items.Extensions;
 
 namespace LaMision.Core
 {
@@ -22,6 +21,7 @@ namespace LaMision.Core
 
             world.Time.IncreaseHours(17);
 
+            var nowhere = new MisionMapped("nowhere", Externality.Internal, Genere.Femenine, Number.Singular);
             var radio = new MisionMapped("radio", Externality.Internal, Genere.Femenine, Number.Singular);
             var salita = new MisionMapped("salita", Externality.Internal, Genere.Femenine, Number.Singular);
             var pasillo = new MisionMapped("pasillo", Externality.Internal, Genere.Masculine, Number.Singular);
@@ -29,6 +29,7 @@ namespace LaMision.Core
             var dormitorio = new MisionMapped("dormitorio", Externality.Internal, Genere.Masculine, Number.Singular);
             var lavabo = new MisionMapped("lavabo", Externality.Internal, Genere.Masculine, Number.Singular);
 
+            world.Map.Add(nowhere);
             world.Map.Add(radio);
             world.Map.Add(salita);
             world.Map.Add(pasillo);
@@ -155,6 +156,8 @@ namespace LaMision.Core
             world.Items.Add(tarjetaNaranja);
             world.Items.Add(frasco);
             world.Items.Add(armario);
+
+            nowhere.Items.Add(tarjetaNaranja);
 
             salita.Items.Add(fluorescenteSalita);
             salita.Items.Add(tarjetaBlanca);

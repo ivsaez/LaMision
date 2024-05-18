@@ -6,6 +6,9 @@ namespace LaMision.Core.Lang
     {
         public IEnumerable<Word> Words => new List<Word>
         {
+            new Word("nowhere_name", "nowhere"),
+            new Word("nowhere_description", "Nowhere."),
+
             new Word("radio_name", "radio"),
             new Word("radio_description", "Es la radio."),
 

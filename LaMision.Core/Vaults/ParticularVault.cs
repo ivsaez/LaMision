@@ -10,6 +10,8 @@ using ItemsLang;
 using Rand;
 using Agents.Extensions;
 using Agents;
+using AgentBody;
+using ClimaticsLang;
 
 namespace LaMision.Core.Vaults
 {
@@ -240,6 +242,81 @@ namespace LaMision.Core.Vaults
                 .WithInteraction((post) =>
                 {
                     return Output.FromTexts("beberFrasco_text".trans());
+                })
+                    .WithDriver(Descriptor.MainRole)
+                    .SetAsRoot()
+                .Finish(),
+
+                StoryletBuilder.Create("mirarDebajoSofa")
+                .BeingRepeteable()
+                .ForHumans()
+                .WithDescriptor("thing")
+                .WithItemsScope()
+                .WithPreconditions((pre) =>
+                {
+                    var main = pre.Main;
+                    var item = pre.Item("thing");
+                    
+                    return pre.EveryoneConscious()
+                        && (pre.PositionIs(Descriptor.MainRole, Position.Lying) || pre.PositionIs(Descriptor.MainRole, Position.Kneeing))
+                        && item.Id == "sofa"
+                        && pre.MainPlaceIsEnlighted();
+                })
+                .WithInteraction((post) =>
+                {
+                    var main = post.Main;
+                    var item = post.Item("thing");
+                    var tarjetaNaranja = post.World.Items.GetOne("tarjetaNaranja");
+                    var nowhere = post.World.Map.Get("nowhere");
+
+                    if (nowhere.Items.Has(tarjetaNaranja))
+                        return Output.FromTexts("mirarDebajoSofa_something_text".trans());
+
+                    return Output.FromTexts("mirarDebajoSofa_text".trans());
+                })
+                    .WithDriver(Descriptor.MainRole)
+                    .SetAsRoot()
+                .Finish(),
+
+                StoryletBuilder.Create("cogerTarjetaNaranja")
+                .BeingRepeteable()
+                .ForHumans()
+                .WithItemsScope()
+                .WithPreconditions((pre) =>
+                {
+                    var main = pre.Main;
+                    var place = pre.MainPlace;
+                    var tarjetaNaranja = pre.World.Items.GetOne("tarjetaNaranja");
+                    var nowhere = pre.World.Map.Get("nowhere");
+
+                    return pre.EveryoneConscious()
+                        && (pre.PositionIs(Descriptor.MainRole, Position.Lying) || pre.PositionIs(Descriptor.MainRole, Position.Kneeing))
+                        && pre.MainPlaceIsEnlighted()
+                        && place.Id == "salon"
+                        && pre.Historic.HasHappened(new Snapshot("mirarDebajoSofa", main.Id, "sofa"))
+                        && nowhere.Items.Has(tarjetaNaranja);
+                })
+                .WithInteraction((post) =>
+                {
+                    var main = post.Main;
+                    var item = post.World.Items.GetOne("tarjetaNaranja");
+                    var nowhere = post.World.Map.Get("nowhere");
+
+                    var itemDescriptor = new ItemDescriptor(item);
+
+                    var baggingResult = main.Cast<ICarrier>().Carrier.Take(item, post.World.Items);
+                    if (!baggingResult.HasBag)
+                        return Output.FromTexts("coger_nobag".trans(main.Name, itemDescriptor.ArticledName(true)));
+
+                    if (baggingResult.Addition == ItemAddition.Big)
+                        return Output.FromTexts("coger_big".trans(main.Name, itemDescriptor.ArticledName(true)));
+
+                    if (baggingResult.Addition == ItemAddition.Heavy)
+                        return Output.FromTexts("coger_heavy".trans(main.Name, itemDescriptor.ArticledName(true)));
+
+                    var removed = nowhere.Items.Remove(item);
+
+                    return Output.FromTexts("coger_good".trans(main.Name, itemDescriptor.ArticledName(true)));
                 })
                     .WithDriver(Descriptor.MainRole)
                     .SetAsRoot()

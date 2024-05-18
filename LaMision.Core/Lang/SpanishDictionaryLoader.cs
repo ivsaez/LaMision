@@ -128,11 +128,17 @@ namespace LaMision.Core.Lang
             new Word("mensajeSalon_voz_9", "El enemigo se acerca recluta. Creo que no debo necesitar recordárselo."),
             new Word("mensajeSalon_voz_10", "Utilice las tarjetas de acceso. Puede que alguna se haya caído de su sitio. Busque y encuéntrelas todas."),
 
+            new Word("mirarDebajoSofa_1_interaction_description", "Mirar debajo del sofá"),
+            new Word("mirarDebajoSofa_text", "Debajo del sofá ya solo queda polvo."),
+            new Word("mirarDebajoSofa_something_text", "Debajo del sofá hay algo. Parece una tarjeta de acceso, en este caso es la de color naranja."),
+
+            new Word("cogerTarjetaNaranja_1_interaction_description", "Coger la tarjeta de debajo del sofá"),
+
             //new Word("saludo_1_interaction_description", "{main} saluda a {saluted}."),
             //new Word("saludo_11_interaction_description", "{saluted} saluda a {main}."),
             //new Word("saludo_text", "Buenas {0}."),
             //new Word("respuesta_text", "Hola {0}."),
-
+            
             //new Word("pedirse_1_interaction_description", "{main} se tira un cuesco."),
             //new Word("pedirse_text", "{0} levanta la pierna y se tira un sonoro pedo."),
             //new Word("pedirse_conversation", "¡Ups! Perdón."),

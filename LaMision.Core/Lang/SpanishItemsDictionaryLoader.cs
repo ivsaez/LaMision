@@ -45,7 +45,7 @@ namespace LaMision.Core.Lang
             new Word("silla_name", "silla"),
             new Word("silla_description", "Es una plegable de color negro."),
 
-            new Word("sofa_name", "sofa"),
+            new Word("sofa_name", "sofá"),
             new Word("sofa_description", "Es un sofá de tres plazas de color marrón. El tejido parece imitación de cuero."),
 
             new Word("tarjetaAzul_name", "tarjeta azul"),

@@ -21,7 +21,13 @@ namespace LaMision.Core.Lang
             new Word("coger_nobag", "No puedea coger {1} porque no tienes donde guardar cosas."),
 
             new Word("dejar_1_interaction_description", "Dejar {thing}"),
-            new Word("dejar", "Dejas {1} en el suelo."),
+            new Word("dejar", "Dejas {0} en el suelo."),
+
+            new Word("dejarEn_1_interaction_description", "Dejar {thing} dentro de {recipient}"),
+            new Word("dejarEn_closed", "Hay que abrir {0} para poder poner cosas dentro."),
+            new Word("dejarEn_big", "No se puede poner {0} dentro de {1}. Es demasiado grande."),
+            new Word("dejarEn_heavy", "No se puede poner {0} dentro de {1}. Pesa demasiado."),
+            new Word("dejarEn_success", "Dejas {0} en {1}."),
 
             new Word("ir_1_interaction_description", "Ir hacia hacia {place}"),
             new Word("ir", "Te desplazas hacia {1}."),

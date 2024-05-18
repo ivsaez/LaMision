@@ -265,6 +265,51 @@ namespace LaMision.Core.Vaults
                     .SetAsRoot()
                 .Finish(),
 
+                StoryletBuilder.Create("dejarEn")
+                .BeingRepeteable()
+                .ForHumans()
+                .WithDescriptor("thing", "recipient")
+                .WithItemsScope()
+                .WithPreconditions((pre) =>
+                {
+                    var main = pre.Main;
+                    var item = pre.Item("thing");
+                    var recipient = pre.Item("recipient");
+
+                    return pre.EveryoneConscious()
+                        && pre.RoleOwns(Descriptor.MainRole, "thing")
+                        && recipient is IContainer
+                        && !main.Cast<ICarrier>().Carrier.GetCarrieds(pre.World.Items).Back!.Equals(recipient)
+                        && !main.Cast<ICarrier>().Carrier.GetCarrieds(pre.World.Items).Back!.Equals(item);
+                })
+                .WithInteraction((post) =>
+                {
+                    var main = post.Main;
+                    var item = post.Item("thing");
+                    var recipient = post.Item("recipient");
+
+                    var itemDescriptor = new ItemDescriptor(item);
+                    var recipientDescriptor = new ItemDescriptor(recipient);
+
+                    if (recipient is IOpenable && recipient.Cast<IOpenable>().Openable.IsClosed)
+                        return Output.FromTexts("dejarEn_closed".trans(recipientDescriptor.ArticledName(true)));
+
+                    var addition = recipient.Cast<IContainer>().Inventory.Add(item, post.World.Items);
+
+                    if(addition == ItemAddition.Heavy)
+                        return Output.FromTexts("dejarEn_heavy".trans(itemDescriptor.ArticledName(true), recipientDescriptor.ArticledName(true)));
+
+                    if (addition == ItemAddition.Big)
+                        return Output.FromTexts("dejarEn_big".trans(itemDescriptor.ArticledName(true), recipientDescriptor.ArticledName(true)));
+
+                    main.Cast<ICarrier>().Carrier.Leave(item, post.World.Items);
+
+                    return Output.FromTexts("dejarEn_success".trans(itemDescriptor.ArticledName(true), recipientDescriptor.ArticledName(true)));
+                })
+                    .WithDriver(Descriptor.MainRole)
+                    .SetAsRoot()
+                .Finish(),
+
                 StoryletBuilder.Create("levantarse")
                 .BeingRepeteable()
                 .ForHumans()

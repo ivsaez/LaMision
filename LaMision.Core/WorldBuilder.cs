@@ -120,6 +120,13 @@ namespace LaMision.Core
                     return "lavabo_view".trans();
                 });
 
+            var litera = new ArticledFurniture("litera", 400, 20, false, Genere.Femenine, Number.Singular);
+            var mesita = new ArticledContainerOpenableFurniture("mesita", 50, 20, false, Genere.Femenine, Number.Singular, 50, 50);
+
+            var vater = new ArticledFurniture("vater", 30, 10, false, Genere.Masculine, Number.Singular);
+            var lavadero = new ArticledFurniture("lavadero", 40, 10, false, Genere.Masculine, Number.Singular);
+            var espejo = new ArticledFurniture("espejo", 50, 10, false, Genere.Masculine, Number.Singular);
+
             world.Items.Add(rinonera);
             world.Items.Add(tarjetaBlanca);
             world.Items.Add(fluorescenteSalita);
@@ -137,6 +144,11 @@ namespace LaMision.Core
             world.Items.Add(puertaDormitorio);
             world.Items.Add(puertaLavabo);
             world.Items.Add(tarjetaAzul);
+            world.Items.Add(litera);
+            world.Items.Add(mesita);
+            world.Items.Add(vater);
+            world.Items.Add(lavadero);
+            world.Items.Add(espejo);
 
             salita.Items.Add(fluorescenteSalita);
             salita.Items.Add(tarjetaBlanca);
@@ -161,6 +173,18 @@ namespace LaMision.Core
             salon.Items.Add(puertaDormitorio);
             salon.Items.Add(puertaLavabo);
             salon.Items.Hide(luzRoja, dispositivo, mesaSalon, silla, sofa, puertaDormitorio, puertaLavabo);
+
+            dormitorio.Items.Add(luzRoja);
+            dormitorio.Items.Add(litera);
+            dormitorio.Items.Add(mesita);
+            mesita.Cast<IContainer>().Inventory.Add(tarjetaAzul, world.Items);
+            dormitorio.Items.Hide(luzRoja, mesita, litera);
+
+            lavabo.Items.Add(luzRoja);
+            lavabo.Items.Add(vater);
+            lavabo.Items.Add(lavadero);
+            lavabo.Items.Add(espejo);
+            lavabo.Items.Hide(vater, lavadero, espejo, luzRoja);
 
             sujeto.Carrier.SetBack(rinonera, world.Items);
 

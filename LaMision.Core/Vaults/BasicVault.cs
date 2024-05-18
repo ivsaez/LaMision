@@ -22,8 +22,6 @@ namespace LaMision.Core.Vaults
     {
         public static StoriesVault Get()
         {
-            
-
             //var saludo = StoryletBuilder.Create("saludo")
             //    .BeingSingle()
             //    .ForHumans()
@@ -48,37 +46,6 @@ namespace LaMision.Core.Vaults
             //        .Build()
             //    .WithDriver(Descriptor.MainRole)
             //    .SetAsRoot()
-            //    .Finish();
-
-            //var pedirse = StoryletBuilder.Create("pedirse")
-            //    .ForMachines()
-            //    .WithAgentsScope()
-            //    .WithPreconditions((pre) => pre.EveryoneConscious())
-            //    .WithInteraction((world, roles) =>
-            //    {
-            //        var main = roles.Get<MisionAgent>(Descriptor.MainRole);
-
-            //        return new Output(
-            //            new Pharagraph("pedirse_text".trans(main.Name)),
-            //            new Conversation().With(main.Name, "pedirse_conversation".trans())
-            //            );
-            //    })
-            //        .WithDriver(Descriptor.MainRole)
-            //        .SetAsRoot()
-            //    .Finish();
-
-            //var sacamoco = StoryletBuilder.Create("sacamoco")
-            //    .ForMachines()
-            //    .WithAgentsScope()
-            //    .WithPreconditions((pre) => pre.EveryoneConscious())
-            //    .WithInteraction((world, roles) =>
-            //    {
-            //        var main = roles.Get<MisionAgent>(Descriptor.MainRole);
-
-            //        return Output.FromTexts("sacamoco_text".trans(main.Name));
-            //    })
-            //        .WithDriver(Descriptor.MainRole)
-            //        .SetAsRoot()
             //    .Finish();
 
             //var estornudo = StoryletBuilder.Create("estornudo")
@@ -187,6 +154,7 @@ namespace LaMision.Core.Vaults
                 .WithMappedsScope()
                 .WithPreconditions((pre) =>
                     pre.EveryoneConscious()
+                    && pre.EveryoneStanding()
                     && !pre.RoleInPlace(Descriptor.MainRole, "place")
                     && pre.IsExit("place"))
                 .WithInteraction((post) =>
@@ -215,16 +183,17 @@ namespace LaMision.Core.Vaults
                 .WithItemsScope()
                 .WithPreconditions((pre) =>
                 {
-                    var main = pre.Roles.Get<MisionAgent>(Descriptor.MainRole);
-                    var item = pre.Roles.Get<IItem>("thing");
-                    var place = pre.World.Map.GetUbication(main);
+                    var main = pre.Main;
+                    var item = pre.Item("thing");
+                    var place = pre.MainPlace;
 
                     return pre.EveryoneConscious()
                         && main.Position.Machine.CurrentState == Position.Standing
                         && main is ICarrier
-                        && place.Items.Has(item)
                         && item is not IFurniture
                         && pre.MainPlaceIsEnlighted()
+                        && !pre.RoleOwns(Descriptor.MainRole, "thing")
+                        && !main.Cast<ICarrier>().Carrier.GetCarrieds(pre.World.Items).Back!.Equals(item)
                         && (pre.Historic.HasHappened(new Snapshot("mirar_mapped", main.Id, place.Id))
                             || pre.HasHappened("dejar", Descriptor.MainRole, "thing"));
                 })
@@ -246,7 +215,19 @@ namespace LaMision.Core.Vaults
                     if (baggingResult.Addition == ItemAddition.Heavy)
                         return Output.FromTexts("coger_heavy".trans(main.Name, itemDescriptor.ArticledName(true)));
 
-                    place.Items.Remove(item);
+                    var removed = place.Items.Remove(item);
+                    if (!removed)
+                    {
+                        foreach (var thing in place.Items.AllAccessible(post.World.Items))
+                        {
+                            if (thing is IContainer)
+                            {
+                                removed = thing.Cast<IContainer>().Inventory.Remove(item);
+                                if(removed) break;
+                            }
+                        }
+                    }
+
                     return Output.FromTexts("coger_good".trans(main.Name, itemDescriptor.ArticledName(true)));
                 })
                     .WithDriver(Descriptor.MainRole)

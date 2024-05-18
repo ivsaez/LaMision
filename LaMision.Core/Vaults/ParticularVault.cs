@@ -110,7 +110,6 @@ namespace LaMision.Core.Vaults
                 {
                     var main = pre.Main;
                     var item = pre.Item("thing");
-                    var place = pre.World.Map.GetUbication(main);
 
                     return pre.EveryoneConscious()
                         && main.Position.Machine.CurrentState == Position.Standing
@@ -121,6 +120,30 @@ namespace LaMision.Core.Vaults
                 .WithInteraction((post) =>
                 {
                     return Output.FromTexts("cogerTraje_text".trans());
+                })
+                    .WithDriver(Descriptor.MainRole)
+                    .SetAsRoot()
+                .Finish(),
+
+                StoryletBuilder.Create("sentarSofa")
+                .BeingGlobalSingle()
+                .ForHumans()
+                .WithDescriptor("thing")
+                .WithItemsScope()
+                .WithPreconditions((pre) =>
+                {
+                    var main = pre.Main;
+                    var item = pre.Item("thing");
+
+                    return pre.EveryoneConscious()
+                        && main.Position.Machine.CurrentState == Position.Standing
+                        && item.Id == "sofa"
+                        && pre.MainPlaceIsEnlighted()
+                        && (pre.Historic.HasHappened(new Snapshot("mirar_item", main.Id, item.Id)));
+                })
+                .WithInteraction((post) =>
+                {
+                    return Output.FromTexts("sentarSofa_text".trans());
                 })
                     .WithDriver(Descriptor.MainRole)
                     .SetAsRoot()

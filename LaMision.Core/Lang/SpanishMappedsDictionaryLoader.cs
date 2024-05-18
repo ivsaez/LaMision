@@ -21,11 +21,11 @@ namespace LaMision.Core.Lang
             new Word("salon_view", "Al otro lado se ve una sala más amplia, una especie de salón. Sientes una oleada de calor muy fuerte proveniente de esa sala, como si hubieras abierto la puerta de un horno."),
 
             new Word("dormitorio_name", "dormitorio"),
-            new Word("dormitorio_description", "."),
+            new Word("dormitorio_description", "El dormitorio es una habitación muy pequeña, iluminada por otra luz roja. Dos de las paredes son de hormigón visto, mientras que la pared del fondo tiene un empapelado a cuadros blancos y verdes. Los únicos muebles son una litera y una mesita."),
             new Word("dormitorio_view", "Al otro lado ves lo que parece ser un dormitorio."),
 
             new Word("lavabo_name", "lavabo"),
-            new Word("lavabo_description", "."),
+            new Word("lavabo_description", "El lavabo es pequeño y está iluminado por una luz roja situada encima de la puerta. Únicamente consta de un váter y un lavadero. En la pared de hormigón visto hay colgado un espejo rectangular."),
             new Word("lavabo_view", "Al otro lado hay un lavabo."),
         };
     }

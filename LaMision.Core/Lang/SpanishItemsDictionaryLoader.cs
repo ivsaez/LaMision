@@ -49,7 +49,7 @@ namespace LaMision.Core.Lang
             new Word("sofa_description", "Es un sofá de tres plazas de color marrón. El tejido parece imitación de cuero."),
 
             new Word("tarjetaAzul_name", "tarjeta azul"),
-            new Word("tarjetaAzul_description", "Es una tarjeta de plástico de color azul. Es completamente lisa, no hay ninguna inscripción"),
+            new Word("tarjetaAzul_description", "Es una tarjeta de plástico de color azul. Es completamente lisa, no hay ninguna inscripción."),
 
             new Word("puertaDormitorio_name", "puerta de la pared oeste del salón"),
             new Word("puertaDormitorio_description", "Es una puerta de color gris, completamente lisa. No hay ningún pomo o maneta visibles."),
@@ -57,6 +57,20 @@ namespace LaMision.Core.Lang
             new Word("puertaLavabo_name", "puerta de la pared este del salón"),
             new Word("puertaLavabo_description", "Es una puerta de color gris, completamente lisa. No hay ningún pomo o maneta visibles."),
 
+            new Word("litera_name", "litera"),
+            new Word("litera_description", "Es una endeble litera metálica para dos camas, donde los somieres son láminas de madera. En este momento no tiene los colochones."),
+
+            new Word("mesita_name", "mesita"),
+            new Word("mesita_description", "Es una mesita de noche de madera, con un cajón. Encima de la mesita no hay nada."),
+
+            new Word("vater_name", "váter"),
+            new Word("vater_description", "Es un váter redondo y amarillento por la suciedad, con la cisterna justo encima con una cadenilla colgando. No tiene tapa, y puedes ver que tampoco hay agua dentro."),
+
+            new Word("lavadero_name", "lavadero"),
+            new Word("lavadero_description", "El lavadero es grande y cuadrado. Tiene un grifo monomando."),
+
+            new Word("espejo_name", "espejo"),
+            new Word("espejo_description", "Al mirarte al espejo ves la cara de un desconocido iluminada por la luz roja. Eres un hombre de unos 30 años, con la tez morena y el pelo completamente rasurado. Estás extremadamente delgado, con pómulos y sienes marcados, y con los dientes ennegrecidos."),
         };
     }
 }

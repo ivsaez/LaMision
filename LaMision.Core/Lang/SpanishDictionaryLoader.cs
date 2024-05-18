@@ -94,6 +94,9 @@ namespace LaMision.Core.Lang
             new Word("mensajeLevanta2_voz_3", "¡Arriba! ¡Levante!"),
             new Word("mensajeLevanta2_voz_4", "¡Muévase Kazinsky! No hay tiempo para descansar."),
 
+            new Word("sentarSofa_1_interaction_description", "Sentarte en el sofá"),
+            new Word("sentarSofa_text", "Tocas el sofá antes de sentarte... está ardiendo. Prefieres quedarte de pie."),
+
             //new Word("saludo_1_interaction_description", "{main} saluda a {saluted}."),
             //new Word("saludo_11_interaction_description", "{saluted} saluda a {main}."),
             //new Word("saludo_text", "Buenas {0}."),

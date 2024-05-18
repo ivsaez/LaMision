@@ -103,6 +103,15 @@ namespace LaMision.Core.Lang
             new Word("sentarSofa_1_interaction_description", "Sentarte en el sofá"),
             new Word("sentarSofa_text", "Tocas el sofá antes de sentarte... está ardiendo. Prefieres quedarte de pie."),
 
+            new Word("usarVater_1_interaction_description", "Usar el váter"),
+            new Word("usarVater_text", "Te sientas en el sucio váter y aprietas el vientre. Estás completamente vacío, nada en el intestino y nada en la vejiga. Lo único que sale es un sonoro pedo que inunda la estancia de un nauseabundo olor durante unos segundos."),
+
+            new Word("usarLavadero_1_interaction_description", "Abrir el grifo del lavadero"),
+            new Word("usarLavadero_text", "Levantas el grifo monomando pero no sucede nada. No cae ni una gota, el agua debe estar cortada desde hace tiempo."),
+
+            new Word("usarLitera_1_interaction_description", "Tumbarte en la litera"),
+            new Word("usarLitera_text", "Palpas la lámina de madera que hace las funciones de somier. Está fría y dura, sería lo mismo que tumbarte en el suelo."),
+
             //new Word("saludo_1_interaction_description", "{main} saluda a {saluted}."),
             //new Word("saludo_11_interaction_description", "{saluted} saluda a {main}."),
             //new Word("saludo_text", "Buenas {0}."),

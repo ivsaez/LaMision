@@ -275,10 +275,13 @@ namespace LaMision.Core.Vaults
                     var main = pre.Main;
                     var item = pre.Item("thing");
                     var recipient = pre.Item("recipient");
+                    var place = pre.MainPlace;
 
                     return pre.EveryoneConscious()
+                        && pre.MainPlaceIsEnlighted()
                         && pre.RoleOwns(Descriptor.MainRole, "thing")
                         && recipient is IContainer
+                        && pre.Historic.HasHappened(new Snapshot("mirar_mapped", main.Id, place.Id))
                         && !main.Cast<ICarrier>().Carrier.GetCarrieds(pre.World.Items).Back!.Equals(recipient)
                         && !main.Cast<ICarrier>().Carrier.GetCarrieds(pre.World.Items).Back!.Equals(item);
                 })

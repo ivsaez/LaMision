@@ -147,6 +147,78 @@ namespace LaMision.Core.Vaults
                 })
                     .WithDriver(Descriptor.MainRole)
                     .SetAsRoot()
+                .Finish(),
+
+                StoryletBuilder.Create("usarVater")
+                .BeingGlobalSingle()
+                .ForHumans()
+                .WithDescriptor("thing")
+                .WithItemsScope()
+                .WithPreconditions((pre) =>
+                {
+                    var main = pre.Main;
+                    var item = pre.Item("thing");
+
+                    return pre.EveryoneConscious()
+                        && main.Position.Machine.CurrentState == Position.Standing
+                        && item.Id == "vater"
+                        && pre.MainPlaceIsEnlighted()
+                        && (pre.Historic.HasHappened(new Snapshot("mirar_item", main.Id, item.Id)));
+                })
+                .WithInteraction((post) =>
+                {
+                    return Output.FromTexts("usarVater_text".trans());
+                })
+                    .WithDriver(Descriptor.MainRole)
+                    .SetAsRoot()
+                .Finish(),
+
+                StoryletBuilder.Create("usarLavadero")
+                .BeingGlobalSingle()
+                .ForHumans()
+                .WithDescriptor("thing")
+                .WithItemsScope()
+                .WithPreconditions((pre) =>
+                {
+                    var main = pre.Main;
+                    var item = pre.Item("thing");
+
+                    return pre.EveryoneConscious()
+                        && main.Position.Machine.CurrentState == Position.Standing
+                        && item.Id == "lavadero"
+                        && pre.MainPlaceIsEnlighted()
+                        && (pre.Historic.HasHappened(new Snapshot("mirar_item", main.Id, item.Id)));
+                })
+                .WithInteraction((post) =>
+                {
+                    return Output.FromTexts("usarLavadero_text".trans());
+                })
+                    .WithDriver(Descriptor.MainRole)
+                    .SetAsRoot()
+                .Finish(),
+
+                StoryletBuilder.Create("usarLitera")
+                .BeingGlobalSingle()
+                .ForHumans()
+                .WithDescriptor("thing")
+                .WithItemsScope()
+                .WithPreconditions((pre) =>
+                {
+                    var main = pre.Main;
+                    var item = pre.Item("thing");
+
+                    return pre.EveryoneConscious()
+                        && main.Position.Machine.CurrentState == Position.Standing
+                        && item.Id == "litera"
+                        && pre.MainPlaceIsEnlighted()
+                        && (pre.Historic.HasHappened(new Snapshot("mirar_item", main.Id, item.Id)));
+                })
+                .WithInteraction((post) =>
+                {
+                    return Output.FromTexts("usarLitera_text".trans());
+                })
+                    .WithDriver(Descriptor.MainRole)
+                    .SetAsRoot()
                 .Finish()
                 );
         }

@@ -53,6 +53,7 @@ namespace LaMision.Core
 
             var tarjetaBlanca = new Tarjeta("tarjetaBlanca", 1, 1, Genere.Femenine, Number.Singular);
             var tarjetaAzul = new Tarjeta("tarjetaAzul", 1, 1, Genere.Femenine, Number.Singular);
+            var tarjetaNaranja = new Tarjeta("tarjetaNaranja", 1, 1, Genere.Femenine, Number.Singular);
 
             var fluorescenteSalita = new ArticledEnlightedFurniture("fluorescenteSalita", 10, 5, Genere.Masculine, Number.Singular);
             fluorescenteSalita.Switch.TurnOn();
@@ -93,6 +94,8 @@ namespace LaMision.Core
             var mesaSalon = new ArticledFurniture("mesaSalon", 150, 20, false, Genere.Femenine, Number.Singular);
             var silla = new ArticledFurniture("silla", 30, 5, false, Genere.Femenine, Number.Singular);
             var sofa = new ArticledFurniture("sofa", 300, 60, false, Genere.Masculine, Number.Singular);
+            var frasco = new ArticledItem("frasco", 2, 1, Genere.Masculine, Number.Singular);
+            var armario = new ArticledContainerOpenableFurniture("armario", 1000, 40, false, Genere.Masculine, Number.Singular, 600, 100);
             var puertaDormitorio = new Puerta("puertaDormitorio", 200, 20, false, Genere.Femenine, Number.Singular, tarjetaBlanca)
                 .WithConnection(world =>
                 {
@@ -149,6 +152,9 @@ namespace LaMision.Core
             world.Items.Add(vater);
             world.Items.Add(lavadero);
             world.Items.Add(espejo);
+            world.Items.Add(tarjetaNaranja);
+            world.Items.Add(frasco);
+            world.Items.Add(armario);
 
             salita.Items.Add(fluorescenteSalita);
             salita.Items.Add(tarjetaBlanca);
@@ -162,7 +168,7 @@ namespace LaMision.Core
             pasillo.Items.Add(taquilla);
             pasillo.Items.Add(dispositivo);
             pasillo.Items.Add(puertaPasillo);
-            taquilla.Cast<IContainer>().Inventory.Add(trajePlastico, world.Items);
+            taquilla.Inventory.Add(trajePlastico, world.Items);
             pasillo.Items.Hide(luzRoja, taquilla, dispositivo, puertaPasillo);
 
             salon.Items.Add(dispositivo);
@@ -172,12 +178,14 @@ namespace LaMision.Core
             salon.Items.Add(sofa);
             salon.Items.Add(puertaDormitorio);
             salon.Items.Add(puertaLavabo);
-            salon.Items.Hide(luzRoja, dispositivo, mesaSalon, silla, sofa, puertaDormitorio, puertaLavabo);
+            salon.Items.Add(armario);
+            armario.Inventory.Add(frasco, world.Items);
+            salon.Items.Hide(luzRoja, dispositivo, mesaSalon, silla, sofa, puertaDormitorio, puertaLavabo, armario);
 
             dormitorio.Items.Add(luzRoja);
             dormitorio.Items.Add(litera);
             dormitorio.Items.Add(mesita);
-            mesita.Cast<IContainer>().Inventory.Add(tarjetaAzul, world.Items);
+            mesita.Inventory.Add(tarjetaAzul, world.Items);
             dormitorio.Items.Hide(luzRoja, mesita, litera);
 
             lavabo.Items.Add(luzRoja);

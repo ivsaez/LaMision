@@ -219,6 +219,30 @@ namespace LaMision.Core.Vaults
                 })
                     .WithDriver(Descriptor.MainRole)
                     .SetAsRoot()
+                .Finish(),
+
+                StoryletBuilder.Create("beberFrasco")
+                .BeingGlobalSingle()
+                .ForHumans()
+                .WithDescriptor("thing")
+                .WithItemsScope()
+                .WithPreconditions((pre) =>
+                {
+                    var main = pre.Main;
+                    var item = pre.Item("thing");
+
+                    return pre.EveryoneConscious()
+                        && main.Position.Machine.CurrentState == Position.Standing
+                        && item.Id == "frasco"
+                        && pre.MainPlaceIsEnlighted()
+                        && (pre.Historic.HasHappened(new Snapshot("mirar_item", main.Id, item.Id)));
+                })
+                .WithInteraction((post) =>
+                {
+                    return Output.FromTexts("beberFrasco_text".trans());
+                })
+                    .WithDriver(Descriptor.MainRole)
+                    .SetAsRoot()
                 .Finish()
                 );
         }

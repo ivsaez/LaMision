@@ -17,7 +17,7 @@ namespace LaMision.Core.Lang
             new Word("pasillo_view", "Al otro lado ves un oscuro pasillo."),
 
             new Word("salon_name", "salón"),
-            new Word("salon_description", "El salón es una estancia amplia con paredes, techo y suelo de hormigón visto. En medio hay una mesa con una silla y junto a la pared hay un sofá. Una luz roja mortecina es lo único que ilumina la habitación, dándole un aspecto lúgubre y abandonado. Además de la puerta del pasillo, en la pared oeste del salón hay una puerta y en la pared del lado opuesto hay otra. En el techo ves también el dispositivo del altavoz con el lez encendido."),
+            new Word("salon_description", "El salón es una estancia amplia con paredes, techo y suelo de hormigón visto. En medio hay una mesa con una silla y junto a la pared hay un sofá. En la misma pared del sofá hay a un lado un armario y al otro una puerta de color naranja. Una luz roja mortecina es lo único que ilumina la habitación, dándole un aspecto lúgubre y abandonado. Además de la puerta del pasillo, en la pared oeste del salón hay una puerta y en la pared del lado opuesto hay otra. En el techo ves también el dispositivo del altavoz con el lez encendido."),
             new Word("salon_view", "Al otro lado se ve una sala más amplia, una especie de salón. Sientes una oleada de calor muy fuerte proveniente de esa sala, como si hubieras abierto la puerta de un horno."),
 
             new Word("dormitorio_name", "dormitorio"),

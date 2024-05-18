@@ -137,8 +137,11 @@ namespace LaMision.Core.Vaults
 
                     if(item is IContainer)
                     {
-                        var inventoryDescriptor = new InventoryDescriptor(item.Cast<IContainer>().Inventory);
-                        texts.Add(inventoryDescriptor.GetObservablesDescription(post.World.Items));
+                        if(item is not IOpenable || item.Cast<IOpenable>().Openable.IsOpened)
+                        {
+                            var inventoryDescriptor = new InventoryDescriptor(item.Cast<IContainer>().Inventory);
+                            texts.Add(inventoryDescriptor.GetObservablesDescription(post.World.Items));
+                        }
                     }
 
                     return Output.FromTexts(texts.ToArray());

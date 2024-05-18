@@ -71,6 +71,15 @@ namespace LaMision.Core.Lang
 
             new Word("espejo_name", "espejo"),
             new Word("espejo_description", "Al mirarte al espejo ves la cara de un desconocido iluminada por la luz roja. Eres un hombre de unos 30 años, con la tez morena y el pelo completamente rasurado. Estás extremadamente delgado, con pómulos y sienes marcados, y con los dientes ennegrecidos."),
+
+            new Word("tarjetaNaranja_name", "tarjeta naranja"),
+            new Word("tarjetaNaranja_description", "Es una tarjeta de plástico de color naranja. Es completamente lisa, no hay ninguna inscripción."),
+
+            new Word("armario_name", "armario"),
+            new Word("armario_description", "Es un armario de madera. Parece ser algún tipo de despensa."),
+
+            new Word("frasco_name", "frasco"),
+            new Word("frasco_description", "Es un bote de plástico transparente que en algún momento pasado contuvo alguna conserva. Ahora está medio lleno de un aceite que desprende un olor nauseabundo."),
         };
     }
 }

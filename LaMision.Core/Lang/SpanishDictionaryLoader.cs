@@ -112,6 +112,9 @@ namespace LaMision.Core.Lang
             new Word("usarLitera_1_interaction_description", "Tumbarte en la litera"),
             new Word("usarLitera_text", "Palpas la lámina de madera que hace las funciones de somier. Está fría y dura, sería lo mismo que tumbarte en el suelo."),
 
+            new Word("beberFrasco_1_interaction_description", "Beber el aceite del frasco"),
+            new Word("beberFrasco_text", "Acercas el frasco a la boca y un olor a pescado muerto te llena la nariz. Desistes de la idea de tragar ese aceite."),
+
             //new Word("saludo_1_interaction_description", "{main} saluda a {saluted}."),
             //new Word("saludo_11_interaction_description", "{saluted} saluda a {main}."),
             //new Word("saludo_text", "Buenas {0}."),

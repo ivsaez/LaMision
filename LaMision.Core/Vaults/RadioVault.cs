@@ -138,6 +138,42 @@ namespace LaMision.Core.Vaults
                 })
                     .WithDriver(Descriptor.MainRole)
                     .SetAsRoot()
+                .Finish(),
+
+                 StoryletBuilder.Create("mensajeSalon")
+                .BeingRepeteable()
+                .ForMachines()
+                .WithAgentsScope()
+                .WithEnvPreconditions(pre => pre.IsState(States.Mision))
+                .WithPreconditions((pre) =>
+                {
+                    var sujeto = pre.World.Agents.GetOne("sujeto");
+
+                    return sujeto.Position.Machine.CurrentState == Position.Standing
+                        && pre.World.Map.GetUbication(sujeto).Id == "salon";
+                })
+                .WithInteraction((post) =>
+                {
+                    return new Output(
+                        new Pharagraph("mensajeSalon_text_1".trans()),
+                        new Conversation()
+                            .With(post.Main.Name, new string[]
+                            {
+                                "mensajeSalon_voz_1".trans(),
+                                "mensajeSalon_voz_2".trans(),
+                                "mensajeSalon_voz_3".trans(),
+                                "mensajeSalon_voz_4".trans(),
+                                "mensajeSalon_voz_5".trans(),
+                                "mensajeSalon_voz_6".trans(),
+                                "mensajeSalon_voz_7".trans(),
+                                "mensajeSalon_voz_8".trans(),
+                                "mensajeSalon_voz_9".trans(),
+                                "mensajeSalon_voz_10".trans(),
+                            }.Random())
+                        );
+                })
+                    .WithDriver(Descriptor.MainRole)
+                    .SetAsRoot()
                 .Finish()
                 );
         }

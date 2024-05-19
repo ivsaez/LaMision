@@ -147,6 +147,7 @@ namespace LaMision.Core
                 });
 
             var litera = new ArticledFurniture("litera", 400, 20, false, Genere.Femenine, Number.Singular);
+            var rejilla = new ArticledFurniture("rejilla", 30, 1, false, Genere.Femenine, Number.Singular);
             var mesita = new ArticledContainerOpenableFurniture("mesita", 50, 20, false, Genere.Femenine, Number.Singular, 50, 50);
             var pared = new ArticledFurniture("pared", 1000, 60, false, Genere.Femenine, Number.Singular)
                 .WithTurnPassed((world, turns) =>
@@ -199,8 +200,10 @@ namespace LaMision.Core
             world.Items.Add(puertaNaranja);
             world.Items.Add(boton);
             world.Items.Add(pared);
+            world.Items.Add(rejilla);
 
             nowhere.Items.Add(tarjetaNaranja);
+            nowhere.Items.Add(rejilla);
 
             salita.Items.Add(fluorescenteSalita);
             salita.Items.Add(tarjetaBlanca);

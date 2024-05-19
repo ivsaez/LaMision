@@ -265,7 +265,6 @@ namespace LaMision.Core.Vaults
                 .WithInteraction((post) =>
                 {
                     var main = post.Main;
-                    var item = post.Item("thing");
                     var tarjetaNaranja = post.World.Items.GetOne("tarjetaNaranja");
                     var nowhere = post.World.Map.Get("nowhere");
 
@@ -365,6 +364,93 @@ namespace LaMision.Core.Vaults
                 .WithInteraction((post) =>
                 {
                     return Output.FromTexts("cogerMesaPlegable_text".trans());
+                })
+                    .WithDriver(Descriptor.MainRole)
+                    .SetAsRoot()
+                .Finish(),
+
+                StoryletBuilder.Create("mirarDebajoLitera")
+                .BeingRepeteable()
+                .ForHumans()
+                .WithDescriptor("thing")
+                .WithItemsScope()
+                .WithPreconditions((pre) =>
+                {
+                    var main = pre.Main;
+                    var item = pre.Item("thing");
+
+                    return pre.EveryoneConscious()
+                        && (pre.PositionIs(Descriptor.MainRole, Position.Lying) || pre.PositionIs(Descriptor.MainRole, Position.Kneeing))
+                        && item.Id == "litera"
+                        && pre.MainPlaceIsEnlighted();
+                })
+                .WithInteraction((post) =>
+                {
+                    var main = post.Main;
+                    var rejilla = post.World.Items.GetOne("rejilla");
+                    var nowhere = post.World.Map.Get("nowhere");
+
+                    if (nowhere.Items.Has(rejilla))
+                        return Output.FromTexts("mirarDebajoLitera_something_text".trans());
+
+                    return Output.FromTexts("mirarDebajoLitera_text".trans());
+                })
+                    .WithDriver(Descriptor.MainRole)
+                    .SetAsRoot()
+                .Finish(),
+
+                StoryletBuilder.Create("romperRejilla")
+                .BeingRepeteable()
+                .ForHumans()
+                .WithItemsScope()
+                .WithPreconditions((pre) =>
+                {
+                    var main = pre.Main;
+                    var place = pre.MainPlace;
+                    var rejilla = pre.World.Items.GetOne("rejilla");
+                    var nowhere = pre.World.Map.Get("nowhere");
+
+                    return pre.EveryoneConscious()
+                        && (pre.PositionIs(Descriptor.MainRole, Position.Lying) || pre.PositionIs(Descriptor.MainRole, Position.Kneeing))
+                        && pre.MainPlaceIsEnlighted()
+                        && place.Id == "dormitorio"
+                        && pre.Historic.HasHappened(new Snapshot("mirarDebajoLitera", main.Id, "litera"))
+                        && nowhere.Items.Has(rejilla);
+                })
+                .WithInteraction((post) =>
+                {
+                    var item = post.World.Items.GetOne("rejilla");
+                    var nowhere = post.World.Map.Get("nowhere");
+
+                    var itemDescriptor = new ItemDescriptor(item);
+
+                    nowhere.Items.Remove(item);
+
+                    return Output.FromTexts("romperRejilla_text".trans());
+                })
+                    .WithDriver(Descriptor.MainRole)
+                    .SetAsRoot()
+                .Finish(),
+
+                StoryletBuilder.Create("empujarLitera")
+                .BeingGlobalSingle()
+                .ForHumans()
+                .WithDescriptor("thing")
+                .WithItemsScope()
+                .WithPreconditions((pre) =>
+                {
+                    var main = pre.Main;
+                    var item = pre.Item("thing");
+
+                    return pre.EveryoneConscious()
+                        && main.Position.Machine.CurrentState == Position.Standing
+                        && item.Id == "litera"
+                        && pre.MainPlaceIsEnlighted()
+                        && (pre.Historic.HasHappened(new Snapshot("mirar_item", main.Id, item.Id)));
+                })
+                .WithInteraction((post) =>
+                {
+                    return Output.FromTexts("empujarLitera_text".trans());
                 })
                     .WithDriver(Descriptor.MainRole)
                     .SetAsRoot()

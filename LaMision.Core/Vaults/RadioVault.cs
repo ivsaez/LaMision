@@ -56,7 +56,8 @@ namespace LaMision.Core.Vaults
                 .WithPreconditions((pre) =>
                 {
                     var sujeto = pre.World.Agents.GetOne("sujeto");
-                    return sujeto.Position.Machine.CurrentState != Position.Standing;
+                    return sujeto.Position.Machine.CurrentState != Position.Standing
+                        && pre.World.Map.GetUbication(sujeto).Id == "salon";
                 })
                 .WithInteraction((post) =>
                 {

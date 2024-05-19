@@ -14,6 +14,9 @@ namespace LaMision.Core.Lang
 
             new Word("mirar_item_1_interaction_description", "Mirar {thing}"),
 
+            new Word("empujar_1_interaction_description", "Empujar {thing}"),
+            new Word("empujar", "Intentas empujar {0} pero pesa demasiado."),
+
             new Word("coger_1_interaction_description", "Coger {thing}"),
             new Word("coger_good", "Coges y guardas {1}."),
             new Word("coger_big", "No puedes coger {1} porque es demasiado grande."),
@@ -139,6 +142,16 @@ namespace LaMision.Core.Lang
 
             new Word("cogerMesaPlegable_1_interaction_description", "Coget {thing}"),
             new Word("cogerMesaPlegable_text", "En condiciones normales no tendrías problemas en plegar la mesa y cargarla, pero en este momento te encuentras extremadamente débil."),
+
+            new Word("mirarDebajoLitera_1_interaction_description", "Mirar debajo de la litera"),
+            new Word("mirarDebajoLitera_text", "Debajo de la litera hay una rejilla. Está rota, de manera que ahora el conducto está libre."),
+            new Word("mirarDebajoLitera_something_text", "Debajo de la litera hay una rejilla. La rejilla es metálica pero muy fina, parecida a la reja de un colador. Cubre lo que parece ser un conducto de aire rectangular. Quizá una persona menuda o muy delgada podría caber por ese conducto."),
+
+            new Word("romperRejilla_1_interaction_description", "Romper la rejilla"),
+            new Word("romperRejilla_text", "Golpeas la rejilla con el pie varias veces hasta que logras romperla del todo."),
+
+            new Word("empujarLitera_1_interaction_description", "Empujar {thing}"),
+            new Word("empujarLitera_text", "La litera está atornillada al suelo, no puedes moverla."),
 
             //new Word("saludo_1_interaction_description", "{main} saluda a {saluted}."),
             //new Word("saludo_11_interaction_description", "{saluted} saluda a {main}."),

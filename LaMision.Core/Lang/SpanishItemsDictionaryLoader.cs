@@ -93,6 +93,9 @@ namespace LaMision.Core.Lang
             new Word("pared_text_2", "Algo ha golpeado la pared desde el otro lado."),
             new Word("pared_text_3", "Se oye un golpe fuerte al otro lado, como de alguien cayendo al suelo."),
             new Word("pared_text_4", "Te parece oir una voz al otro lado de la pared, como un grito."),
+
+            new Word("rejilla_name", "rejilla"),
+            new Word("rejilla_description", "La rejilla es metálica pero muy fina, parecida a la reja de un colador. Cubre lo que parece ser un conducto de aire rectangular. Quizá una persona menuda o muy delgada podría caber por ese conducto."),
         };
     }
 }

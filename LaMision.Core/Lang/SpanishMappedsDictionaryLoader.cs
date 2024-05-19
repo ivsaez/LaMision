@@ -30,6 +30,13 @@ namespace LaMision.Core.Lang
             new Word("lavabo_name", "lavabo"),
             new Word("lavabo_description", "El lavabo es pequeño y está iluminado por una luz roja situada encima de la puerta. Únicamente consta de un váter y un lavadero. En la pared de hormigón visto hay colgado un espejo rectangular."),
             new Word("lavabo_view", "Al otro lado hay un lavabo."),
+
+            new Word("salaBoton_name", "sala del botón"),
+            new Word("salaBoton_description", "Es una sala muy pequeña y cuadrada, con las paredes de hormigón visto e iluminada por una luz roja situada encima de la entrada. No hay nada salvo un pedestal en medio de la sala, coronado por un enorme botón rojo. Al lado oeste hay otro cuarto abierto donde se ve la sala de controles. En el techo ves de nuevo el dispositivo del altavoz, justo en medio de la sala del botón y de los controles."),
+            new Word("salaBoton_view", "Al otro lado ves una pequeña sala donde se encuentra el botón."),
+
+            new Word("salaControl_name", "sala de control"),
+            new Word("salaControl_description", "Más que una sala parece un armario grande, iluminado por un bulbo de color rojo en el techo. En el techo hay un dispositivo con altavoz, justo en medio de la sala del botón y de los controles."),
         };
     }
 }

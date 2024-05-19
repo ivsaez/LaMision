@@ -80,6 +80,12 @@ namespace LaMision.Core.Lang
 
             new Word("frasco_name", "frasco"),
             new Word("frasco_description", "Es un bote de plástico transparente que en algún momento pasado contuvo alguna conserva. Ahora está medio lleno de un aceite que desprende un olor nauseabundo."),
+
+            new Word("puertaNaranja_name", "puerta naranja"),
+            new Word("puertaNaranja_description", "Es una puerta de color naranja, completamente lisa. No hay ningún pomo o maneta visibles."),
+
+            new Word("boton_name", "botón"),
+            new Word("boton_description", "El botón se encuentra encima de un pedestal metálico. Es un botón rojo y enorme, como los que salen en los concursos de preguntas en televisión. Uno esperaría que estuviera encendido por dentro con una luz roja, pero seguramente no lo está porque falta arreglar la conexión."),
         };
     }
 }

@@ -28,6 +28,8 @@ namespace LaMision.Core
             var salon = new MisionMapped("salon", Externality.Internal, Genere.Masculine, Number.Singular);
             var dormitorio = new MisionMapped("dormitorio", Externality.Internal, Genere.Masculine, Number.Singular);
             var lavabo = new MisionMapped("lavabo", Externality.Internal, Genere.Masculine, Number.Singular);
+            var salaBoton = new MisionMapped("salaBoton", Externality.Internal, Genere.Femenine, Number.Singular);
+            var salaControl = new MisionMapped("salaControl", Externality.Internal, Genere.Femenine, Number.Singular);
 
             world.Map.Add(nowhere);
             world.Map.Add(radio);
@@ -36,6 +38,10 @@ namespace LaMision.Core
             world.Map.Add(salon);
             world.Map.Add(dormitorio);
             world.Map.Add(lavabo);
+            world.Map.Add(salaBoton);
+            world.Map.Add(salaControl);
+
+            world.Map.Connect(salaControl, salaBoton, Direction.East_West);
 
             var sujeto = new MisionAgent("sujeto", "Mirko", "Kazinsky", Importance.Main);
             sujeto.BecomeHuman();
@@ -124,12 +130,28 @@ namespace LaMision.Core
                     return "lavabo_view".trans();
                 });
 
+            var puertaNaranja = new Puerta("puertaNaranja", 200, 20, false, Genere.Femenine, Number.Singular, tarjetaNaranja)
+                .WithConnection(world =>
+                {
+                    var salaBoton = world.Map.Get("salaBoton");
+                    var salon = world.Map.Get("salon");
+
+                    if (salon.Exits.Has(salaBoton))
+                        return string.Empty;
+
+                    world.Map.Connect(salaBoton, salon, Direction.North_South);
+
+                    return "salaBoton_view".trans();
+                });
+
             var litera = new ArticledFurniture("litera", 400, 20, false, Genere.Femenine, Number.Singular);
             var mesita = new ArticledContainerOpenableFurniture("mesita", 50, 20, false, Genere.Femenine, Number.Singular, 50, 50);
 
             var vater = new ArticledFurniture("vater", 30, 10, false, Genere.Masculine, Number.Singular);
             var lavadero = new ArticledFurniture("lavadero", 40, 10, false, Genere.Masculine, Number.Singular);
             var espejo = new ArticledFurniture("espejo", 50, 10, false, Genere.Masculine, Number.Singular);
+
+            var boton = new ArticledFurniture("boton", 40, 10, false, Genere.Masculine, Number.Singular);
 
             world.Items.Add(rinonera);
             world.Items.Add(tarjetaBlanca);
@@ -156,6 +178,8 @@ namespace LaMision.Core
             world.Items.Add(tarjetaNaranja);
             world.Items.Add(frasco);
             world.Items.Add(armario);
+            world.Items.Add(puertaNaranja);
+            world.Items.Add(boton);
 
             nowhere.Items.Add(tarjetaNaranja);
 
@@ -182,8 +206,9 @@ namespace LaMision.Core
             salon.Items.Add(puertaDormitorio);
             salon.Items.Add(puertaLavabo);
             salon.Items.Add(armario);
+            salon.Items.Add(puertaNaranja);
             armario.Inventory.Add(frasco, world.Items);
-            salon.Items.Hide(luzRoja, dispositivo, mesaSalon, silla, sofa, puertaDormitorio, puertaLavabo, armario);
+            salon.Items.Hide(luzRoja, dispositivo, mesaSalon, silla, sofa, puertaDormitorio, puertaLavabo, armario, puertaNaranja);
 
             dormitorio.Items.Add(luzRoja);
             dormitorio.Items.Add(litera);
@@ -196,6 +221,14 @@ namespace LaMision.Core
             lavabo.Items.Add(lavadero);
             lavabo.Items.Add(espejo);
             lavabo.Items.Hide(vater, lavadero, espejo, luzRoja);
+
+            salaBoton.Items.Add(luzRoja);
+            salaBoton.Items.Add(dispositivo);
+            salaBoton.Items.Add(boton);
+            salaBoton.Items.Hide(boton, luzRoja, dispositivo);
+
+            salaControl.Items.Add(luzRoja);
+            salaControl.Items.Hide(luzRoja);
 
             sujeto.Carrier.SetBack(rinonera, world.Items);
 

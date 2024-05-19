@@ -86,6 +86,13 @@ namespace LaMision.Core.Lang
 
             new Word("boton_name", "botón"),
             new Word("boton_description", "El botón se encuentra encima de un pedestal metálico. Es un botón rojo y enorme, como los que salen en los concursos de preguntas en televisión. Uno esperaría que estuviera encendido por dentro con una luz roja, pero seguramente no lo está porque falta arreglar la conexión."),
+
+            new Word("pared_name", "pared"),
+            new Word("pared_description", "Una de las paredes de la habitación tiene un horrible empapelado a cuadros verdes y blancos. El papel está cuarteado por el terrible calor que hace en este lugar."),
+            new Word("pared_text_1", "Oyes unos pasos al otro lado de la pared."),
+            new Word("pared_text_2", "Algo ha golpeado la pared desde el otro lado."),
+            new Word("pared_text_3", "Se oye un golpe fuerte al otro lado, como de alguien cayendo al suelo."),
+            new Word("pared_text_4", "Te parece oir una voz al otro lado de la pared, como un grito."),
         };
     }
 }

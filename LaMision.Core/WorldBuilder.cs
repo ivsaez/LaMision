@@ -6,6 +6,8 @@ using Mapping;
 using StateMachine;
 using Worlding;
 using Languager.Extensions;
+using Outputer;
+using Rand;
 
 namespace LaMision.Core
 {
@@ -146,6 +148,22 @@ namespace LaMision.Core
 
             var litera = new ArticledFurniture("litera", 400, 20, false, Genere.Femenine, Number.Singular);
             var mesita = new ArticledContainerOpenableFurniture("mesita", 50, 20, false, Genere.Femenine, Number.Singular, 50, 50);
+            var pared = new ArticledFurniture("pared", 1000, 60, false, Genere.Femenine, Number.Singular)
+                .WithTurnPassed((world, turns) =>
+                {
+                    if (Rnd.Instance.Check(30))
+                    {
+                        return Output.FromTexts(new string[]
+                        {
+                            "pared_text_1",
+                            "pared_text_2",
+                            "pared_text_3",
+                            "pared_text_4",
+                        }.Random().trans());
+                    }
+
+                    return Output.Empty;
+                });
 
             var vater = new ArticledFurniture("vater", 30, 10, false, Genere.Masculine, Number.Singular);
             var lavadero = new ArticledFurniture("lavadero", 40, 10, false, Genere.Masculine, Number.Singular);
@@ -180,6 +198,7 @@ namespace LaMision.Core
             world.Items.Add(armario);
             world.Items.Add(puertaNaranja);
             world.Items.Add(boton);
+            world.Items.Add(pared);
 
             nowhere.Items.Add(tarjetaNaranja);
 
@@ -213,8 +232,9 @@ namespace LaMision.Core
             dormitorio.Items.Add(luzRoja);
             dormitorio.Items.Add(litera);
             dormitorio.Items.Add(mesita);
+            dormitorio.Items.Add(pared);
             mesita.Inventory.Add(tarjetaAzul, world.Items);
-            dormitorio.Items.Hide(luzRoja, mesita, litera);
+            dormitorio.Items.Hide(luzRoja, mesita, litera, pared);
 
             lavabo.Items.Add(luzRoja);
             lavabo.Items.Add(vater);

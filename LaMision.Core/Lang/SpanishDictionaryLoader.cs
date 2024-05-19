@@ -137,6 +137,9 @@ namespace LaMision.Core.Lang
             new Word("pulsarBoton_1_interaction_description", "Pulsar el botón"),
             new Word("pulsarBoton_text", "Pulsas el botón dándole un manotazo. No sucede nada."),
 
+            new Word("cogerMesaPlegable_1_interaction_description", "Coget {thing}"),
+            new Word("cogerMesaPlegable_text", "En condiciones normales no tendrías problemas en plegar la mesa y cargarla, pero en este momento te encuentras extremadamente débil."),
+
             //new Word("saludo_1_interaction_description", "{main} saluda a {saluted}."),
             //new Word("saludo_11_interaction_description", "{saluted} saluda a {main}."),
             //new Word("saludo_text", "Buenas {0}."),

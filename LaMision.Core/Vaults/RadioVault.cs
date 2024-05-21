@@ -175,6 +175,121 @@ namespace LaMision.Core.Vaults
                 })
                     .WithDriver(Descriptor.MainRole)
                     .SetAsRoot()
+                .Finish(),
+
+                 StoryletBuilder.Create("mensajeBoton")
+                .BeingRepeteable()
+                .ForMachines()
+                .WithAgentsScope()
+                .WithEnvPreconditions(pre => pre.IsState(States.Mision))
+                .WithPreconditions((pre) =>
+                {
+                    var sujeto = pre.World.Agents.GetOne("sujeto");
+
+                    return sujeto.Position.Machine.CurrentState == Position.Standing
+                        && pre.World.Map.GetUbication(sujeto).Id == "salaBoton";
+                })
+                .WithInteraction((post) =>
+                {
+                    return new Output(
+                        new Pharagraph("mensajeBoton_text_1".trans()),
+                        new Conversation()
+                            .With(post.Main.Name, new string[]
+                            {
+                                "mensajeBoton_voz_1".trans(),
+                                "mensajeBoton_voz_2".trans(),
+                                "mensajeBoton_voz_3".trans(),
+                                "mensajeBoton_voz_4".trans(),
+                            }.Random())
+                        );
+                })
+                    .WithDriver(Descriptor.MainRole)
+                    .SetAsRoot()
+                .Finish(),
+
+                 StoryletBuilder.Create("conexion")
+                .BeingGlobalSingle()
+                .ForMachines()
+                .WithAgentsScope()
+                .WithEnvPreconditions(pre => pre.IsState(States.Mision))
+                .WithPreconditions((pre) =>
+                {
+                    var sujeto = pre.World.Agents.GetOne("sujeto");
+
+                    return sujeto.Position.Machine.CurrentState == Position.Standing
+                        && pre.World.Map.GetUbication(sujeto).Id == "salaControl";
+                })
+                .WithInteraction((post) =>
+                {
+                    post.World.State.Transite(States.Mision);
+                    var main = post.Main;
+                    var sujeto = post.World.Agents.GetOne("sujeto");
+
+                    return new Output(
+                        new Pharagraph("conexion_text".trans()),
+                        new Conversation()
+                            .With(main.Name, "conexion_text_1".trans())
+                            .With(sujeto.Name, "conexion_text_2".trans())
+                            .With(main.Name, "conexion_text_3".trans())
+                            .With(sujeto.Name, "conexion_text_4".trans())
+                            .With(main.Name, "conexion_text_5".trans())
+                            .With(sujeto.Name, "conexion_text_6".trans())
+                            .With(main.Name, "conexion_text_7".trans())
+                            .With(sujeto.Name, "conexion_text_8".trans())
+                            .With(main.Name, "conexion_text_9".trans())
+                            .With(sujeto.Name, "conexion_text_10".trans())
+                            .With(main.Name, "conexion_text_11".trans())
+                            .With(sujeto.Name, "conexion_text_12".trans())
+                            .With(main.Name, "conexion_text_13".trans())
+                            .With(sujeto.Name, "conexion_text_14".trans())
+                            .With(main.Name, "conexion_text_15".trans())
+                            .With(sujeto.Name, "conexion_text_16".trans())
+                            .With(main.Name, "conexion_text_17".trans())
+                            .With(sujeto.Name, "conexion_text_18".trans()));
+                })
+                    .WithDriver(Descriptor.MainRole)
+                    .SetAsRoot()
+                .Finish(),
+
+                StoryletBuilder.Create("pistas")
+                .BeingRepeteable()
+                .ForMachines()
+                .WithAgentsScope()
+                .WithEnvPreconditions(pre => pre.IsState(States.Mision))
+                .WithPreconditions((pre) =>
+                {
+                    var sujeto = pre.World.Agents.GetOne("sujeto");
+
+                    return sujeto.Position.Machine.CurrentState == Position.Standing
+                        && pre.World.Map.GetUbication(sujeto).Id == "salaControl"
+                        && pre.Historic.HasGloballyHappened("conexion");
+                })
+                .WithInteraction((post) =>
+                {
+                    return new Output(
+                        new Pharagraph("pistas_text_1".trans()),
+                        new Conversation()
+                            .With(post.Main.Name, new string[]
+                            {
+                                "pistas_voz_1".trans(),
+                                "pistas_voz_2".trans(),
+                                "pistas_voz_3".trans(),
+                                "pistas_voz_4".trans(),
+                                "pistas_voz_5".trans(),
+                                "pistas_voz_6".trans(),
+                                "pistas_voz_7".trans(),
+                                "pistas_voz_8".trans(),
+                                "pistas_voz_9".trans(),
+                                "pistas_voz_10".trans(),
+                                "pistas_voz_11".trans(),
+                                "pistas_voz_12".trans(),
+                                "pistas_voz_13".trans(),
+                                "pistas_voz_14".trans(),
+                            }.Random())
+                        );
+                })
+                    .WithDriver(Descriptor.MainRole)
+                    .SetAsRoot()
                 .Finish()
                 );
         }

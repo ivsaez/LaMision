@@ -96,6 +96,57 @@ namespace LaMision.Core.Lang
 
             new Word("rejilla_name", "rejilla"),
             new Word("rejilla_description", "La rejilla es metálica pero muy fina, parecida a la reja de un colador. Cubre lo que parece ser un conducto de aire rectangular. Quizá una persona menuda o muy delgada podría caber por ese conducto."),
+
+            new Word("cableNegro_name", "cable negro"),
+            new Word("cableNegro_description", "Es un cable de color negro."),
+
+            new Word("cableBlanco_name", "cable blanco"),
+            new Word("cableBlanco_description", "Es un cable de color blanco."),
+
+            new Word("cableGris_name", "cable gris"),
+            new Word("cableGris_description", "Es un cable de color gris."),
+
+            new Word("cableAzul_name", "cable azul"),
+            new Word("cableAzul_description", "Es un cable de color azul."),
+
+            new Word("cableRojo_name", "cable rojo"),
+            new Word("cableRojo_description", "Es un cable de color rojo."),
+
+            new Word("cableAmarillo_name", "cable amarillo"),
+            new Word("cableAmarillo_description", "Es un cable de color amarillo."),
+
+            new Word("interruptor1_name", "interruptor 1"),
+            new Word("interruptor1_description", "Es un interruptor con el número 1."),
+
+            new Word("interruptor2_name", "interruptor 2"),
+            new Word("interruptor2_description", "Es un interruptor con el número 2."),
+
+            new Word("interruptor3_name", "interruptor 3"),
+            new Word("interruptor3_description", "Es un interruptor con el número 3."),
+
+            new Word("interruptor4_name", "interruptor 4"),
+            new Word("interruptor4_description", "Es un interruptor con el número 4."),
+
+            new Word("interruptor5_name", "interruptor 5"),
+            new Word("interruptor5_description", "Es un interruptor con el número 5."),
+
+            new Word("interruptor6_name", "interruptor 6"),
+            new Word("interruptor6_description", "Es un interruptor con el número 6."),
+
+            new Word("interruptor7_name", "interruptor 7"),
+            new Word("interruptor7_description", "Es un interruptor con el número 7."),
+
+            new Word("interruptor8_name", "interruptor 8"),
+            new Word("interruptor8_description", "Es un interruptor con el número 8."),
+
+            new Word("interruptor9_name", "interruptor 9"),
+            new Word("interruptor9_description", "Es un interruptor con el número 9."),
+
+            new Word("interruptor10_name", "interruptor 10"),
+            new Word("interruptor10_description", "Es un interruptor con el número 10."),
+
+            new Word("palanca_name", "palanca"),
+            new Word("palanca_description", "Es una palanca parecida a la de las máquinas tragaperras."),
         };
     }
 }

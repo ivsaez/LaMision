@@ -11,7 +11,6 @@ using Rand;
 using Agents.Extensions;
 using Agents;
 using AgentBody;
-using ClimaticsLang;
 
 namespace LaMision.Core.Vaults
 {
@@ -446,7 +445,7 @@ namespace LaMision.Core.Vaults
                         && main.Position.Machine.CurrentState == Position.Standing
                         && item.Id == "litera"
                         && pre.MainPlaceIsEnlighted()
-                        && (pre.Historic.HasHappened(new Snapshot("mirar_item", main.Id, item.Id)));
+                        && pre.Historic.HasHappened(new Snapshot("mirar_item", main.Id, item.Id));
                 })
                 .WithInteraction((post) =>
                 {

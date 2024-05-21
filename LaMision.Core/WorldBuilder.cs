@@ -172,6 +172,15 @@ namespace LaMision.Core
 
             var boton = new ArticledFurniture("boton", 40, 10, false, Genere.Masculine, Number.Singular);
 
+            var cableNegro = new Cable("cableNegro");
+            var cableBlanco = new Cable("cableBlanco");
+            var cableGris = new Cable("cableGris");
+            var cableRojo = new Cable("cableRojo");
+            var cableAzul = new Cable("cableAzul");
+            var cableAmarillo = new Cable("cableAmarillo");
+            var interruptores = new Interruptores("interruptores");
+            var palanca = new ArticledFurniture("palanca", 1, 1, false, Genere.Femenine, Number.Singular);
+
             world.Items.Add(rinonera);
             world.Items.Add(tarjetaBlanca);
             world.Items.Add(fluorescenteSalita);
@@ -201,6 +210,14 @@ namespace LaMision.Core
             world.Items.Add(boton);
             world.Items.Add(pared);
             world.Items.Add(rejilla);
+            world.Items.Add(cableNegro);
+            world.Items.Add(cableBlanco);
+            world.Items.Add(cableGris);
+            world.Items.Add(cableAzul);
+            world.Items.Add(cableRojo);
+            world.Items.Add(cableAmarillo);
+            world.Items.Add(interruptores);
+            world.Items.Add(palanca);
 
             nowhere.Items.Add(tarjetaNaranja);
             nowhere.Items.Add(rejilla);
@@ -251,7 +268,24 @@ namespace LaMision.Core
             salaBoton.Items.Hide(boton, luzRoja, dispositivo);
 
             salaControl.Items.Add(luzRoja);
-            salaControl.Items.Hide(luzRoja);
+            salaControl.Items.Add(cableNegro);
+            salaControl.Items.Add(cableBlanco);
+            salaControl.Items.Add(cableGris);
+            salaControl.Items.Add(cableAzul);
+            salaControl.Items.Add(cableRojo);
+            salaControl.Items.Add(cableAmarillo);
+            salaControl.Items.Add(interruptores);
+            salaControl.Items.Add(palanca);
+            salaControl.Items.Hide(
+                luzRoja, 
+                cableNegro, 
+                cableBlanco, 
+                cableGris, 
+                cableAzul, 
+                cableRojo, 
+                cableAmarillo,
+                interruptores,
+                palanca);
 
             sujeto.Carrier.SetBack(rinonera, world.Items);
 

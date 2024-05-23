@@ -36,6 +36,9 @@ namespace LaMision.Core.Lang
             new Word("ir", "Te desplazas hacia {1}."),
             new Word("ir_door", "No puedes ir hacia {1} sin antes abrir la puerta."),
 
+            new Word("ir_reptando_1_interaction_description", "Ir reptando hacia hacia {place}"),
+            new Word("ir_reptando", "Te desplazas reptando hacia {1}."),
+
             new Word("abrir_1_interaction_description", "Abrir {openable}"),
             new Word("abrir_text", "Te dispones a abrir {0}."),
             new Word("abrir_invalidKey", "Parece ser que {0} no sirve para abrir {1}."),
@@ -230,6 +233,13 @@ namespace LaMision.Core.Lang
 
             new Word("disconnectCable_1_interaction_description", "Desconectar {cable} del {other}"),
             new Word("disconnectCable_text", "Desconectas {0} y {1}."),
+
+            new Word("untarteAceite_1_interaction_description", "Untarte el aceite del frasco"),
+            new Word("untarteAceite_text", "Colocas el frasco por encima de tu cabeza y lo vuelcas poco a poco, notando como el correoso aceite cae por tu cabeza y tus hombros, envolviéndote con su repugnante textura y su pestilente olor. Retienes una arcada."),
+
+            new Word("meterteRejilla_1_interaction_description", "Meterte por {thing}"),
+            new Word("meterteRejilla_text", "Te metes por {0}. Gracias al aceite impregnado en tu cuerpo consigues deslizarte a través del estrecho hueco. Llegas a un lavabo."),
+            new Word("meterteRejilla_failure_text", "Intentas meterte por {0}, pero las paredes son muy rugosas y los hombros se te atascan."),
 
             //new Word("saludo_1_interaction_description", "{main} saluda a {saluted}."),
             //new Word("saludo_11_interaction_description", "{saluted} saluda a {main}."),

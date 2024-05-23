@@ -32,6 +32,7 @@ namespace LaMision.Core
             var lavabo = new MisionMapped("lavabo", Externality.Internal, Genere.Masculine, Number.Singular);
             var salaBoton = new MisionMapped("salaBoton", Externality.Internal, Genere.Femenine, Number.Singular);
             var salaControl = new MisionMapped("salaControl", Externality.Internal, Genere.Femenine, Number.Singular);
+            var otroLavabo = new MisionMapped("otroLavabo", Externality.Internal, Genere.Masculine, Number.Singular);
 
             world.Map.Add(nowhere);
             world.Map.Add(radio);
@@ -42,6 +43,7 @@ namespace LaMision.Core
             world.Map.Add(lavabo);
             world.Map.Add(salaBoton);
             world.Map.Add(salaControl);
+            world.Map.Add(otroLavabo);
 
             world.Map.Connect(salaControl, salaBoton, Direction.East_West);
 
@@ -103,7 +105,7 @@ namespace LaMision.Core
             var mesaSalon = new ArticledFurniture("mesaSalon", 150, 20, false, Genere.Femenine, Number.Singular);
             var silla = new ArticledFurniture("silla", 30, 5, false, Genere.Femenine, Number.Singular);
             var sofa = new ArticledFurniture("sofa", 300, 60, false, Genere.Masculine, Number.Singular);
-            var frasco = new ArticledItem("frasco", 2, 1, Genere.Masculine, Number.Singular);
+            var frasco = new Frasco("frasco");
             var armario = new ArticledContainerOpenableFurniture("armario", 1000, 40, false, Genere.Masculine, Number.Singular, 600, 100);
             var puertaDormitorio = new Puerta("puertaDormitorio", 200, 20, false, Genere.Femenine, Number.Singular, tarjetaBlanca)
                 .WithConnection(world =>
@@ -181,6 +183,8 @@ namespace LaMision.Core
             var interruptores = new Interruptores("interruptores");
             var palanca = new ArticledFurniture("palanca", 1, 1, false, Genere.Femenine, Number.Singular);
 
+            var hueco = new ArticledFurniture("hueco", 30, 1, false, Genere.Masculine, Number.Singular);
+
             world.Items.Add(rinonera);
             world.Items.Add(tarjetaBlanca);
             world.Items.Add(fluorescenteSalita);
@@ -218,6 +222,7 @@ namespace LaMision.Core
             world.Items.Add(cableAmarillo);
             world.Items.Add(interruptores);
             world.Items.Add(palanca);
+            world.Items.Add(hueco);
 
             nowhere.Items.Add(tarjetaNaranja);
             nowhere.Items.Add(rejilla);
@@ -286,6 +291,13 @@ namespace LaMision.Core
                 cableAmarillo,
                 interruptores,
                 palanca);
+
+            otroLavabo.Items.Add(luzRoja);
+            otroLavabo.Items.Add(vater);
+            otroLavabo.Items.Add(lavadero);
+            otroLavabo.Items.Add(espejo);
+            otroLavabo.Items.Add(hueco);
+            otroLavabo.Items.Hide(vater, lavadero, espejo, luzRoja, hueco);
 
             sujeto.Carrier.SetBack(rinonera, world.Items);
 

@@ -179,6 +179,35 @@ namespace LaMision.Core.Vaults
                     .SetAsRoot()
                 .Finish(),
 
+                StoryletBuilder.Create("ir_reptando")
+                .BeingRepeteable()
+                .ForHumans()
+                .WithDescriptor("place")
+                .WithMappedsScope()
+                .WithPreconditions((pre) =>
+                    pre.EveryoneConscious()
+                    && !pre.RoleInPlace(Descriptor.MainRole, "place")
+                    && pre.IsExit("place")
+                    && (pre.PositionIs(Descriptor.MainRole, Position.Lying) || pre.PositionIs(Descriptor.MainRole, Position.Kneeing)))
+                .WithInteraction((post) =>
+                {
+                    var main = post.Main;
+                    var place = post.MainPlace;
+                    var destination = post.Mapped("place");
+
+                    var movementResult = post.World.Map.Move(main, place, destination, post.World.Items);
+
+                    var mappedDescriptor = new MappedDescriptor(destination);
+
+                    if (movementResult.Outcome == MovementOutcome.BlockingDoor)
+                        return Output.FromTexts("ir_door".trans(main.Name, mappedDescriptor.ArticledName));
+
+                    return Output.FromTexts("ir_reptando".trans(main.Name, mappedDescriptor.ArticledName));
+                })
+                    .WithDriver(Descriptor.MainRole)
+                    .SetAsRoot()
+                .Finish(),
+
                 StoryletBuilder.Create("coger")
                 .BeingRepeteable()
                 .ForHumans()

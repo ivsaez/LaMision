@@ -37,6 +37,9 @@ namespace LaMision.Core.Lang
 
             new Word("salaControl_name", "sala de control"),
             new Word("salaControl_description", "Más que una sala parece un armario grande, iluminado por un bulbo de color rojo en el techo. En el techo hay un dispositivo con altavoz, justo en medio de la sala del botón y de los controles."),
+
+            new Word("otroLavabo_name", "lavabo"),
+            new Word("otroLavabo_description", "Estás en un lavabo. Es pequeño y está iluminado por una luz roja situada encima de la puerta. Únicamente consta de un váter y un lavadero. En la pared de hormigón visto hay colgado un espejo rectangular. El hueco de la rejilla por donde has entrado queda justo al lado del váter. Tiene una puerta abierta y puedes ver a través de ella un salón grande."),
         };
     }
 }

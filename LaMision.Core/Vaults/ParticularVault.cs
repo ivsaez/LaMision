@@ -11,6 +11,8 @@ using Rand;
 using Agents.Extensions;
 using Agents;
 using AgentBody;
+using Logic;
+using Mapping;
 
 namespace LaMision.Core.Vaults
 {
@@ -235,6 +237,7 @@ namespace LaMision.Core.Vaults
                     return pre.EveryoneConscious()
                         && main.Position.Machine.CurrentState == Position.Standing
                         && item.Id == "frasco"
+                        && !item.Cast<Frasco>().IsEmpty
                         && pre.MainPlaceIsEnlighted()
                         && (pre.Historic.HasHappened(new Snapshot("mirar_item", main.Id, item.Id)));
                 })
@@ -420,10 +423,12 @@ namespace LaMision.Core.Vaults
                 {
                     var item = post.World.Items.GetOne("rejilla");
                     var nowhere = post.World.Map.Get("nowhere");
+                    var dormitorio = post.World.Map.Get("dormitorio");
 
                     var itemDescriptor = new ItemDescriptor(item);
 
                     nowhere.Items.Remove(item);
+                    dormitorio.Items.Add(item);
 
                     return Output.FromTexts("romperRejilla_text".trans());
                 })
@@ -450,6 +455,75 @@ namespace LaMision.Core.Vaults
                 .WithInteraction((post) =>
                 {
                     return Output.FromTexts("empujarLitera_text".trans());
+                })
+                    .WithDriver(Descriptor.MainRole)
+                    .SetAsRoot()
+                .Finish(),
+
+                StoryletBuilder.Create("untarteAceite")
+                .BeingRepeteable()
+                .ForHumans()
+                .WithDescriptor("thing")
+                .WithItemsScope()
+                .WithPreconditions((pre) =>
+                {
+                    var main = pre.Main;
+                    var item = pre.Item("thing");
+
+                    return pre.EveryoneConscious()
+                        && item.Id == "frasco"
+                        && !item.Cast<Frasco>().IsEmpty
+                        && pre.MainPlaceIsEnlighted()
+                        && pre.Historic.HasHappened(new Snapshot("mirar_item", main.Id, item.Id));
+                })
+                .WithInteraction((post) =>
+                {
+                    var main = post.Main;
+                    var frasco = post.Item("thing").Cast<Frasco>();
+
+                    frasco.Empty();
+
+                    post.World.Knowledge.Add(Sentence.Build("Aceitado", main.Id));
+
+                    return Output.FromTexts("untarteAceite_text".trans());
+                })
+                    .WithDriver(Descriptor.MainRole)
+                    .SetAsRoot()
+                .Finish(),
+
+                StoryletBuilder.Create("meterteRejilla")
+                .BeingGlobalSingle()
+                .ForHumans()
+                .WithDescriptor("thing")
+                .WithItemsScope()
+                .WithPreconditions((pre) =>
+                {
+                    var main = pre.Main;
+                    var item = pre.Item("thing");
+
+                    return pre.EveryoneConscious()
+                        && (pre.PositionIs(Descriptor.MainRole, Position.Lying) || pre.PositionIs(Descriptor.MainRole, Position.Kneeing))
+                        && item.Id == "rejilla"
+                        && pre.MainPlaceIsEnlighted()
+                        && pre.Historic.HasHappened(new Snapshot("romperRejilla", main.Id));
+                })
+                .WithInteraction((post) =>
+                {
+                    var main = post.Main;
+                    var item = post.Item("thing");
+                    var frasco = post.World.Items.GetOne("frasco");
+
+                    var itemDescriptor = new ItemDescriptor(item);
+
+                    if(!post.IsKnown("Aceitado", main.Id))
+                        return Output.FromTexts("meterteRejilla_failure_text".trans(itemDescriptor.ArticledName(true)));
+
+                    var dormitorio = post.MainPlace;
+                    var otroLavabo = post.World.Map.Get("otroLavabo");
+                    post.World.Map.Connect(otroLavabo, dormitorio, Direction.East_West);
+                    post.World.Map.Move(main, dormitorio, otroLavabo, post.World.Items);
+
+                    return Output.FromTexts("meterteRejilla_text".trans(itemDescriptor.ArticledName(true)));
                 })
                     .WithDriver(Descriptor.MainRole)
                     .SetAsRoot()

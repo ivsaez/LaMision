@@ -95,7 +95,7 @@ namespace LaMision.Core.Lang
             new Word("pared_text_4", "Te parece oir una voz al otro lado de la pared, como un grito."),
 
             new Word("rejilla_name", "rejilla"),
-            new Word("rejilla_description", "La rejilla es metálica pero muy fina, parecida a la reja de un colador. Cubre lo que parece ser un conducto de aire rectangular. Quizá una persona menuda o muy delgada podría caber por ese conducto."),
+            new Word("rejilla_description", "La rejilla es metálica pero muy fina, parecida a la reja de un colador. Cubre lo que parece ser un conducto de aire rectangular. Está completamente rota, quizá una persona menuda o muy delgada podría caber por ese conducto."),
 
             new Word("cableNegro_name", "cable negro"),
             new Word("cableNegro_description", "Es un cable de color negro."),
@@ -147,6 +147,9 @@ namespace LaMision.Core.Lang
 
             new Word("palanca_name", "palanca"),
             new Word("palanca_description", "Es una palanca parecida a la de las máquinas tragaperras."),
+
+            new Word("hueco_name", "hueco"),
+            new Word("hueco_description", "Es el hueco por donde te has colado desde el dormitorio. Sigue manchado de aceite por lo que seguramente puedes volver a pasar."),
         };
     }
 }

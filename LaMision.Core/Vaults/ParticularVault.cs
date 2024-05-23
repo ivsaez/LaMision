@@ -520,7 +520,7 @@ namespace LaMision.Core.Vaults
 
                     var dormitorio = post.MainPlace;
                     var otroLavabo = post.World.Map.Get("otroLavabo");
-                    post.World.Map.Connect(otroLavabo, dormitorio, Direction.East_West);
+                    post.World.Map.Connect(dormitorio, otroLavabo, Direction.East_West);
                     post.World.Map.Move(main, dormitorio, otroLavabo, post.World.Items);
 
                     return Output.FromTexts("meterteRejilla_text".trans(itemDescriptor.ArticledName(true)));

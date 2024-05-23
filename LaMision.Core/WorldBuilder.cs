@@ -33,6 +33,7 @@ namespace LaMision.Core
             var salaBoton = new MisionMapped("salaBoton", Externality.Internal, Genere.Femenine, Number.Singular);
             var salaControl = new MisionMapped("salaControl", Externality.Internal, Genere.Femenine, Number.Singular);
             var otroLavabo = new MisionMapped("otroLavabo", Externality.Internal, Genere.Masculine, Number.Singular);
+            var otroSalon = new MisionMapped("otroSalon", Externality.Internal, Genere.Masculine, Number.Singular);
 
             world.Map.Add(nowhere);
             world.Map.Add(radio);
@@ -44,8 +45,10 @@ namespace LaMision.Core
             world.Map.Add(salaBoton);
             world.Map.Add(salaControl);
             world.Map.Add(otroLavabo);
+            world.Map.Add(otroSalon);
 
             world.Map.Connect(salaControl, salaBoton, Direction.East_West);
+            world.Map.Connect(otroLavabo, otroSalon, Direction.East_West);
 
             var sujeto = new MisionAgent("sujeto", "Mirko", "Kazinsky", Importance.Main);
             sujeto.BecomeHuman();
@@ -65,6 +68,7 @@ namespace LaMision.Core
             var tarjetaBlanca = new Tarjeta("tarjetaBlanca", 1, 1, Genere.Femenine, Number.Singular);
             var tarjetaAzul = new Tarjeta("tarjetaAzul", 1, 1, Genere.Femenine, Number.Singular);
             var tarjetaNaranja = new Tarjeta("tarjetaNaranja", 1, 1, Genere.Femenine, Number.Singular);
+            var tarjetaInexistente = new Tarjeta("tarjetaInexistente", 1, 1, Genere.Femenine, Number.Singular);
 
             var fluorescenteSalita = new ArticledEnlightedFurniture("fluorescenteSalita", 10, 5, Genere.Masculine, Number.Singular);
             fluorescenteSalita.Switch.TurnOn();
@@ -133,7 +137,6 @@ namespace LaMision.Core
 
                     return "lavabo_view".trans();
                 });
-
             var puertaNaranja = new Puerta("puertaNaranja", 200, 20, false, Genere.Femenine, Number.Singular, tarjetaNaranja)
                 .WithConnection(world =>
                 {
@@ -185,6 +188,15 @@ namespace LaMision.Core
 
             var hueco = new ArticledFurniture("hueco", 30, 1, false, Genere.Masculine, Number.Singular);
 
+            var otraPuertaLavabo = new Puerta("otraPuertaLavabo", 200, 20, false, Genere.Femenine, Number.Singular);
+            otraPuertaLavabo.Openable.Open();
+            var otraMesaSalon = new ArticledFurniture("otraMesaSalon", 150, 20, false, Genere.Femenine, Number.Singular);
+            var otroSofa = new ArticledFurniture("otroSofa", 300, 60, false, Genere.Masculine, Number.Singular);
+            var otroArmario = new ArticledContainerOpenableFurniture("otroArmario", 1000, 40, false, Genere.Masculine, Number.Singular, 600, 100);
+            otroArmario.Openable.Open();
+            var otraPuertaDormitorio = new Puerta("otraPuertaDormitorio", 200, 20, false, Genere.Femenine, Number.Singular, tarjetaInexistente);
+            var puertaRosa = new Puerta("puertaRosa", 200, 20, false, Genere.Femenine, Number.Singular, tarjetaInexistente);
+
             world.Items.Add(rinonera);
             world.Items.Add(tarjetaBlanca);
             world.Items.Add(fluorescenteSalita);
@@ -223,9 +235,17 @@ namespace LaMision.Core
             world.Items.Add(interruptores);
             world.Items.Add(palanca);
             world.Items.Add(hueco);
+            world.Items.Add(otraPuertaLavabo);
+            world.Items.Add(otraMesaSalon);
+            world.Items.Add(otroSofa);
+            world.Items.Add(otroArmario);
+            world.Items.Add(otraPuertaDormitorio);
+            world.Items.Add(puertaRosa);
+            world.Items.Add(tarjetaInexistente);
 
             nowhere.Items.Add(tarjetaNaranja);
             nowhere.Items.Add(rejilla);
+            nowhere.Items.Add(tarjetaInexistente);
 
             salita.Items.Add(fluorescenteSalita);
             salita.Items.Add(tarjetaBlanca);
@@ -298,6 +318,24 @@ namespace LaMision.Core
             otroLavabo.Items.Add(espejo);
             otroLavabo.Items.Add(hueco);
             otroLavabo.Items.Hide(vater, lavadero, espejo, luzRoja, hueco);
+
+            otroSalon.Items.Add(luzRoja);
+            otroSalon.Items.Add(dispositivo);
+            otroSalon.Items.Add(otraPuertaLavabo);
+            otroSalon.Items.Add(otraMesaSalon);
+            otroSalon.Items.Add(otroSofa);
+            otroSalon.Items.Add(otroArmario);
+            otroSalon.Items.Add(otraPuertaDormitorio);
+            otroSalon.Items.Add(puertaRosa);
+            otroSalon.Items.Hide(
+                otraPuertaLavabo, 
+                luzRoja, 
+                dispositivo, 
+                otraMesaSalon, 
+                otroSofa, 
+                otroArmario, 
+                otraPuertaDormitorio, 
+                puertaRosa);
 
             sujeto.Carrier.SetBack(rinonera, world.Items);
 

@@ -40,6 +40,9 @@ namespace LaMision.Core.Lang
 
             new Word("otroLavabo_name", "lavabo"),
             new Word("otroLavabo_description", "Estás en un lavabo. Es pequeño y está iluminado por una luz roja situada encima de la puerta. Únicamente consta de un váter y un lavadero. En la pared de hormigón visto hay colgado un espejo rectangular. El hueco de la rejilla por donde has entrado queda justo al lado del váter. Tiene una puerta abierta y puedes ver a través de ella un salón grande."),
+
+            new Word("otroSalon_name", "salón"),
+            new Word("otroSalon_description", "El salón es idéntico al otro a excepción de la puerta naranja, que aquí es rosa. La luz está en el mismo sitio, también el dispositivo. Tiene prácticamente el mismo mobiliario pero alguien lo ha destrozado todo."),
         };
     }
 }

@@ -150,6 +150,27 @@ namespace LaMision.Core.Lang
 
             new Word("hueco_name", "hueco"),
             new Word("hueco_description", "Es el hueco por donde te has colado desde el dormitorio. Sigue manchado de aceite por lo que seguramente puedes volver a pasar."),
+
+            new Word("tarjetaInexistente_name", "tarjeta inexistente"),
+            new Word("tarjetaInexistente_description", "No existe."),
+
+            new Word("otraPuertaLavabo_name", "puerta de la pared este del salón"),
+            new Word("otraPuertaLavabo_description", "Es una puerta de color gris, completamente lisa. No hay ningún pomo o maneta visibles."),
+
+            new Word("otraMesaSalon_name", "mesa"),
+            new Word("otraMesaSalon_description", "Era una mesa plegable, pero ahora tiene las patas doblegadas y la superfície rota."),
+
+            new Word("otroSofa_name", "sofá"),
+            new Word("otroSofa_description", "Es un sofá de imitación de piel de color marrón. Está volcado en el suelo y alguien le ha rajado los cojines."),
+
+            new Word("otroArmario_name", "armario"),
+            new Word("otroArmario_description", "Es un armario de madera, tipo despensa."),
+
+            new Word("otraPuertaDormitorio_name", "puerta de la pared oeste del salón"),
+            new Word("otraPuertaDormitorio_description", "Es una puerta de color gris, completamente lisa. No hay ningún pomo o maneta visibles."),
+
+            new Word("puertaRosa_name", "puerta rosa"),
+            new Word("puertaRosa_description", "Es una puerta de color rosa, completamente lisa. No hay ningún pomo o maneta visibles."),
         };
     }
 }

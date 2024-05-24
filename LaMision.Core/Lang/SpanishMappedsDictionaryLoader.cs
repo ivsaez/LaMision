@@ -43,6 +43,9 @@ namespace LaMision.Core.Lang
 
             new Word("otroSalon_name", "salón"),
             new Word("otroSalon_description", "El salón es idéntico al otro a excepción de la puerta naranja, que aquí es rosa. La luz está en el mismo sitio, también el dispositivo. Tiene prácticamente el mismo mobiliario pero alguien lo ha destrozado todo."),
+
+            new Word("otroPasillo_name", "pasillo"),
+            new Word("otroPasillo_description", "Estás en un pasillo largo y estrecho. A medio camino hay un par de escalones y al fondo puedes ver otra puerta con un número. Volcada en el suelo hay una taquilla. La única iluminación proviene de una lámpara de luz roja que hay encima de la puerta del fondo. El pasillo también dispone del extraño dispositivo en el techo."),
         };
     }
 }

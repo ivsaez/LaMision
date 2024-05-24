@@ -171,6 +171,18 @@ namespace LaMision.Core.Lang
 
             new Word("puertaRosa_name", "puerta rosa"),
             new Word("puertaRosa_description", "Es una puerta de color rosa, completamente lisa. No hay ningún pomo o maneta visibles."),
+
+            new Word("otraTaquilla_name", "taquilla"),
+            new Word("otraTaquilla_description", "Es una taquilla metálica de aproximadamente metro y medio de altura. Está volcada en medio del pasillo."),
+
+            new Word("otraPuertaPasillo_name", "puerta del pasillo"),
+            new Word("otraPuertaPasillo_description", "Es una puerta de color gris, completamente lisa. No hay ningún pomo o maneta visibles."),
+
+            new Word("plasticos_name", "plásticos"),
+            new Word("plasticos_description", "Hay unos diminutos trozos de plástico de varios colores... parece como si alguien hubiera mascado las tarjetas de acceso y las hubiera vuelto a escupir."),
+
+            new Word("otraPuertaSalita_name", "puerta con un número"),
+            new Word("otraPuertaSalita_description", "Es una puerta de color blanco con un enorme número 4 escrito en el medio. No hay ningún pomo o maneta visibles."),
         };
     }
 }

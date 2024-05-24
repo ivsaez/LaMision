@@ -34,6 +34,7 @@ namespace LaMision.Core
             var salaControl = new MisionMapped("salaControl", Externality.Internal, Genere.Femenine, Number.Singular);
             var otroLavabo = new MisionMapped("otroLavabo", Externality.Internal, Genere.Masculine, Number.Singular);
             var otroSalon = new MisionMapped("otroSalon", Externality.Internal, Genere.Masculine, Number.Singular);
+            var otroPasillo = new MisionMapped("otroPasillo", Externality.Internal, Genere.Masculine, Number.Singular);
 
             world.Map.Add(nowhere);
             world.Map.Add(radio);
@@ -46,9 +47,11 @@ namespace LaMision.Core
             world.Map.Add(salaControl);
             world.Map.Add(otroLavabo);
             world.Map.Add(otroSalon);
+            world.Map.Add(otroPasillo);
 
             world.Map.Connect(salaControl, salaBoton, Direction.East_West);
             world.Map.Connect(otroLavabo, otroSalon, Direction.East_West);
+            world.Map.Connect(otroSalon, otroPasillo, Direction.North_South);
 
             var sujeto = new MisionAgent("sujeto", "Mirko", "Kazinsky", Importance.Main);
             sujeto.BecomeHuman();
@@ -197,6 +200,13 @@ namespace LaMision.Core
             var otraPuertaDormitorio = new Puerta("otraPuertaDormitorio", 200, 20, false, Genere.Femenine, Number.Singular, tarjetaInexistente);
             var puertaRosa = new Puerta("puertaRosa", 200, 20, false, Genere.Femenine, Number.Singular, tarjetaInexistente);
 
+            var otraPuertaPasillo = new Puerta("otraPuertaPasillo", 200, 20, false, Genere.Femenine, Number.Singular);
+            otraPuertaPasillo.Openable.Open();
+            var otraTaquilla = new ArticledContainerOpenableFurniture("otraTaquilla", 600, 20, false, Genere.Femenine, Number.Singular, 600, 100);
+            otraTaquilla.Openable.Open();
+            var plasticos = new ArticledFurniture("plasticos", 3, 1, false, Genere.Masculine, Number.Plural);
+            var otraPuertaSalita = new Puerta("otraPuertaSalita", 200, 20, false, Genere.Femenine, Number.Singular, tarjetaInexistente);
+
             world.Items.Add(rinonera);
             world.Items.Add(tarjetaBlanca);
             world.Items.Add(fluorescenteSalita);
@@ -242,6 +252,10 @@ namespace LaMision.Core
             world.Items.Add(otraPuertaDormitorio);
             world.Items.Add(puertaRosa);
             world.Items.Add(tarjetaInexistente);
+            world.Items.Add(otraPuertaPasillo);
+            world.Items.Add(otraTaquilla);
+            world.Items.Add(plasticos);
+            world.Items.Add(otraPuertaSalita);
 
             nowhere.Items.Add(tarjetaNaranja);
             nowhere.Items.Add(rejilla);
@@ -336,6 +350,20 @@ namespace LaMision.Core
                 otroArmario, 
                 otraPuertaDormitorio, 
                 puertaRosa);
+
+            otroPasillo.Items.Add(luzRoja);
+            otroPasillo.Items.Add(otraTaquilla);
+            otroPasillo.Items.Add(dispositivo);
+            otroPasillo.Items.Add(otraPuertaPasillo);
+            otroPasillo.Items.Add(plasticos);
+            otroPasillo.Items.Add(otraPuertaSalita);
+            otroPasillo.Items.Hide(
+                luzRoja, 
+                otraTaquilla, 
+                dispositivo, 
+                otraPuertaPasillo, 
+                plasticos,
+                otraPuertaSalita);
 
             sujeto.Carrier.SetBack(rinonera, world.Items);
 

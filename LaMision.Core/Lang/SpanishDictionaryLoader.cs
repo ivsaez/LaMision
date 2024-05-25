@@ -241,6 +241,12 @@ namespace LaMision.Core.Lang
             new Word("meterteRejilla_text", "Te metes por {0}. Gracias al aceite impregnado en tu cuerpo consigues deslizarte a través del estrecho hueco. Llegas a un lavabo."),
             new Word("meterteRejilla_failure_text", "Intentas meterte por {0}, pero las paredes son muy rugosas y los hombros se te atascan."),
 
+            new Word("mensajeVacio_1_interaction_description", "Parece que vaya a sonar una locución"),
+            new Word("mensajeVacio_text_1", "Se oye un ruido sordo, como de interferencia."),
+            new Word("mensajeVacio_text_2", "Suena como si alguien fuera a decir algo pero se corta."),
+            new Word("mensajeVacio_text_3", "Suena la respiración de alguien. Luego se corta."),
+            new Word("mensajeVacio_text_4", "Alguien activa el micrófono y se oyen voces initeligibles de fondo. Se corta de nuevo."),
+
             //new Word("saludo_1_interaction_description", "{main} saluda a {saluted}."),
             //new Word("saludo_11_interaction_description", "{saluted} saluda a {main}."),
             //new Word("saludo_text", "Buenas {0}."),

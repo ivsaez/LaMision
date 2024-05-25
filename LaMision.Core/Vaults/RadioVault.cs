@@ -21,7 +21,11 @@ namespace LaMision.Core.Vaults
                 .WithPreconditions((pre) =>
                 {
                     var sujeto = pre.World.Agents.GetOne("sujeto");
-                    return sujeto.Position.Machine.CurrentState != Position.Standing;
+                    var place = pre.World.Map.GetUbication(sujeto);
+
+                    return sujeto.Position.Machine.CurrentState != Position.Standing
+                        && place.Id != "otroSalon"
+                        && place.Id != "otroPasillo";
                 })
                 .WithInteraction((post) =>
                 {
@@ -287,6 +291,31 @@ namespace LaMision.Core.Vaults
                                 "pistas_voz_14".trans(),
                             }.Random())
                         );
+                })
+                    .WithDriver(Descriptor.MainRole)
+                    .SetAsRoot()
+                .Finish(),
+
+                StoryletBuilder.Create("mensajeVacio")
+                .BeingRepeteable()
+                .ForMachines()
+                .WithAgentsScope()
+                .WithPreconditions((pre) =>
+                {
+                    var sujeto = pre.World.Agents.GetOne("sujeto");
+                    var place = pre.World.Map.GetUbication(sujeto);
+
+                    return place.Id == "otroPasillo" || place.Id == "otroSalon";
+                })
+                .WithInteraction((post) =>
+                {
+                    return Output.FromTexts(new string[] 
+                    {
+                        "mensajeVacio_text_1",
+                        "mensajeVacio_text_2",
+                        "mensajeVacio_text_3",
+                        "mensajeVacio_text_4"
+                    }.Random().trans());
                 })
                     .WithDriver(Descriptor.MainRole)
                     .SetAsRoot()

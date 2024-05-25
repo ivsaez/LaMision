@@ -291,7 +291,7 @@ namespace LaMision.Core.Vaults
                     main.Cast<ICarrier>().Carrier.Leave(item, post.World.Items);
                     place.Items.Add(item);
 
-                    return Output.FromTexts("dejar".trans(main.Name, itemDescriptor.ArticledName(true)));
+                    return Output.FromTexts("dejar".trans(itemDescriptor.ArticledName(true)));
                 })
                     .WithDriver(Descriptor.MainRole)
                     .SetAsRoot()

@@ -10,7 +10,7 @@ namespace LaMision.Core.Lang
             new Word("rinonera_description", "Es una pequeña riñonera con un estampado de camuflaje de tonos marrones. Solo tiene un compartimento cerrado con una cremallera."),
 
             new Word("dispositivo_name", "dispositivo"),
-            new Word("dispositivo_description", "El dispositivo tiene forma rectangular y está incrustado en el techo. Se asemeja a un altavoz, pero también tiene una pequeña lente negra y un led rojo siempre encendido."),
+            new Word("dispositivo_description", "El dispositivo tiene forma rectangular y está incrustado en el techo. Se asemeja a un altavoz, pero también tiene una pequeña lente negra y un led rojo siempre encendido, junto al cual hay un pequeño display digital que muestra la hora."),
 
             new Word("tarjetaBlanca_name", "tarjeta blanca"),
             new Word("tarjetaBlanca_description", "Es una tarjeta de plástico de color blanco. Es completamente lisa, no hay ninguna inscripción."),

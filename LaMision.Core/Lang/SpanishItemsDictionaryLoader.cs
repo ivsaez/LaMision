@@ -75,6 +75,9 @@ namespace LaMision.Core.Lang
             new Word("espejo_name", "espejo"),
             new Word("espejo_description", "Al mirarte al espejo ves la cara de un desconocido iluminada por la luz roja. Eres un hombre de unos 30 años, con la tez morena y el pelo completamente rasurado. Estás extremadamente delgado, con pómulos y sienes marcados, y con los dientes ennegrecidos."),
 
+            new Word("espejoConsciente_name", "espejo"),
+            new Word("espejoConsciente_description", "Reconoces en el espejo tu cara iluminada por la luz roja. Te reconoces pero te asustas al ver el lamentable estado físico en el que te encuentras. Alguien te ha rasurado la cabeza, no queda ni rastro de tus rizos negros. Estás extremadamente delgado, con pómulos y sienes marcados, y con los dientes ennegrecidos. ¿Cómo has llegado a esta situación?"),
+
             new Word("tarjetaNaranja_name", "tarjeta naranja"),
             new Word("tarjetaNaranja_description", "Es una tarjeta de plástico de color naranja. Es completamente lisa, no hay ninguna inscripción."),
 

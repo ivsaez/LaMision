@@ -564,7 +564,23 @@ namespace LaMision.Core.Vaults
                     .WithSubinteraction((post) =>
                     {
                         post.World.State.Transite(States.Revelation);
-                        
+
+                        var nowhere = post.World.Map.Get("nowhere");
+                        var lavabo = post.World.Map.Get("lavabo");
+                        var otroLavabo = post.World.Map.Get("otroLavabo");
+                        var espejo = post.World.Items.GetOne("espejo");
+                        var espejoConsciente = post.World.Items.GetOne("espejoConsciente");
+
+                        nowhere.Items.Remove(espejoConsciente);
+                        lavabo.Items.Remove(espejo);
+                        otroLavabo.Items.Remove(espejo);
+
+                        nowhere.Items.Add(espejo);
+                        lavabo.Items.Add(espejoConsciente);
+                        otroLavabo.Items.Add(espejoConsciente);
+                        lavabo.Items.Hide(espejoConsciente);
+                        otroLavabo.Items.Hide(espejoConsciente);
+
                         var comandante = post.World.Agents.GetOne("comandante");
                         comandante.Status.Machine.Transite(Status.Unconscious);
 

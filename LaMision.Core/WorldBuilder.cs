@@ -197,6 +197,7 @@ namespace LaMision.Core
             var vater = new ArticledFurniture("vater", 30, 10, false, Genere.Masculine, Number.Singular);
             var lavadero = new ArticledFurniture("lavadero", 40, 10, false, Genere.Masculine, Number.Singular);
             var espejo = new ArticledFurniture("espejo", 50, 10, false, Genere.Masculine, Number.Singular);
+            var espejoConsciente = new ArticledFurniture("espejoConsciente", 50, 10, false, Genere.Masculine, Number.Singular);
 
             var boton = new ArticledFurniture("boton", 40, 10, false, Genere.Masculine, Number.Singular);
 
@@ -250,6 +251,7 @@ namespace LaMision.Core
             world.Items.Add(vater);
             world.Items.Add(lavadero);
             world.Items.Add(espejo);
+            world.Items.Add(espejoConsciente);
             world.Items.Add(tarjetaNaranja);
             world.Items.Add(frasco);
             world.Items.Add(armario);
@@ -282,6 +284,7 @@ namespace LaMision.Core
             nowhere.Items.Add(rejilla);
             nowhere.Items.Add(tarjetaInexistente);
             nowhere.Items.Add(sillaRota);
+            nowhere.Items.Add(espejoConsciente);
 
             salita.Items.Add(fluorescenteSalita);
             salita.Items.Add(tarjetaBlanca);

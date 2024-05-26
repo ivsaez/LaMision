@@ -375,7 +375,7 @@ namespace LaMision.Core.Vaults
                     .SetAsRoot()
                 .Finish(),
 
-                StoryletBuilder.Create("mensajeLevanta3")
+                StoryletBuilder.Create("mensajeLevantaNatalia")
                 .BeingRepeteable()
                 .ForMachines()
                 .WithAgentsScope()
@@ -387,19 +387,213 @@ namespace LaMision.Core.Vaults
                         && pre.MainPlace.Id == "radio"
                         && sujeto.Position.Machine.CurrentState != Position.Standing
                         && pre.World.Map.GetUbication(sujeto).Id == "salon"
-                        && pre.Historic.HasHappened(new Snapshot("entradaNatalia", "natalia"));
+                        && pre.Historic.HasGloballyHappened("entradaNatalia");
                 })
                 .WithInteraction((post) =>
                 {
                     return new Output(
-                        new Pharagraph("mensajeLevanta3_text_1".trans()),
+                        new Pharagraph("mensajeLevantaNatalia_text_1".trans()),
                         new Conversation()
                             .With(post.Main.Name, new string[]
                             {
-                                "mensajeLevanta3_voz_1".trans(),
-                                "mensajeLevanta3_voz_2".trans(),
-                                "mensajeLevanta3_voz_3".trans(),
-                                "mensajeLevanta3_voz_4".trans(),
+                                "mensajeLevantaNatalia_voz_1".trans(),
+                                "mensajeLevantaNatalia_voz_2".trans(),
+                                "mensajeLevantaNatalia_voz_3".trans(),
+                                "mensajeLevantaNatalia_voz_4".trans(),
+                            }.Random())
+                        );
+                })
+                    .WithDriver(Descriptor.MainRole)
+                    .SetAsRoot()
+                .Finish(),
+
+                StoryletBuilder.Create("mensajePasilloNatalia")
+                .BeingRepeteable()
+                .ForMachines()
+                .WithAgentsScope()
+                .WithEnvPreconditions(pre => pre.IsState(States.Revelation))
+                .WithPreconditions((pre) =>
+                {
+                    var sujeto = pre.World.Agents.GetOne("sujeto");
+
+                    return pre.EveryoneConscious()
+                        && pre.MainPlace.Id == "radio"
+                        && pre.World.Map.GetUbication(sujeto).Id == "pasillo"
+                        && pre.Historic.HasGloballyHappened("entradaNatalia");
+                })
+                .WithInteraction((post) =>
+                {
+                    return new Output(
+                        new Pharagraph("mensajePasilloNatalia_text_1".trans()),
+                        new Conversation()
+                            .With(post.Main.Name, new string[]
+                            {
+                                "mensajePasilloNatalia_voz_1".trans(),
+                                "mensajePasilloNatalia_voz_2".trans(),
+                                "mensajePasilloNatalia_voz_3".trans(),
+                                "mensajePasilloNatalia_voz_4".trans(),
+                            }.Random())
+                        );
+                })
+                    .WithDriver(Descriptor.MainRole)
+                    .SetAsRoot()
+                .Finish(),
+
+                StoryletBuilder.Create("mensajeSalonNatalia")
+                .BeingRepeteable()
+                .ForMachines()
+                .WithAgentsScope()
+                .WithEnvPreconditions(pre => pre.IsState(States.Revelation))
+                .WithPreconditions((pre) =>
+                {
+                    var sujeto = pre.World.Agents.GetOne("sujeto");
+
+                    return pre.EveryoneConscious()
+                        && pre.MainPlace.Id == "radio"
+                        && sujeto.Position.Machine.CurrentState == Position.Standing
+                        && pre.World.Map.GetUbication(sujeto).Id == "salon"
+                        && pre.Historic.HasGloballyHappened("entradaNatalia");
+                })
+                .WithInteraction((post) =>
+                {
+                    return new Output(
+                        new Pharagraph("mensajeSalonNatalia_text_1".trans()),
+                        new Conversation()
+                            .With(post.Main.Name, new string[]
+                            {
+                                "mensajeSalonNatalia_voz_1".trans(),
+                                "mensajeSalonNatalia_voz_2".trans(),
+                                "mensajeSalonNatalia_voz_3".trans(),
+                                "mensajeSalonNatalia_voz_4".trans(),
+                                "mensajeSalonNatalia_voz_5".trans(),
+                                "mensajeSalonNatalia_voz_6".trans(),
+                                "mensajeSalonNatalia_voz_7".trans(),
+                                "mensajeSalonNatalia_voz_8".trans(),
+                                "mensajeSalonNatalia_voz_9".trans(),
+                                "mensajeSalonNatalia_voz_10".trans(),
+                            }.Random())
+                        );
+                })
+                    .WithDriver(Descriptor.MainRole)
+                    .SetAsRoot()
+                .Finish(),
+
+                StoryletBuilder.Create("mensajeBotonNatalia")
+                .BeingRepeteable()
+                .ForMachines()
+                .WithAgentsScope()
+                .WithEnvPreconditions(pre => pre.IsState(States.Revelation))
+                .WithPreconditions((pre) =>
+                {
+                    var sujeto = pre.World.Agents.GetOne("sujeto");
+
+                    return pre.EveryoneConscious()
+                        && pre.MainPlace.Id == "radio"
+                        && sujeto.Position.Machine.CurrentState == Position.Standing
+                        && pre.World.Map.GetUbication(sujeto).Id == "salaBoton"
+                        && pre.Historic.HasGloballyHappened("entradaNatalia");
+                })
+                .WithInteraction((post) =>
+                {
+                    return new Output(
+                        new Pharagraph("mensajeBotonNatalia_text_1".trans()),
+                        new Conversation()
+                            .With(post.Main.Name, new string[]
+                            {
+                                "mensajeBotonNatalia_voz_1".trans(),
+                                "mensajeBotonNatalia_voz_2".trans(),
+                                "mensajeBotonNatalia_voz_3".trans(),
+                                "mensajeBotonNatalia_voz_4".trans(),
+                            }.Random())
+                        );
+                })
+                    .WithDriver(Descriptor.MainRole)
+                    .SetAsRoot()
+                .Finish(),
+
+                StoryletBuilder.Create("conexionNatalia")
+                .BeingGlobalSingle()
+                .ForMachines()
+                .WithAgentsScope()
+                .WithEnvPreconditions(pre => pre.IsState(States.Revelation))
+                .WithPreconditions((pre) =>
+                {
+                    var sujeto = pre.World.Agents.GetOne("sujeto");
+
+                    return pre.EveryoneConscious()
+                        && pre.MainPlace.Id == "radio"
+                        && sujeto.Position.Machine.CurrentState == Position.Standing
+                        && pre.World.Map.GetUbication(sujeto).Id == "salaControl"
+                        && pre.Historic.HasGloballyHappened("entradaNatalia");
+                })
+                .WithInteraction((post) =>
+                {
+                    post.World.State.Transite(States.Mision);
+                    var main = post.Main;
+                    var sujeto = post.World.Agents.GetOne("sujeto").Cast<SimonEstevez>();
+
+                    return new Output(
+                        new Pharagraph("conexionNatalia_text".trans()),
+                        new Conversation()
+                            .With(main.Name, "conexionNatalia_text_1".trans())
+                            .With(sujeto.TrueName, "conexionNatalia_text_2".trans())
+                            .With(main.Name, "conexionNatalia_text_3".trans())
+                            .With(sujeto.TrueName, "conexionNatalia_text_4".trans())
+                            .With(main.Name, "conexionNatalia_text_5".trans())
+                            .With(sujeto.TrueName, "conexionNatalia_text_6".trans())
+                            .With(main.Name, "conexionNatalia_text_7".trans())
+                            .With(sujeto.TrueName, "conexionNatalia_text_8".trans())
+                            .With(main.Name, "conexionNatalia_text_9".trans())
+                            .With(sujeto.TrueName, "conexionNatalia_text_10".trans())
+                            .With(main.Name, "conexionNatalia_text_11".trans())
+                            .With(sujeto.TrueName, "conexionNatalia_text_12".trans())
+                            .With(main.Name, "conexionNatalia_text_13".trans())
+                            .With(sujeto.TrueName, "conexionNatalia_text_14".trans())
+                            .With(main.Name, "conexionNatalia_text_15".trans())
+                            .With(sujeto.TrueName, "conexionNatalia_text_16".trans())
+                            .With(main.Name, "conexionNatalia_text_17".trans())
+                            .With(sujeto.TrueName, "conexionNatalia_text_18".trans()));
+                })
+                    .WithDriver(Descriptor.MainRole)
+                    .SetAsRoot()
+                .Finish(),
+
+                StoryletBuilder.Create("pistasNatalia")
+                .BeingRepeteable()
+                .ForMachines()
+                .WithAgentsScope()
+                .WithEnvPreconditions(pre => pre.IsState(States.Revelation))
+                .WithPreconditions((pre) =>
+                {
+                    var sujeto = pre.World.Agents.GetOne("sujeto");
+
+                    return pre.EveryoneConscious()
+                        && pre.MainPlace.Id == "radio"
+                        && sujeto.Position.Machine.CurrentState == Position.Standing
+                        && pre.World.Map.GetUbication(sujeto).Id == "salaControl"
+                        && pre.Historic.HasGloballyHappened("conexionNatalia");
+                })
+                .WithInteraction((post) =>
+                {
+                    return new Output(
+                        new Pharagraph("pistasNatalia_text_1".trans()),
+                        new Conversation()
+                            .With(post.Main.Name, new string[]
+                            {
+                                "pistasNatalia_voz_1".trans(),
+                                "pistasNatalia_voz_2".trans(),
+                                "pistasNatalia_voz_3".trans(),
+                                "pistasNatalia_voz_4".trans(),
+                                "pistasNatalia_voz_5".trans(),
+                                "pistasNatalia_voz_6".trans(),
+                                "pistasNatalia_voz_7".trans(),
+                                "pistasNatalia_voz_8".trans(),
+                                "pistasNatalia_voz_9".trans(),
+                                "pistasNatalia_voz_10".trans(),
+                                "pistasNatalia_voz_11".trans(),
+                                "pistasNatalia_voz_12".trans(),
+                                "pistasNatalia_voz_13".trans(),
+                                "pistasNatalia_voz_14".trans(),
                             }.Random())
                         );
                 })

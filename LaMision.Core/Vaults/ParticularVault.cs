@@ -47,7 +47,6 @@ namespace LaMision.Core.Vaults
                 .ForHumans()
                 .WithDescriptor("tarjeta", "door")
                 .WithItemsScope()
-                .WithEnvPreconditions((pre) => pre.IsState(States.Mision))
                 .WithPreconditions((pre) =>
                 {
                     var door = pre.Item("door");

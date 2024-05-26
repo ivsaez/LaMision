@@ -1,4 +1,6 @@
 ﻿using Agents;
+using Agents.Extensions;
+using LaMision.Core.Elements;
 using Languager.Extensions;
 using Outputer;
 using Rand;
@@ -23,7 +25,9 @@ namespace LaMision.Core.Vaults
                     var sujeto = pre.World.Agents.GetOne("sujeto");
                     var place = pre.World.Map.GetUbication(sujeto);
 
-                    return sujeto.Position.Machine.CurrentState != Position.Standing
+                    return pre.EveryoneConscious()
+                        && pre.MainPlace.Id == "radio"
+                        && sujeto.Position.Machine.CurrentState != Position.Standing
                         && place.Id != "otroSalon"
                         && place.Id != "otroPasillo";
                 })
@@ -60,7 +64,9 @@ namespace LaMision.Core.Vaults
                 .WithPreconditions((pre) =>
                 {
                     var sujeto = pre.World.Agents.GetOne("sujeto");
-                    return sujeto.Position.Machine.CurrentState != Position.Standing
+                    return pre.EveryoneConscious()
+                        && pre.MainPlace.Id == "radio"
+                        && sujeto.Position.Machine.CurrentState != Position.Standing
                         && pre.World.Map.GetUbication(sujeto).Id == "salon";
                 })
                 .WithInteraction((post) =>
@@ -89,7 +95,9 @@ namespace LaMision.Core.Vaults
                 .WithPreconditions((pre) =>
                 {
                     var sujeto = pre.World.Agents.GetOne("sujeto");
-                    return sujeto.Position.Machine.CurrentState == Position.Standing;
+                    return pre.EveryoneConscious()
+                        && pre.MainPlace.Id == "radio"
+                        && sujeto.Position.Machine.CurrentState == Position.Standing;
                 })
                 .WithInteraction((post) =>
                 {
@@ -125,7 +133,9 @@ namespace LaMision.Core.Vaults
                 {
                     var sujeto = pre.World.Agents.GetOne("sujeto");
 
-                    return pre.World.Map.GetUbication(sujeto).Id == "pasillo";
+                    return pre.EveryoneConscious()
+                        && pre.MainPlace.Id == "radio"
+                        && pre.World.Map.GetUbication(sujeto).Id == "pasillo";
                 })
                 .WithInteraction((post) =>
                 {
@@ -154,7 +164,9 @@ namespace LaMision.Core.Vaults
                 {
                     var sujeto = pre.World.Agents.GetOne("sujeto");
 
-                    return sujeto.Position.Machine.CurrentState == Position.Standing
+                    return pre.EveryoneConscious()
+                        && pre.MainPlace.Id == "radio"
+                        && sujeto.Position.Machine.CurrentState == Position.Standing
                         && pre.World.Map.GetUbication(sujeto).Id == "salon";
                 })
                 .WithInteraction((post) =>
@@ -190,7 +202,9 @@ namespace LaMision.Core.Vaults
                 {
                     var sujeto = pre.World.Agents.GetOne("sujeto");
 
-                    return sujeto.Position.Machine.CurrentState == Position.Standing
+                    return pre.EveryoneConscious()
+                        && pre.MainPlace.Id == "radio"
+                        && sujeto.Position.Machine.CurrentState == Position.Standing
                         && pre.World.Map.GetUbication(sujeto).Id == "salaBoton";
                 })
                 .WithInteraction((post) =>
@@ -220,7 +234,9 @@ namespace LaMision.Core.Vaults
                 {
                     var sujeto = pre.World.Agents.GetOne("sujeto");
 
-                    return sujeto.Position.Machine.CurrentState == Position.Standing
+                    return pre.EveryoneConscious()
+                        && pre.MainPlace.Id == "radio"
+                        && sujeto.Position.Machine.CurrentState == Position.Standing
                         && pre.World.Map.GetUbication(sujeto).Id == "salaControl";
                 })
                 .WithInteraction((post) =>
@@ -264,7 +280,9 @@ namespace LaMision.Core.Vaults
                 {
                     var sujeto = pre.World.Agents.GetOne("sujeto");
 
-                    return sujeto.Position.Machine.CurrentState == Position.Standing
+                    return pre.EveryoneConscious()
+                        && pre.MainPlace.Id == "radio"
+                        && sujeto.Position.Machine.CurrentState == Position.Standing
                         && pre.World.Map.GetUbication(sujeto).Id == "salaControl"
                         && pre.Historic.HasGloballyHappened("conexion");
                 })
@@ -305,7 +323,9 @@ namespace LaMision.Core.Vaults
                     var sujeto = pre.World.Agents.GetOne("sujeto");
                     var place = pre.World.Map.GetUbication(sujeto);
 
-                    return place.Id == "otroPasillo" || place.Id == "otroSalon";
+                    return pre.EveryoneConscious()
+                        && pre.MainPlace.Id == "radio"
+                        && place.Id == "otroPasillo" || place.Id == "otroSalon";
                 })
                 .WithInteraction((post) =>
                 {
@@ -316,6 +336,72 @@ namespace LaMision.Core.Vaults
                         "mensajeVacio_text_3",
                         "mensajeVacio_text_4"
                     }.Random().trans());
+                })
+                    .WithDriver(Descriptor.MainRole)
+                    .SetAsRoot()
+                .Finish(),
+
+                StoryletBuilder.Create("entradaNatalia")
+                .BeingGlobalSingle()
+                .ForMachines()
+                .WithAgentsScope()
+                .WithEnvPreconditions(pre => pre.IsState(States.Revelation))
+                .WithPreconditions((pre) =>
+                {
+                    return pre.EveryoneConscious()
+                        && pre.MainPlace.Id == "radio";
+                })
+                .WithInteraction((post) =>
+                {
+                    var main = post.Main;
+                    var simon = post.World.Agents.GetOne("sujeto").Cast<SimonEstevez>();
+
+                    return new Output(
+                        new Pharagraph("entradaNatalia_text".trans()),
+                        new Conversation()
+                            .With(main.Name, "entradaNatalia_text_1".trans())
+                            .With(simon.TrueName, "entradaNatalia_text_2".trans())
+                            .With(main.Name, "entradaNatalia_text_3".trans())
+                            .With(simon.TrueName, "entradaNatalia_text_4".trans())
+                            .With(main.Name, "entradaNatalia_text_5".trans())
+                            .With(simon.TrueName, "entradaNatalia_text_6".trans())
+                            .With(main.Name, "entradaNatalia_text_7".trans())
+                            .With(simon.TrueName, "entradaNatalia_text_8".trans())
+                            .With(main.Name, "entradaNatalia_text_9".trans())
+                            .With(simon.TrueName, "entradaNatalia_text_10".trans())
+                            .With(main.Name, "entradaNatalia_text_11".trans()));
+                })
+                    .WithDriver(Descriptor.MainRole)
+                    .SetAsRoot()
+                .Finish(),
+
+                StoryletBuilder.Create("mensajeLevanta3")
+                .BeingRepeteable()
+                .ForMachines()
+                .WithAgentsScope()
+                .WithEnvPreconditions(pre => pre.IsState(States.Revelation))
+                .WithPreconditions((pre) =>
+                {
+                    var sujeto = pre.World.Agents.GetOne("sujeto");
+                    return pre.EveryoneConscious()
+                        && pre.MainPlace.Id == "radio"
+                        && sujeto.Position.Machine.CurrentState != Position.Standing
+                        && pre.World.Map.GetUbication(sujeto).Id == "salon"
+                        && pre.Historic.HasHappened(new Snapshot("entradaNatalia", "natalia"));
+                })
+                .WithInteraction((post) =>
+                {
+                    return new Output(
+                        new Pharagraph("mensajeLevanta3_text_1".trans()),
+                        new Conversation()
+                            .With(post.Main.Name, new string[]
+                            {
+                                "mensajeLevanta3_voz_1".trans(),
+                                "mensajeLevanta3_voz_2".trans(),
+                                "mensajeLevanta3_voz_3".trans(),
+                                "mensajeLevanta3_voz_4".trans(),
+                            }.Random())
+                        );
                 })
                     .WithDriver(Descriptor.MainRole)
                     .SetAsRoot()

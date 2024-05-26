@@ -19,6 +19,17 @@ namespace LaMision.Core
                 .WithState(States.Initial)
                     .WithTransition(States.Mision)
                 .EndState()
+                .WithState(States.Mision)
+                    .WithTransition(States.Revelation)
+                    .WithTransition(States.Fight)
+                .EndState()
+                .WithState(States.Revelation)
+                    .WithTransition(States.Fight)
+                .EndState()
+                .WithState(States.Fight)
+                    .WithTransition(States.Mision)
+                    .WithTransition(States.Revelation)
+                .EndState()
                 .Build());
 
             world.Time.IncreaseHours(17);
@@ -53,17 +64,25 @@ namespace LaMision.Core
             world.Map.Connect(otroLavabo, otroSalon, Direction.East_West);
             world.Map.Connect(otroSalon, otroPasillo, Direction.North_South);
 
-            var sujeto = new MisionAgent("sujeto", "Mirko", "Kazinsky", Importance.Main);
+            var sujeto = new SimonEstevez("sujeto");
             sujeto.BecomeHuman();
             sujeto.Position.Machine.Transite(Position.Lying);
 
             var comandante = new MisionAgent("comandante", "Comandante", "Hoffmann", Importance.None);
+            var natalia = new MisionAgent("natalia", "Natalia", "Hoffmann", Importance.None);
+            natalia.Status.Machine.Transite(Status.Unconscious);
+            var extrano = new MisionAgent("extrano", "Extraño", "Personaje", Importance.None);
+            extrano.Status.Machine.Transite(Status.Unconscious);
 
             world.Agents.Add(sujeto);
             world.Agents.Add(comandante);
+            world.Agents.Add(natalia);
+            world.Agents.Add(extrano);
 
             world.Map.Ubicate(sujeto, salita);
             world.Map.Ubicate(comandante, radio);
+            world.Map.Ubicate(natalia, radio);
+            world.Map.Ubicate(extrano, otroSalon);
 
             var rinonera = new ArticledContainerItem("rinonera", 40, 1, Genere.Femenine, Number.Singular, 40, 20);
             var dispositivo = new ArticledFurniture("dispositivo", 2, 1, false, Genere.Masculine, Number.Singular);
@@ -111,6 +130,7 @@ namespace LaMision.Core
 
             var mesaSalon = new ArticledFurniture("mesaSalon", 150, 20, false, Genere.Femenine, Number.Singular);
             var silla = new ArticledFurniture("silla", 30, 5, false, Genere.Femenine, Number.Singular);
+            var sillaRota = new ArticledFurniture("sillaRota", 30, 5, false, Genere.Femenine, Number.Singular);
             var sofa = new ArticledFurniture("sofa", 300, 60, false, Genere.Masculine, Number.Singular);
             var frasco = new Frasco("frasco");
             var armario = new ArticledContainerOpenableFurniture("armario", 1000, 40, false, Genere.Masculine, Number.Singular, 600, 100);
@@ -220,6 +240,7 @@ namespace LaMision.Core
             world.Items.Add(puertaPasillo);
             world.Items.Add(mesaSalon);
             world.Items.Add(silla);
+            world.Items.Add(sillaRota);
             world.Items.Add(sofa);
             world.Items.Add(puertaDormitorio);
             world.Items.Add(puertaLavabo);
@@ -260,6 +281,7 @@ namespace LaMision.Core
             nowhere.Items.Add(tarjetaNaranja);
             nowhere.Items.Add(rejilla);
             nowhere.Items.Add(tarjetaInexistente);
+            nowhere.Items.Add(sillaRota);
 
             salita.Items.Add(fluorescenteSalita);
             salita.Items.Add(tarjetaBlanca);
@@ -375,5 +397,7 @@ namespace LaMision.Core
     {
         public static readonly string Initial = "Initial";
         public static readonly string Mision = "Mision";
+        public static readonly string Revelation = "Revelation";
+        public static readonly string Fight = "Fight";
     }
 }

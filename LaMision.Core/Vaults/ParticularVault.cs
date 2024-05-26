@@ -527,6 +527,69 @@ namespace LaMision.Core.Vaults
                 })
                     .WithDriver(Descriptor.MainRole)
                     .SetAsRoot()
+                .Finish(),
+
+                StoryletBuilder.Create("sentarteSilla")
+                .BeingGlobalSingle()
+                .ForHumans()
+                .WithDescriptor("thing")
+                .WithItemsScope()
+                .WithPreconditions((pre) =>
+                {
+                    var main = pre.Main;
+                    var item = pre.Item("thing");
+
+                    return pre.EveryoneConscious()
+                        && main.Position.Machine.CurrentState == Position.Standing
+                        && item.Id == "silla"
+                        && pre.MainPlaceIsEnlighted()
+                        && pre.Historic.HasHappened(new Snapshot("mirar_item", main.Id, item.Id));
+                })
+                .WithInteraction((post) =>
+                {
+                    var silla = post.Item("thing");
+                    post.MainPlace.Items.Remove(silla);
+
+                    var nowhere = post.World.Map.Get("nowhere");
+                    nowhere.Items.Add(silla);
+
+                    var sillaRota = post.World.Items.GetOne("sillaRota");
+                    nowhere.Items.Remove(sillaRota);
+                    post.MainPlace.Items.Add(sillaRota);
+                    post.MainPlace.Items.Hide(sillaRota);
+
+                    post.Main.Position.Machine.Transite(Position.Lying);
+
+                    return Output.FromTexts("sentarteSilla_text".trans());
+                })
+                    .WithSubinteraction((post) =>
+                    {
+                        post.World.State.Transite(States.Revelation);
+                        
+                        var comandante = post.World.Agents.GetOne("comandante");
+                        comandante.Status.Machine.Transite(Status.Unconscious);
+
+                        var natalia = post.World.Agents.GetOne("natalia");
+                        natalia.Status.Machine.Transite(Status.Conscious);
+
+                        var sujeto = post.Main.Cast<SimonEstevez>();
+
+                        var sujetoConversation = new Conversation()
+                            .With(sujeto.TrueName, "sentarteSilla_revelacion_text_1".trans())
+                            .With(sujeto.TrueName, "sentarteSilla_revelacion_text_2".trans())
+                            .With(sujeto.TrueName, "sentarteSilla_revelacion_text_3".trans());
+
+                        sujeto.Revelate();
+
+                        var simonCoversation = new Conversation()
+                            .With(sujeto.TrueName, "sentarteSilla_revelacion_text_4".trans());
+
+                        return new Output(sujetoConversation, simonCoversation);
+                    })
+                            .WithDriver(Descriptor.MainRole)
+                            .Build()
+                    .WithDriver(Descriptor.MainRole)
+                    .SetAsRoot()
                 .Finish()
                 );
         }

@@ -36,7 +36,7 @@ namespace LaMision.Core.Lang
             new Word("trajePlastico_name", "traje de goma"),
             new Word("trajePlastico_description", "Es un traje de goma para todo el cuerpo, parecido a un traje de apicultor. Tiene un color verde caqui."),
 
-            new Word("puertaPasillo_name", "puerta del pasillo"),
+            new Word("puertaPasillo_name", "puerta del fondo del pasillo"),
             new Word("puertaPasillo_description", "Es una puerta de color gris, completamente lisa. No hay ningún pomo o maneta visibles."),
 
             new Word("mesaSalon_name", "mesa del salón"),
@@ -44,6 +44,9 @@ namespace LaMision.Core.Lang
 
             new Word("silla_name", "silla"),
             new Word("silla_description", "Es una plegable de color negro."),
+
+            new Word("sillaRota_name", "silla"),
+            new Word("sillaRota_description", "La silla se ha convertido en un amasijo de hierros después de que se le hayan doblegado las patas al sentarte."),
 
             new Word("sofa_name", "sofá"),
             new Word("sofa_description", "Es un sofá de tres plazas de color marrón. El tejido parece imitación de cuero."),
@@ -175,7 +178,7 @@ namespace LaMision.Core.Lang
             new Word("otraTaquilla_name", "taquilla"),
             new Word("otraTaquilla_description", "Es una taquilla metálica de aproximadamente metro y medio de altura. Está volcada en medio del pasillo."),
 
-            new Word("otraPuertaPasillo_name", "puerta del pasillo"),
+            new Word("otraPuertaPasillo_name", "puerta del fondo del pasillo"),
             new Word("otraPuertaPasillo_description", "Es una puerta de color gris, completamente lisa. No hay ningún pomo o maneta visibles."),
 
             new Word("plasticos_name", "plásticos"),

@@ -127,5 +127,23 @@ namespace LaMision.Core
             onGoing.SetAutomaticDecision(desires);
             return GameInteraction.Automatic(onGoing.Step);
         }
+
+        public string GetTime()
+        {
+            var hour = world.Time.Hour;
+            var turn = world.Time.Turn;
+
+            var minute = turn % 60;
+
+            var hourText = hour < 10
+                ? $"0{hour}"
+                : hour.ToString();
+
+            var minuteText = minute < 10
+                ? $"0{minute}"
+                : minute.ToString();
+
+            return $"{hourText}:{minuteText}";
+        }
     }
 }

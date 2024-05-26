@@ -5,7 +5,7 @@ VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LaMision", "LaMision\LaMision.csproj", "{1CE6BDA2-943B-474D-97CD-EEB792879843}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaMision.Core", "LaMision.Core\LaMision.Core.csproj", "{E944C8C9-2F2C-4F4F-A8B3-0344F578EDE5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LaMision.Core", "LaMision.Core\LaMision.Core.csproj", "{E944C8C9-2F2C-4F4F-A8B3-0344F578EDE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

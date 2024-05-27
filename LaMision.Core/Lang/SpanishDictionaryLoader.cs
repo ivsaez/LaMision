@@ -349,6 +349,9 @@ namespace LaMision.Core.Lang
             new Word("mirarExtrano_text_1", "Hay un tipo apoyado contra la pared, mirando hacia el suelo, sin moverse. Parece inconsciente. Es un hombre de unos 30 años, extremadamente delgado y con un aspecto demacrado."),
             new Word("mirarExtrano_text_2", "De repente levanta la vista y te mira fijamente. Ves su cara y te das cuenta de que ese hombre no está bien. Tiene la piel extremadamente roja, como si se hubiera quemado al sol durante días. Le sale sangre por la nariz, los ojos, las orejas... sin embargo no tiene signos aparentes de vilencia."),
 
+            new Word("mirarExtranoMuerto_1_interaction_description", "Mirar al extraño"),
+            new Word("mirarExtranoMuerto_text", "El extraño yace muerto con el rostro completamente deshecho por la pelea. El aspecto de ese desgraciado te resulta repugnante."),
+
             new Word("extranoHabla_1_interaction_description", "El extraño te habla"),
             new Word("extranoHabla_11_interaction_description", "Tienes un recuerdo fugaz"),
             new Word("extranoHabla_text_1", "El extraño se incorpora y te habla mientras camnia hacia ti lentamente."),
@@ -396,6 +399,24 @@ namespace LaMision.Core.Lang
             new Word("extranoAmenazaPatada_golpear_text", "Antes de que lances el golpe el extraño ya te ha pateado en {0}."),
             new Word("extranoAmenazaPatada_fintar_text", "Fintas con una mano pero el extraño te da una patadón en {0} antes de que intentes golpear."),
 
+            new Word("extranoEsperaCansado_1_interaction_description", "El extraño descansa"),
+            new Word("extranoEsperaCansado_11_interaction_description", "Esperar"),
+            new Word("extranoEsperaCansado_12_interaction_description", "Golpearle directamente"),
+            new Word("extranoEsperaCansado_13_interaction_description", "Fintar y luego golpearle"),
+            new Word("extranoEsperaCansado_text", "El extraño se hecha ligeramente hacia atrás y baja los brazos."),
+            new Word("extranoEsperaCansado_esperar_text", "Los dos os miráis a los ojos. La tensión es extrema."),
+            new Word("extranoEsperaCansado_golpear_text", "Lanzas un golpe rápido y directo, golpeando al extraño en {0}. Un trozo de piel de su cara se desprende tras el golpe."),
+            new Word("extranoEsperaCansado_fintar_text", "Fintas con una mano y lanzas un golpe con la otra, pero el extraño sube la guardia y no impactas bien."),
+
+            new Word("extranoEsperaGuardia_1_interaction_description", "El extraño se pone en guardia"),
+            new Word("extranoEsperaGuardia_11_interaction_description", "Esperar"),
+            new Word("extranoEsperaGuardia_12_interaction_description", "Golpearle directamente"),
+            new Word("extranoEsperaGuardia_13_interaction_description", "Fintar y luego golpearle"),
+            new Word("extranoEsperaGuardia_text", "El extraño se detiene y se pone en guardia."),
+            new Word("extranoEsperaGuardia_esperar_text", "Los dos os miráis a los ojos. La tensión es extrema."),
+            new Word("extranoEsperaGuardia_golpear_text", "Lanzas un golpe rápido y directo, pero el extraño se abalanza sobe ti y tu golpe le pasa rozando."),
+            new Word("extranoEsperaGuardia_fintar_text", "Fintas con una mano y engañas al extraño, que se mueve para evitar el falso golpe. Entonces lanzas un puñetazo con la otra que le acierta en {0}. Algo de piel sale desprendida de su cara por el golpe."),
+
             new Word("head_part_1", "el mentón"),
             new Word("head_part_2", "el pómulo"),
             new Word("head_part_3", "la nariz"),
@@ -410,16 +431,15 @@ namespace LaMision.Core.Lang
             new Word("hit_celebration_5", "¡Me mataréis a mi, pero nunca podréis matar mis ideales!"),
             new Word("hit_celebration_6", "¡Encaja esa, fascista neoliberal!"),
 
+            new Word("aggression_celebration_1", "¿Que coño te pasa en la cara?"),
+            new Word("aggression_celebration_2", "Te estás rompiendo a trozos..."),
+            new Word("aggression_celebration_3", "¡Te estás deshaciendo!"),
+            new Word("aggression_celebration_4", "Te pasa algo muy jodido."),
+
             new Word("muerte_pelea", "A causa del daño recibido por los golpes caes muerto. Tu historia termina en manos de ese violento desconocido."),
+            new Word("muerte_extrano", "El último golpe es demasiado para el extraño, que cae al suelo. Ese desgraciado no volverá a levantarse más."),
 
             new Word("fin", "FIN"),
-
-            //new Word("estornudo_1_interaction_description", "{main} estornuda."),
-            //new Word("estornudo_1_text", "{0} estornuda sonoramente."),
-            //new Word("estornudo_11_interaction_description", "{main} se limpia con la manga izquierda."),
-            //new Word("estornudo_2_text", "{0} se limpia la nariz con el dorso de la manga izquierda."),
-            //new Word("estornudo_12_interaction_description", "{main} se limpia con la manga derecha."),
-            //new Word("estornudo_3_text", "{0} se limpia la nariz con el dorso de la manga derecha."),
         };
     }
 }

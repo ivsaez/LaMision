@@ -5,10 +5,8 @@ using Languager.Extensions;
 using Outputer;
 using Rand;
 using Rolling;
-using StateMachine;
 using Stories;
 using Stories.Builders;
-using System.Runtime.InteropServices;
 
 namespace LaMision.Core.Vaults
 {
@@ -29,7 +27,8 @@ namespace LaMision.Core.Vaults
 
                     return pre.MainPlaceIsEnlighted()
                         && pre.Historic.HasHappened(new Snapshot("mirar_mapped", main.Id, place.Id))
-                        && pre.Agent("other").Id == "extrano";
+                        && pre.Agent("other").Id == "extrano"
+                        && pre.Agent("other").Cast<MisionAgent>().IsAlive;
                 })
                 .WithInteraction((post) =>
                 {
@@ -40,6 +39,26 @@ namespace LaMision.Core.Vaults
                         "mirarExtrano_text_1".trans(),
                         "mirarExtrano_text_2".trans());
                 })
+                    .WithDriver(Descriptor.MainRole)
+                    .SetAsRoot()
+                .Finish(),
+
+                StoryletBuilder.Create("mirarExtranoMuerto")
+                .BeingRepeteable()
+                .ForHumans()
+                .WithDescriptor("other")
+                .WithAgentsScope()
+                .WithPreconditions((pre) =>
+                {
+                    var main = pre.Main;
+                    var place = pre.MainPlace;
+
+                    return pre.MainPlaceIsEnlighted()
+                        && pre.Historic.HasHappened(new Snapshot("mirar_mapped", main.Id, place.Id))
+                        && pre.Agent("other").Id == "extrano"
+                        && !pre.Agent("other").Cast<MisionAgent>().IsAlive;
+                })
+                .WithInteraction((post) => Output.FromTexts("mirarExtranoMuerto_text".trans()))
                     .WithDriver(Descriptor.MainRole)
                     .SetAsRoot()
                 .Finish(),
@@ -192,6 +211,80 @@ namespace LaMision.Core.Vaults
                     .Build()
                 .WithDriver(Descriptor.MainRole)
                 .SetAsRoot()
+            .Finish(),
+
+            StoryletBuilder.Create("extranoEsperaCansado")
+            .BeingRepeteable()
+            .ForMachines()
+            .WithDescriptor("other")
+            .WithAgentsScope()
+            .WithEnvPreconditions(pre => pre.IsState(States.Fight))
+            .WithPreconditions((pre) =>
+            {
+                return pre.EveryoneConscious()
+                    && pre.MainPlaceIsEnlighted()
+                    && pre.Main.Cast<MisionAgent>().IsAlive
+                    && pre.Agent("other").Cast<MisionAgent>().IsAlive
+                    && pre.Main.Id == "extrano";
+            })
+            .WithInteraction((post) => Output.FromTexts("extranoEsperaCansado_text".trans()))
+                .WithSubinteraction((post) =>
+                {
+                    return Output.FromTexts("extranoEsperaCansado_esperar_text".trans());
+                })
+                    .WithDriver("other")
+                    .Build()
+                .WithSubinteraction((post) =>
+                {
+                    return aggression(post, "extranoEsperaCansado_golpear_text");
+                })
+                    .WithDriver("other")
+                    .Build()
+                .WithSubinteraction((post) =>
+                {
+                    return Output.FromTexts("extranoEsperaCansado_fintar_text".trans());
+                })
+                    .WithDriver("other")
+                    .Build()
+                .WithDriver(Descriptor.MainRole)
+                .SetAsRoot()
+            .Finish(),
+
+            StoryletBuilder.Create("extranoEsperaGuardia")
+            .BeingRepeteable()
+            .ForMachines()
+            .WithDescriptor("other")
+            .WithAgentsScope()
+            .WithEnvPreconditions(pre => pre.IsState(States.Fight))
+            .WithPreconditions((pre) =>
+            {
+                return pre.EveryoneConscious()
+                    && pre.MainPlaceIsEnlighted()
+                    && pre.Main.Cast<MisionAgent>().IsAlive
+                    && pre.Agent("other").Cast<MisionAgent>().IsAlive
+                    && pre.Main.Id == "extrano";
+            })
+            .WithInteraction((post) => Output.FromTexts("extranoEsperaGuardia_text".trans()))
+                .WithSubinteraction((post) =>
+                {
+                    return Output.FromTexts("extranoEsperaGuardia_esperar_text".trans());
+                })
+                    .WithDriver("other")
+                    .Build()
+                .WithSubinteraction((post) =>
+                {
+                    return Output.FromTexts("extranoEsperaGuardia_golpear_text".trans());
+                })
+                    .WithDriver("other")
+                    .Build()
+                .WithSubinteraction((post) =>
+                {
+                    return aggression(post, "extranoEsperaGuardia_fintar_text");
+                })
+                    .WithDriver("other")
+                    .Build()
+                .WithDriver(Descriptor.MainRole)
+                .SetAsRoot()
             .Finish()
             );
         }
@@ -200,9 +293,6 @@ namespace LaMision.Core.Vaults
         {
             var sujeto = post.Agent("other").Cast<MisionAgent>();
             sujeto.Hit();
-
-            if (!sujeto.IsAlive)
-                return Output.FromTexts("muerte_pelea".trans(), "fin".trans());
 
             var part = upper
                 ? new string[]
@@ -218,7 +308,8 @@ namespace LaMision.Core.Vaults
                 "body_part_3"
             }.Random().trans();
 
-            return new Output(
+            var outputables = new List<IOutputable>
+            {
                 new Pharagraph(text_key.trans(part)),
                 new Conversation().With("Extraño", new string[]
                 {
@@ -229,7 +320,50 @@ namespace LaMision.Core.Vaults
                     "hit_celebration_5",
                     "hit_celebration_6",
                 }.Random().trans())
-            );
+            };
+
+            if (!sujeto.IsAlive) 
+            {
+                outputables.Add(new Pharagraph("muerte_pelea".trans()));
+                outputables.Add(new Pharagraph("fin".trans()));
+            }
+
+            return new Output(outputables.ToArray());
+        }
+
+        private static Output aggression(PredefinedPostconditions post, string text_key)
+        {
+            var sujeto = post.Agent("other").Cast<SimonEstevez>();
+            var extrano = post.Main.Cast<MisionAgent>();
+
+            extrano.Hit();
+
+            var part = new string[]
+            {
+                "head_part_1",
+                "head_part_2",
+                "head_part_3"
+            }.Random().trans();
+
+            var outputables = new List<IOutputable>
+            {
+                new Pharagraph(text_key.trans(part)),
+                new Conversation().With(sujeto.TrueName, new string[]
+                {
+                    "aggression_celebration_1",
+                    "aggression_celebration_2",
+                    "aggression_celebration_3",
+                    "aggression_celebration_4",
+                }.Random().trans())
+            };
+
+            if (!extrano.IsAlive)
+            {
+                post.World.State.Transite(States.Mision);
+                outputables.Add(new Pharagraph("muerte_extrano".trans()));
+            }
+
+            return new Output(outputables.ToArray());
         }
     }
 }

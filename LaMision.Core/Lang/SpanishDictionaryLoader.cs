@@ -348,11 +348,11 @@ namespace LaMision.Core.Lang
             new Word("mirarExtrano_1_interaction_description", "Mirar al extraño"),
             new Word("mirarExtrano_text_1", "Hay un tipo apoyado contra la pared, mirando hacia el suelo, sin moverse. Parece inconsciente. Es un hombre de unos 30 años, extremadamente delgado y con un aspecto demacrado."),
             new Word("mirarExtrano_text_2", "De repente levanta la vista y te mira fijamente. Ves su cara y te das cuenta de que ese hombre no está bien. Tiene la piel extremadamente roja, como si se hubiera quemado al sol durante días. Le sale sangre por la nariz, los ojos, las orejas... sin embargo no tiene signos aparentes de vilencia."),
-            new Word("mirarExtrano_text_3", "Alertado, te pones de pie."),
 
             new Word("extranoHabla_1_interaction_description", "El extraño te habla"),
             new Word("extranoHabla_11_interaction_description", "Tienes un recuerdo fugaz"),
             new Word("extranoHabla_text_1", "El extraño se incorpora y te habla mientras camnia hacia ti lentamente."),
+            new Word("extranoHabla_text_levanta", "Alertado, te pones de pie."),
             new Word("extranoHabla_text_2", "El enajenado individuo recobra la compostura, como si hubiera obtenido fuerzas de golpe. No se abalanza a por ti a lo loco, en lugar de eso adopta una posición de combate y se acerca lentamente. Una posición de combate que ya has visto en el pasado..."),
             new Word("extranoHabla_mensaje_1", "Ya vienes a buscarme. Ya os habéis dado cuenta de que no soy útil y vienes a rematarme."),
             new Word("extranoHabla_mensaje_2", "No te buscaba. Oye, me he colado por la rejilla del lavabo..."),

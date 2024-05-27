@@ -36,19 +36,9 @@ namespace LaMision.Core.Vaults
                     var extrano = post.Agent("other");
                     extrano.Status.Machine.Transite(Status.Conscious);
 
-                    var texts = new List<string>
-                    {
+                    return Output.FromTexts(
                         "mirarExtrano_text_1".trans(),
-                        "mirarExtrano_text_2".trans()
-                    };
-
-                    if (post.Main.Position.Machine.CurrentState != Position.Standing)
-                    {
-                        post.Main.Position.Machine.Transite(Position.Standing);
-                        texts.Add("mirarExtrano_text_3".trans());
-                    }
-
-                    return Output.FromTexts(texts.ToArray());
+                        "mirarExtrano_text_2".trans());
                 })
                     .WithDriver(Descriptor.MainRole)
                     .SetAsRoot()
@@ -63,16 +53,24 @@ namespace LaMision.Core.Vaults
                 {
                     return pre.EveryoneConscious()
                         && pre.MainPlaceIsEnlighted()
-                        && pre.EveryoneStanding()
                         && pre.Main.Id == "extrano";
                 })
                 .WithInteraction((post) =>
                 {
                     var sujeto = post.Agent("other").Cast<SimonEstevez>();
 
-                    return new Output(
-                        new Pharagraph("extranoHabla_text_1".trans()),
-                        new Conversation()
+                    var outputables = new List<IOutputable>
+                    {
+                        new Pharagraph("extranoHabla_text_1".trans())
+                    };
+
+                    if(sujeto.Position.Machine.CurrentState != Position.Standing)
+                    {
+                        sujeto.Position.Machine.Transite(Position.Standing);
+                        outputables.Add(new Pharagraph("extranoHabla_text_levanta".trans()));
+                    }
+
+                    outputables.Add(new Conversation()
                             .With("Extraño", "extranoHabla_mensaje_1".trans())
                             .With(sujeto.TrueName, "extranoHabla_mensaje_2".trans())
                             .With("Extraño", "extranoHabla_mensaje_3".trans())
@@ -83,9 +81,11 @@ namespace LaMision.Core.Vaults
                             .With(sujeto.TrueName, "extranoHabla_mensaje_8".trans())
                             .With("Extraño", "extranoHabla_mensaje_9".trans())
                             .With(sujeto.TrueName, "extranoHabla_mensaje_10".trans())
-                            .With("Extraño", "extranoHabla_mensaje_11".trans()),
-                        new Pharagraph("extranoHabla_text_2".trans())
-                        );
+                            .With("Extraño", "extranoHabla_mensaje_11".trans()));
+
+                    outputables.Add(new Pharagraph("extranoHabla_text_2".trans()));
+
+                    return new Output(outputables.ToArray());
                 })
                 .WithSubinteraction((post) =>
                 {

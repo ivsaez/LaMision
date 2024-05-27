@@ -22,60 +22,6 @@ namespace LaMision.Core.Vaults
     {
         public static StoriesVault Get()
         {
-            //var saludo = StoryletBuilder.Create("saludo")
-            //    .BeingSingle()
-            //    .ForHumans()
-            //    .WithDescriptor("saluted")
-            //    .WithAgentsScope()
-            //    .WithPreconditions((pre) => pre.EveryoneConscious() && pre.EverythingInMainPlace())
-            //    .WithInteraction((world, roles) =>
-            //    {
-            //        var main = roles.Get<MisionAgent>(Descriptor.MainRole);
-            //        var saluted = roles.Get<MisionAgent>("saluted");
-
-            //        return Output.FromSpeech(main.Name, "saludo_text".trans(saluted.Name));
-            //    })
-            //        .WithSubinteraction((world, roles) =>
-            //        {
-            //            var main = roles.Get<MisionAgent>(Descriptor.MainRole);
-            //            var saluted = roles.Get<MisionAgent>("saluted");
-
-            //            return Output.FromSpeech(saluted.Name, "respuesta_text".trans(main.Name));
-            //        })
-            //        .WithDriver("saluted")
-            //        .Build()
-            //    .WithDriver(Descriptor.MainRole)
-            //    .SetAsRoot()
-            //    .Finish();
-
-            //var estornudo = StoryletBuilder.Create("estornudo")
-            //    .ForHumans()
-            //    .WithAgentsScope()
-            //    .WithPreconditions((pre) => pre.EveryoneConscious())
-            //    .WithInteraction((world, roles) =>
-            //    {
-            //        var main = roles.Get<MisionAgent>(Descriptor.MainRole);
-
-            //        return Output.FromTexts("estornudo_1_text".trans(main.Name));
-            //    })
-            //        .WithDriver(Descriptor.MainRole)
-            //        .WithSubinteraction((world, roles) =>
-            //        {
-            //            var main = roles.Get<MisionAgent>(Descriptor.MainRole);
-
-            //            return Output.FromTexts("estornudo_2_text".trans(main.Name));
-            //        })
-            //            .Build()
-            //        .WithSubinteraction((world, roles) =>
-            //        {
-            //            var main = roles.Get<MisionAgent>(Descriptor.MainRole);
-
-            //            return Output.FromTexts("estornudo_3_text".trans(main.Name));
-            //        })
-            //            .Build()
-            //        .SetAsRoot()
-            //    .Finish();
-
             return new StoriesVault(
                 StoryletBuilder.Create("mirar_mapped")
                 .BeingRepeteable()
@@ -356,6 +302,7 @@ namespace LaMision.Core.Vaults
                 .BeingRepeteable()
                 .ForHumans()
                 .WithAgentsScope()
+                .WithEnvPreconditions((pre) => !pre.IsState(States.Fight))
                 .WithPreconditions((pre) =>
                 {
                     return pre.EveryoneConscious()
@@ -378,6 +325,7 @@ namespace LaMision.Core.Vaults
                 .BeingRepeteable()
                 .ForHumans()
                 .WithAgentsScope()
+                .WithEnvPreconditions((pre) => !pre.IsState(States.Fight))
                 .WithPreconditions((pre) =>
                 {
                     return pre.EveryoneConscious()
@@ -398,6 +346,7 @@ namespace LaMision.Core.Vaults
                 .BeingRepeteable()
                 .ForHumans()
                 .WithAgentsScope()
+                .WithEnvPreconditions((pre) => !pre.IsState(States.Fight))
                 .WithPreconditions((pre) =>
                 {
                     return pre.EveryoneConscious()
@@ -410,6 +359,17 @@ namespace LaMision.Core.Vaults
 
                     return Output.FromTexts("tumbarse_text".trans());
                 })
+                    .WithDriver(Descriptor.MainRole)
+                    .SetAsRoot()
+                .Finish(),
+
+                StoryletBuilder.Create("esperar")
+                .BeingRepeteable()
+                .ForHumans()
+                .WithAgentsScope()
+                .WithEnvPreconditions((pre) => !pre.IsState(States.Fight))
+                .WithPreconditions((pre) => pre.EveryoneConscious())
+                .WithInteraction((post) => Output.FromTexts("esperar_text".trans()))
                     .WithDriver(Descriptor.MainRole)
                     .SetAsRoot()
                 .Finish(),

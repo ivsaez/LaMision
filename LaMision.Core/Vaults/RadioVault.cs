@@ -325,6 +325,7 @@ namespace LaMision.Core.Vaults
 
                     return pre.Agent(Descriptor.MainRole).Status.Machine.CurrentState == Status.Conscious
                         && pre.MainPlace.Id == "radio"
+                        && sujeto.Cast<MisionAgent>().IsAlive
                         && (place.Id == "otroPasillo" || place.Id == "otroSalon");
                 })
                 .WithInteraction((post) =>

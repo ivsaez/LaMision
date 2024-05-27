@@ -39,6 +39,9 @@ namespace LaMision.Core.Lang
             new Word("ir_reptando_1_interaction_description", "Ir reptando hacia hacia {place}"),
             new Word("ir_reptando", "Te desplazas reptando hacia {1}."),
 
+            new Word("esperar_1_interaction_description", "Esperar"),
+            new Word("esperar_text", "Esperas."),
+
             new Word("abrir_1_interaction_description", "Abrir {openable}"),
             new Word("abrir_text", "Te dispones a abrir {0}."),
             new Word("abrir_invalidKey", "Parece ser que {0} no sirve para abrir {1}."),
@@ -345,6 +348,7 @@ namespace LaMision.Core.Lang
             new Word("mirarExtrano_1_interaction_description", "Mirar al extraño"),
             new Word("mirarExtrano_text_1", "Hay un tipo apoyado contra la pared, mirando hacia el suelo, sin moverse. Parece inconsciente. Es un hombre de unos 30 años, extremadamente delgado y con un aspecto demacrado."),
             new Word("mirarExtrano_text_2", "De repente levanta la vista y te mira fijamente. Ves su cara y te das cuenta de que ese hombre no está bien. Tiene la piel extremadamente roja, como si se hubiera quemado al sol durante días. Le sale sangre por la nariz, los ojos, las orejas... sin embargo no tiene signos aparentes de vilencia."),
+            new Word("mirarExtrano_text_3", "Alertado, te pones de pie."),
 
             new Word("extranoHabla_1_interaction_description", "El extraño te habla"),
             new Word("extranoHabla_11_interaction_description", "Tienes un recuerdo fugaz"),
@@ -370,10 +374,45 @@ namespace LaMision.Core.Lang
             new Word("extranoHabla_text_9", "\"Si tiene la guardia alta, te está esperando. Haz una finta, y luego golpea con la otra mano. Finta y golpea. Si baja la guardia, si está cansado, entonces golpea directo. Directo y duro.\""),
             new Word("extranoHabla_text_10", "Un amago de golpe del extraño te saca del recuerdo. No hay tiempo para pensar, hay que pelear."),
 
-            //new Word("saludo_1_interaction_description", "{main} saluda a {saluted}."),
-            //new Word("saludo_11_interaction_description", "{saluted} saluda a {main}."),
-            //new Word("saludo_text", "Buenas {0}."),
-            //new Word("respuesta_text", "Hola {0}."),
+            new Word("extranoAmenazaPuno_1_interaction_description", "El extraño amenaza con el puño"),
+            new Word("extranoAmenazaPuno_11_interaction_description", "Bloquear el puñetazo"),
+            new Word("extranoAmenazaPuno_12_interaction_description", "Tirarte hacia él"),
+            new Word("extranoAmenazaPuno_13_interaction_description", "Golpearle directamente"),
+            new Word("extranoAmenazaPuno_14_interaction_description", "Fintar y luego golpearle"),
+            new Word("extranoAmenazaPuno_text", "El extraño levanta el puño derecho."),
+            new Word("extranoAmenazaPuno_bloquear_text", "No eres suficientemente rápido y el golpe te alcanca en {0}."),
+            new Word("extranoAmenazaPuno_tirarte_text", "Te abalanzas sobre el extraño y el golpe solo te roza."),
+            new Word("extranoAmenazaPuno_golpear_text", "Antes de que lances el golpe el extraño ya te ha dado en {0}."),
+            new Word("extranoAmenazaPuno_fintar_text", "Fintas con una mano pero el extraño te da una hostia en {0} antes de que intentes golpear."),
+
+            new Word("extranoAmenazaPatada_1_interaction_description", "El extraño amenaza con una patada"),
+            new Word("extranoAmenazaPatada_11_interaction_description", "Bloquear la patada"),
+            new Word("extranoAmenazaPatada_12_interaction_description", "Tirarte hacia él"),
+            new Word("extranoAmenazaPatada_13_interaction_description", "Golpearle directamente"),
+            new Word("extranoAmenazaPatada_14_interaction_description", "Fintar y luego golpearle"),
+            new Word("extranoAmenazaPatada_text", "El extraño carga la pierna derecha."),
+            new Word("extranoAmenazaPatada_bloquear_text", "Ves venir la patada y la bloqueas sin problema."),
+            new Word("extranoAmenazaPatada_tirarte_text", "Te abalanzas sobre el extraño, el puntapié te da de lleno en {0}."),
+            new Word("extranoAmenazaPatada_golpear_text", "Antes de que lances el golpe el extraño ya te ha pateado en {0}."),
+            new Word("extranoAmenazaPatada_fintar_text", "Fintas con una mano pero el extraño te da una patadón en {0} antes de que intentes golpear."),
+
+            new Word("head_part_1", "el mentón"),
+            new Word("head_part_2", "el pómulo"),
+            new Word("head_part_3", "la nariz"),
+            new Word("body_part_1", "la espinilla"),
+            new Word("body_part_2", "el estómago"),
+            new Word("body_part_3", "la entrepierna"),
+
+            new Word("hit_celebration_1", "¡Cómete esa cerdo imperialista!"),
+            new Word("hit_celebration_2", "¡Por el pueblo!"),
+            new Word("hit_celebration_3", "¡Moriré de pie cabronazo!"),
+            new Word("hit_celebration_4", "¡Viva la revolución!"),
+            new Word("hit_celebration_5", "¡Me mataréis a mi, pero nunca podréis matar mis ideales!"),
+            new Word("hit_celebration_6", "¡Encaja esa, fascista neoliberal!"),
+
+            new Word("muerte_pelea", "A causa del daño recibido por los golpes caes muerto. Tu historia termina en manos de ese violento desconocido."),
+
+            new Word("fin", "FIN"),
 
             //new Word("estornudo_1_interaction_description", "{main} estornuda."),
             //new Word("estornudo_1_text", "{0} estornuda sonoramente."),

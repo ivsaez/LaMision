@@ -66,12 +66,12 @@ namespace LaMision.Core
 
             var sujeto = new SimonEstevez("sujeto");
             sujeto.BecomeHuman();
-            sujeto.Position.Machine.Transite(Position.Lying);
+            //sujeto.Position.Machine.Transite(Position.Lying);
 
             var comandante = new MisionAgent("comandante", "Comandante", "Hoffmann", Importance.None);
             var natalia = new MisionAgent("natalia", "Natalia", "Hoffmann", Importance.None);
             natalia.Status.Machine.Transite(Status.Unconscious);
-            var extrano = new MisionAgent("extrano", "Extraño", "Personaje", Importance.None);
+            var extrano = new MisionAgent("extrano", "un extraño", "personaje", Importance.None);
             extrano.Status.Machine.Transite(Status.Unconscious);
 
             world.Agents.Add(sujeto);
@@ -79,10 +79,13 @@ namespace LaMision.Core
             world.Agents.Add(natalia);
             world.Agents.Add(extrano);
 
-            world.Map.Ubicate(sujeto, salita);
+            //world.Map.Ubicate(sujeto, salita);
+            world.Map.Ubicate(sujeto, otroLavabo);
             world.Map.Ubicate(comandante, radio);
             world.Map.Ubicate(natalia, radio);
             world.Map.Ubicate(extrano, otroSalon);
+
+            world.State.Transite(States.Mision);
 
             var rinonera = new ArticledContainerItem("rinonera", 40, 1, Genere.Femenine, Number.Singular, 40, 20);
             var dispositivo = new ArticledFurniture("dispositivo", 2, 1, false, Genere.Masculine, Number.Singular);

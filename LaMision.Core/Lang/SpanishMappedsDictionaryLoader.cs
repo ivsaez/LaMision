@@ -42,7 +42,7 @@ namespace LaMision.Core.Lang
             new Word("otroLavabo_description", "Estás en un lavabo. Es pequeño y está iluminado por una luz roja situada encima de la puerta. Únicamente consta de un váter y un lavadero. En la pared de hormigón visto hay colgado un espejo rectangular. El hueco de la rejilla por donde has entrado queda justo al lado del váter. Tiene una puerta abierta y puedes ver a través de ella un salón grande."),
 
             new Word("otroSalon_name", "salón"),
-            new Word("otroSalon_description", "El salón es idéntico al otro a excepción de la puerta naranja, que aquí es rosa. La luz está en el mismo sitio, también el dispositivo. Tiene prácticamente el mismo mobiliario pero alguien lo ha destrozado todo."),
+            new Word("otroSalon_description", "El salón es idéntico al otro a excepción de la puerta naranja, que aquí es rosa. La luz está en el mismo sitio, también el dispositivo. Tiene prácticamente el mismo mobiliario pero todo está destrozado. No estás solo."),
 
             new Word("otroPasillo_name", "pasillo"),
             new Word("otroPasillo_description", "Estás en un pasillo largo y estrecho. A medio camino hay un par de escalones y al fondo puedes ver otra puerta con un número. Volcada en el suelo hay una taquilla. La única iluminación proviene de una lámpara de luz roja que hay encima de la puerta del fondo. El pasillo también dispone del extraño dispositivo en el techo."),

@@ -323,13 +323,15 @@ namespace LaMision.Core.Vaults
                     var sujeto = pre.World.Agents.GetOne("sujeto");
                     var place = pre.World.Map.GetUbication(sujeto);
 
-                    return pre.EveryoneConscious()
+                    return pre.Agent(Descriptor.MainRole).Status.Machine.CurrentState == Status.Conscious
                         && pre.MainPlace.Id == "radio"
-                        && place.Id == "otroPasillo" || place.Id == "otroSalon";
+                        && (place.Id == "otroPasillo" || place.Id == "otroSalon");
                 })
                 .WithInteraction((post) =>
                 {
-                    return Output.FromTexts(new string[] 
+                    return Output.FromTexts(
+                        "mensajeVacio_text".trans(),
+                        new string[] 
                     {
                         "mensajeVacio_text_1",
                         "mensajeVacio_text_2",

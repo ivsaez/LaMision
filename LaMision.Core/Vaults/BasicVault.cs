@@ -82,6 +82,7 @@ namespace LaMision.Core.Vaults
                 .ForHumans()
                 .WithDescriptor("place")
                 .WithMappedsScope()
+                .WithEnvPreconditions((pre) => !pre.IsState(States.Fight))
                 .WithPreconditions((pre) => pre.EveryoneConscious() && pre.RoleInPlace(Descriptor.MainRole, "place"))
                 .WithInteraction((post) =>
                 {
@@ -107,6 +108,7 @@ namespace LaMision.Core.Vaults
                 .ForHumans()
                 .WithDescriptor("thing")
                 .WithItemsScope()
+                .WithEnvPreconditions((pre) => !pre.IsState(States.Fight))
                 .WithPreconditions((pre) =>
                 {
                     var main = pre.Main;
@@ -155,6 +157,7 @@ namespace LaMision.Core.Vaults
                 .ForHumans()
                 .WithDescriptor("place")
                 .WithMappedsScope()
+                .WithEnvPreconditions((pre) => !pre.IsState(States.Fight))
                 .WithPreconditions((pre) =>
                     pre.EveryoneConscious()
                     && pre.EveryoneStanding()
@@ -184,6 +187,7 @@ namespace LaMision.Core.Vaults
                 .ForHumans()
                 .WithDescriptor("place")
                 .WithMappedsScope()
+                .WithEnvPreconditions((pre) => !pre.IsState(States.Fight))
                 .WithPreconditions((pre) =>
                     pre.EveryoneConscious()
                     && !pre.RoleInPlace(Descriptor.MainRole, "place")
@@ -213,6 +217,7 @@ namespace LaMision.Core.Vaults
                 .ForHumans()
                 .WithDescriptor("thing")
                 .WithItemsScope()
+                .WithEnvPreconditions((pre) => !pre.IsState(States.Fight))
                 .WithPreconditions((pre) =>
                 {
                     var main = pre.Main;
@@ -271,6 +276,7 @@ namespace LaMision.Core.Vaults
                 .ForHumans()
                 .WithDescriptor("thing")
                 .WithItemsScope()
+                .WithEnvPreconditions((pre) => !pre.IsState(States.Fight))
                 .WithPreconditions((pre) =>
                 {
                     var main = pre.Main;
@@ -302,6 +308,7 @@ namespace LaMision.Core.Vaults
                 .ForHumans()
                 .WithDescriptor("thing", "recipient")
                 .WithItemsScope()
+                .WithEnvPreconditions((pre) => !pre.IsState(States.Fight))
                 .WithPreconditions((pre) =>
                 {
                     var main = pre.Main;
@@ -412,6 +419,7 @@ namespace LaMision.Core.Vaults
                 .ForHumans()
                 .WithDescriptor("openable")
                 .WithItemsScope()
+                .WithEnvPreconditions((pre) => !pre.IsState(States.Fight))
                 .WithPreconditions((pre) =>
                 {
                     var main = pre.Main;
@@ -470,6 +478,7 @@ namespace LaMision.Core.Vaults
                 .ForHumans()
                 .WithDescriptor("openable")
                 .WithItemsScope()
+                .WithEnvPreconditions((pre) => !pre.IsState(States.Fight))
                 .WithPreconditions((pre) =>
                 {
                     return pre.EveryoneStanding()

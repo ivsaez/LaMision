@@ -14,6 +14,8 @@ namespace LaMision.Core.Elements
 
         public void Revelate() => revelated = true;
 
+        public bool IsRevelated => revelated;
+
         public string TrueName => revelated
             ? "Simón"
             : Name;

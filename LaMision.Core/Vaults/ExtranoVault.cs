@@ -285,6 +285,120 @@ namespace LaMision.Core.Vaults
                     .Build()
                 .WithDriver(Descriptor.MainRole)
                 .SetAsRoot()
+            .Finish(),
+
+            StoryletBuilder.Create("insultarExtrano")
+            .BeingRepeteable()
+            .ForHumans()
+            .WithDescriptor("other")
+            .WithAgentsScope()
+            .WithEnvPreconditions(pre => pre.IsState(States.Fight))
+            .WithPreconditions((pre) =>
+            {
+                var main = pre.Main;
+                var place = pre.MainPlace;
+
+                return pre.EveryoneConscious()
+                    && pre.MainPlaceIsEnlighted()
+                    && pre.Agent("other").Id == "extrano"
+                    && pre.Main.Cast<MisionAgent>().IsAlive
+                    && pre.Agent("other").Cast<MisionAgent>().IsAlive;
+            })
+            .WithInteraction((post) =>
+            {
+                return new Output(new Conversation()
+                    .With(post.Main.Cast<SimonEstevez>().TrueName, new string[]
+                    {
+                        "insultarExtrano_insulto_1",
+                        "insultarExtrano_insulto_2",
+                        "insultarExtrano_insulto_3",
+                        "insultarExtrano_insulto_4"
+                    }.Random().trans())
+                    .With("Extraño", new string[]
+                    {
+                        "insultarExtrano_respuesta_1",
+                        "insultarExtrano_respuesta_2",
+                        "insultarExtrano_respuesta_3",
+                    }.Random().trans()));
+            })
+                .WithDriver(Descriptor.MainRole)
+                .SetAsRoot()
+            .Finish(),
+
+            StoryletBuilder.Create("preguntarExtrano")
+            .BeingRepeteable()
+            .ForHumans()
+            .WithDescriptor("other")
+            .WithAgentsScope()
+            .WithEnvPreconditions(pre => pre.IsState(States.Fight))
+            .WithPreconditions((pre) =>
+            {
+                var main = pre.Main;
+                var place = pre.MainPlace;
+
+                return pre.EveryoneConscious()
+                    && pre.MainPlaceIsEnlighted()
+                    && pre.Agent("other").Id == "extrano"
+                    && pre.Main.Cast<MisionAgent>().IsAlive
+                    && pre.Agent("other").Cast<MisionAgent>().IsAlive;
+            })
+            .WithInteraction((post) =>
+            {
+                return new Output(new Conversation()
+                    .With(post.Main.Cast<SimonEstevez>().TrueName, new string[]
+                    {
+                        "preguntarExtrano_pregunta_1",
+                        "preguntarExtrano_pregunta_2",
+                        "preguntarExtrano_pregunta_3",
+                        "preguntarExtrano_pregunta_4"
+                    }.Random().trans())
+                    .With("Extraño", new string[]
+                    {
+                        "preguntarExtrano_respuesta_1",
+                        "preguntarExtrano_respuesta_2",
+                        "preguntarExtrano_respuesta_3",
+                    }.Random().trans()));
+            })
+                .WithDriver(Descriptor.MainRole)
+                .SetAsRoot()
+            .Finish(),
+
+            StoryletBuilder.Create("calmarExtrano")
+            .BeingRepeteable()
+            .ForHumans()
+            .WithDescriptor("other")
+            .WithAgentsScope()
+            .WithEnvPreconditions(pre => pre.IsState(States.Fight))
+            .WithPreconditions((pre) =>
+            {
+                var main = pre.Main;
+                var place = pre.MainPlace;
+
+                return pre.EveryoneConscious()
+                    && pre.MainPlaceIsEnlighted()
+                    && pre.Agent("other").Id == "extrano"
+                    && pre.Main.Cast<MisionAgent>().IsAlive
+                    && pre.Agent("other").Cast<MisionAgent>().IsAlive;
+            })
+            .WithInteraction((post) =>
+            {
+                return new Output(new Conversation()
+                    .With(post.Main.Cast<SimonEstevez>().TrueName, new string[]
+                    {
+                        "calmarExtrano_frase_1",
+                        "calmarExtrano_frase_2",
+                        "calmarExtrano_frase_3",
+                        "calmarExtrano_frase_4"
+                    }.Random().trans())
+                    .With("Extraño", new string[]
+                    {
+                        "calmarExtrano_respuesta_1",
+                        "calmarExtrano_respuesta_2",
+                        "calmarExtrano_respuesta_3",
+                    }.Random().trans()));
+            })
+                .WithDriver(Descriptor.MainRole)
+                .SetAsRoot()
             .Finish()
             );
         }
@@ -359,7 +473,11 @@ namespace LaMision.Core.Vaults
 
             if (!extrano.IsAlive)
             {
-                post.World.State.Transite(States.Mision);
+                if(sujeto.IsRevelated)
+                    post.World.State.Transite(States.Revelation);
+                else
+                    post.World.State.Transite(States.Mision);
+
                 outputables.Add(new Pharagraph("muerte_extrano".trans()));
             }
 

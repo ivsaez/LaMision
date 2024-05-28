@@ -176,7 +176,7 @@ namespace LaMision.Core.Vaults
                 .Finish(),
 
                 StoryletBuilder.Create("usarLavadero")
-                .BeingGlobalSingle()
+                .BeingRepeteable()
                 .ForHumans()
                 .WithDescriptor("thing")
                 .WithItemsScope()
@@ -490,6 +490,34 @@ namespace LaMision.Core.Vaults
                     .SetAsRoot()
                 .Finish(),
 
+                StoryletBuilder.Create("meterteRejillaFail")
+                .BeingRepeteable()
+                .ForHumans()
+                .WithDescriptor("thing")
+                .WithItemsScope()
+                .WithPreconditions((pre) =>
+                {
+                    var main = pre.Main;
+                    var item = pre.Item("thing");
+
+                    return pre.EveryoneConscious()
+                        && (pre.PositionIs(Descriptor.MainRole, Position.Lying) || pre.PositionIs(Descriptor.MainRole, Position.Kneeing))
+                        && item.Id == "rejilla"
+                        && pre.MainPlaceIsEnlighted()
+                        && pre.Historic.HasHappened(new Snapshot("romperRejilla", main.Id))
+                        && !pre.IsKnown("Aceitado", main.Id);
+                })
+                .WithInteraction((post) =>
+                {
+                    var item = post.Item("thing");
+                    var itemDescriptor = new ItemDescriptor(item);
+
+                    return Output.FromTexts("meterteRejillaFail_text".trans(itemDescriptor.ArticledName(true)));
+                })
+                    .WithDriver(Descriptor.MainRole)
+                    .SetAsRoot()
+                .Finish(),
+
                 StoryletBuilder.Create("meterteRejilla")
                 .BeingGlobalSingle()
                 .ForHumans()
@@ -504,7 +532,8 @@ namespace LaMision.Core.Vaults
                         && (pre.PositionIs(Descriptor.MainRole, Position.Lying) || pre.PositionIs(Descriptor.MainRole, Position.Kneeing))
                         && item.Id == "rejilla"
                         && pre.MainPlaceIsEnlighted()
-                        && pre.Historic.HasHappened(new Snapshot("romperRejilla", main.Id));
+                        && pre.Historic.HasHappened(new Snapshot("romperRejilla", main.Id))
+                        && pre.IsKnown("Aceitado", main.Id);
                 })
                 .WithInteraction((post) =>
                 {
@@ -513,9 +542,6 @@ namespace LaMision.Core.Vaults
                     var frasco = post.World.Items.GetOne("frasco");
 
                     var itemDescriptor = new ItemDescriptor(item);
-
-                    if(!post.IsKnown("Aceitado", main.Id))
-                        return Output.FromTexts("meterteRejilla_failure_text".trans(itemDescriptor.ArticledName(true)));
 
                     var dormitorio = post.MainPlace;
                     var otroLavabo = post.World.Map.Get("otroLavabo");

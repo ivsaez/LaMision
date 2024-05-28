@@ -146,7 +146,7 @@ namespace LaMision.Core.Lang
             new Word("pulsarBoton_1_interaction_description", "Pulsar el botón"),
             new Word("pulsarBoton_text", "Pulsas el botón dándole un manotazo. No sucede nada."),
 
-            new Word("cogerMesaPlegable_1_interaction_description", "Coget {thing}"),
+            new Word("cogerMesaPlegable_1_interaction_description", "Coger {thing}"),
             new Word("cogerMesaPlegable_text", "En condiciones normales no tendrías problemas en plegar la mesa y cargarla, pero en este momento te encuentras extremadamente débil."),
 
             new Word("mirarDebajoLitera_1_interaction_description", "Mirar debajo de la litera"),
@@ -242,7 +242,9 @@ namespace LaMision.Core.Lang
 
             new Word("meterteRejilla_1_interaction_description", "Meterte por {thing}"),
             new Word("meterteRejilla_text", "Te metes por {0}. Gracias al aceite impregnado en tu cuerpo consigues deslizarte a través del estrecho hueco. Llegas a un lavabo."),
-            new Word("meterteRejilla_failure_text", "Intentas meterte por {0}, pero las paredes son muy rugosas y los hombros se te atascan."),
+
+            new Word("meterteRejillaFail_1_interaction_description", "Meterte por {thing}"),
+            new Word("meterteRejillaFail_text", "Intentas meterte por {0}, pero las paredes son muy rugosas y los hombros se te atascan."),
 
             new Word("mensajeVacio_1_interaction_description", "Parece que vaya a sonar una locución"),
             new Word("mensajeVacio_text", "El altavoz se activa como si alguien fuera a decir algo."),

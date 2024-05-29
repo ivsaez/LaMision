@@ -469,6 +469,67 @@ namespace LaMision.Core.Lang
             new Word("muerte_extrano", "El último golpe es demasiado para el extraño, que cae al suelo. Ese desgraciado no volverá a levantarse más."),
 
             new Word("fin", "FIN"),
+
+            new Word("ending1_1_interaction_description", "Se apagan las luces"),
+
+            new Word("ending2_1_interaction_description", "Se apagan las luces"),
+
+            new Word("ending3_1_interaction_description", "Se apagan las luces"),
+
+            new Word("ending_shared_text_1", "De repente todas las luces rojas se apagan. Notas como la temperatura del lugar desciende gradualmente. Te quedas así, a oscuras sin moverte durante un rato. No sabes si pasan solo unos minutos o unas horas, pero te parece una eternidad oyendo solamente tu respiración."),
+            new Word("ending_shared_text_2", "Algo metálico suena. Alguien ha abierto la escotilla. Oyes un alboroto de ruidos metálicos y acto seguido los pesados pasos de varias personas que se acercan."),
+            new Word("ending_shared_text_3", "Te iluminan con varias linternas a la vez. Son cuatro personas, enfundadas en unas pesadas armaduras metálicas que les dan una apariencia enorme, monstruosa. Sus cascos no tienen visor, más bien tienen dos teleobjetivos, por lo que es imposible verles nada del rostro. Todos van armados."),
+            new Word("ending_shared_text_4", "Tras mirarte unos segundos, te apresan entre dos de ellos y te arrastran hacia la escotilla. No les cuesta mucho moverte, no sabes si por que son muy fuertes, o tú estás muy débil, o ambas cosas a la vez."),
+            new Word("ending_shared_text_5", "La escotilla lleva a un largo túnel que atravesáis a oscuras, sin mediar palabra. Estás tan asustado que no te atreves a hablar, tampoco sabes si te oirán con esos cascos tan gruesos y entre el sonido pesado y metálico de sus pisadas."),
+            new Word("ending_shared_text_6", "Al final del túnel hay un enorme montacargas. Todos entráis y uno de ellos pulsa el botón para subir. Mientras subís uno de ellos por fin dice algo."),
+            new Word("ending_shared_text_7", "¿Te encuentras bien? ¿Todo bien?"),
+            new Word("ending_shared_text_8", "Su voz suena a través de un altavoz del casco, totalmente impersonal, como si fuera la voz de Microsoft Sam."),
+            new Word("ending_shared_text_9", "Sí... sí, estoy bien. Creo."),
+
+            new Word("ending_shared_text_botones_1", "Otro distinto al de antes habla también."),
+            new Word("ending_shared_text_botones_2", "¿Te has divertido jugando con los cables y los botoncitos?"),
+            new Word("ending_shared_text_botones_3", "¡Silencio!"),
+            
+            new Word("ending_shared_text_10", "Nadie dice nada más durante el resto del ascenso."),
+            new Word("ending_shared_text_11", "Cuando el montacargas se detiene, salís a una sala rectangular con una puerta metálica enorme. Uno de ellos la abre y todos salís por fin al aire libre. Miras alrededor y ves que os rodea un inmenso desierto. El sol ya está a punto de esconderse y tiñe de rojo el suelo pedregoso que se extiende hasta donde te alcanza la vista."),
+            new Word("ending_shared_text_13", "Te giras y ves que la parte visible del lugar donde te encontrabas es solo del tamaño de la sala del montacargas, asumes que todo lo demás está bajo tierra."),
+            new Word("ending_shared_text_14", "Ahora puedes ver con más claridad a los hombres de las armaduras. Son de un color metálico oscuro y cubren por completo el cuerpo de sus ocupantes. A la luz del día aún lucen más pesadas, esos hombres deben ser realmente fuertes para poder cargar con ese peso. En los hombros de sus armaduras puedes ver pintados algnos emblemas que sin duda representan rangos militares."),
+            new Word("ending_shared_text_15", "Los hombres te conducen a un vehículo aparcado delante de la puerta. Parece una especie de carro blindado pero nunca habías visto uno así. Tiene una forma robusta y obalada, sin cañones ni ventanas. Solo hay una pesada puerta que se abre por la parte de atrás. Dos hombres de armadura entran primero, luego tú y finalmente los otros dos. El vehículo arranca. No ves quién conduce."),
+            new Word("ending_shared_text_16", "El vehículo se desplaza durante un tiempo muy largo. No sabrías decir cuanto pero pueden haber sido horas. Durante todo el trayecto nadie dice nada. Como habías apreciado desde fuera, el vehículo no tiene ventanas, así que pasas el camino sin poder ver nada."),
+            new Word("ending_shared_text_17", "Tras un un trayecto eterno el vehículo se detiene. La puerta del vehículo se abre y los cinco salís uno tras otro. Estáis en una instalación que asemeja un hospital. Los cinco entráis por una puerta automática enorme y accedéis a un pasillo con las paredes blancas. Ahí unos cañones os rocían con un líquido que parece leche."),
+            new Word("ending_shared_text_18", "Al otro lado del pasillo, los hombres de las armaduras se detienen. Otra puerta automática se abre y te hacen señas para que entres. Dubitativo atraviesas el humbral de la puerta y ésta se cierra tras de ti. Ahora estás solo en una habitación donde hay una camilla, una silla y una toalla. Hay también otra puerta, una convencional."),
+            new Word("ending_shared_text_19", "En seguida la puerta convencional se abre y otro hombre entra. Éste va también vestido con un traje especial, parecido a un traje de apicultor. Lleva puesta una especie de escafandra con lo cual puedes verle la cara. Parece un hombre de unos 50 años, con un frondoso bigote canoso."),
+            new Word("ending_shared_text_20", "El hombre se acerca y comienza a hablar mientras mira una carpeta que sostiene con ambas manos."),
+            
+            new Word("ending1_text_1", "Sujeto de experimento número 5. Ningún síntoma aparente, ni rastro de daño alguno."),
+            new Word("ending1_text_2", "Disculpe. ¿Puede usted explicarme lo que está pasando? ¿Hemos derrotado al enemigo?"),
+            new Word("ending1_text_3", "Kazinsky ¿verdad? Se puede decir que sí, que hemos derrotado al enemigo. Bueno, faltan unas cuantas pruebas médicas pero su resultado parece realmente prometedor."),
+            new Word("ending1_text_4", "Pero no logré activar el botón. El Comandante..."),
+            new Word("ending1_text_5", "El hombre te mira sonriendo. Una sonrisa condescendiente. Deja de mirar la carpeta y se marcha por la puerta."),
+            new Word("ending1_text_6", "Te sientas en la camilla desorientado y confuso. Sin comprender absolutamente nada de lo que está sucediendo. En cualquier caso parece que el peligro ha terminado. ¿Pero cual era el peligro?"),
+            
+            new Word("ending2_text_1", "Sujeto de experimento número 5. Ningún síntoma aparente, ni rastro de daño alguno."),
+            new Word("ending2_text_2", "Disculpe. ¿Puede usted explicarme lo que está pasando? ¿Hemos derrotado al enemigo?"),
+            new Word("ending2_text_3", "Era usted... Simón Estevez, ¿estoy en lo cierto?"),
+            new Word("ending2_text_4", "Sí. Exacto. Yo soy Simón Estévez. ¿Dónde está Natalia? ¿Puedo verla?"),
+            new Word("ending2_text_5", "Natalia... sí claro. No se preocupe por eso Estévez, todo eso se resolverá después. Ha aguantado usted 4 horas, el resultado es extremadamente prometedor. Quedan algunas pruebas más por hacer, pero pinta muy bien."),
+            new Word("ending2_text_6", "Entonces lo hemos conseguido. Hemos ganado a los yankees."),
+            new Word("ending2_text_7", "El hombre te mira sonriendo. Una sonrisa condescendiente."),
+            new Word("ending2_text_8", "A los yankees... Ya hablarán con usted en un rato Estévez. Sí le puedo decir que hemos dado un  paso de gigante para ganar a nuestros enemigos."),
+            new Word("ending2_text_9", "Mientras dice esto el hombre cierra la carpeta y sale por la puerta. Te quedas solo, sentado en la camilla pensando en Natalia. Sigues sin recordarla, pero tenía una voz preciosa. Y además parece que has derrotado al enemigo. ¿Eso dijo ese hombre no?"),
+
+            new Word("ending3_text_1", "Sujeto de experimento número 5. Ningún síntoma aparente, ni rastro de daño alguno."),
+            new Word("ending3_text_2", "El hombre que maté allí abajo... era el número 4, ¿no?"),
+            new Word("ending3_text_3", "Sí, pero no se torture señor Estévez, ese hombre ya estaba prácticamente muerto."),
+            new Word("ending3_text_4", "El tipo tenía razón, soy un pobre idiota. Ustedes son los yankees. Ustedes son el enemigo. Toda esa mierda del botón, la tipa del altavoz..."),
+            new Word("ending3_text_5", "Relájese Estévez. Olvídese de todo eso, olvídese de su antigua vida. Si las pruebas lo confirman, ha aguantado usted 4 horas en un nivel de radiación mortal sin sufrir ni un solo rasguño."),
+            new Word("ending3_text_6", "Eso es imposible."),
+            new Word("ending3_text_7", "¿Sabe lo que significa eso de cara a una tercera guerra mundial? Su nombre va a figurar en los libros de historia."),
+            new Word("ending3_text_8", "Entonces... lo del enemigo..."),
+            new Word("ending3_text_9", "Olvídelo. El experimento ha terminado. Después de unas pruebas médicas le mandaremos a Boston donde continuaremos con el programa. "),
+            new Word("ending3_text_10", "¡A Boston! ¡A colaborar con ustedes los yankees! No puede ser... yo soy..."),
+            new Word("ending3_text_11", "Un hombre al que le ha tocado la lotería de la vida. Vamos a contactar con su família, les vamos a mover a todos a Boston. Relájese, usted ya ha hecho todo de su parte."),
+            new Word("ending3_text_12", "Mientras dice esto el hombre cierra la carpeta y sale por la puerta. Te quedas solo, pensando, intentando recordar. A medida que el efecto de las drogas pasa te acuerdas de la instrucción, los entrenamientos, te acuerdas de como capturaron a todo tu pelotón... 'Te ha tocado la lotería de la vida', eso ha dicho el yankee."),
         };
     }
 }

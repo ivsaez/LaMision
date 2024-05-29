@@ -17,7 +17,7 @@
 
 <div class="container mt-3">
     <div class="row vh-100">
-        <div class="col-md-6 bg-light border p-3 h-75">
+        <div class="col-md-6 border p-3 h-75">
             @if (interaction is null || !interaction.HasChoices || interaction.Choices.IsEmpty)
             {
                 <div role="option">
@@ -35,23 +35,47 @@
             }
         </div>
 
-        <div class="col-md-6 bg-light border p-3 overflow-auto h-75">
-            @if (output is not null)
+        <div class="col-md-6 border p-3 overflow-auto h-75">
+            @if (outputs.Any())
             {
-                foreach (var item in output.All)
-                {
-                    if (item is Conversation)
+                var firstOutput = outputs.First();
+                <div class="bg-light border border-2 shadow rounded m-2 p-2">
+                    @foreach (var item in firstOutput.All)
                     {
-                        var conversation = item as Conversation;
-                        foreach (var subitem in conversation!.All)
+                        if (item is Conversation)
                         {
-                            <p role="contentinfo">@subitem.ToString()</p>
+                            var conversation = item as Conversation;
+                            foreach (var subitem in conversation!.All)
+                            {
+                                <p role="contentinfo">@subitem.ToString()</p>
+                            }
+                        }
+                        else
+                        {
+                            <p role="contentinfo">@item.ToString()</p>
                         }
                     }
-                    else
-                    {
-                        <p role="contentinfo">@item.ToString()</p>
-                    }
+                </div>
+
+                foreach (var output in outputs.Skip(1))
+                {
+                    <div class="text-secondary rounded border m-2 p-2">
+                        @foreach (var item in output.All)
+                        {
+                            if (item is Conversation)
+                            {
+                                var conversation = item as Conversation;
+                                foreach (var subitem in conversation!.All)
+                                {
+                                    <p role="contentinfo">@subitem.ToString()</p>
+                                }
+                            }
+                            else
+                            {
+                                <p role="contentinfo">@item.ToString()</p>
+                            }
+                        }
+                    </div>
                 }
             }
         </div>
@@ -59,7 +83,7 @@
 </div>
 
 @code {
-    private Output? output;
+    private List<Output> outputs = new List<Output>();
 
     private GameInteraction? interaction = null;
     private Input input = Input.Void;
@@ -90,7 +114,7 @@
 
     protected override void OnInitialized()
     {
-        output = game.Start();
+        outputs.Add(game.Start());
     }
 
     private void onOptionSelected(int index)
@@ -99,7 +123,7 @@
         interaction = game.NextAction(input);
 
         if (interaction.HasText)
-            output = interaction.Output;
+            AddOutput(interaction.Output);
     }
 
     private void Continue()
@@ -107,6 +131,12 @@
         interaction = game.NextAction(Input.Void);
 
         if (interaction.HasText)
-            output = interaction.Output;
+            AddOutput(interaction.Output);
+    }
+
+    private void AddOutput(Output output)
+    {
+        if (!output.IsEmpty)
+            outputs.Insert(0, output);
     }
 }

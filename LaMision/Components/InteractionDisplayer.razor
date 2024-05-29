@@ -3,17 +3,12 @@
 @if (Interaction is null || !Interaction.HasChoices || Interaction.Choices.IsEmpty)
 {
     <div role="option">
-        <button class="btn btn-primary" @onclick="OnContinue">Continuar</button>
+        <button class="btn btn-primary" @onclick="(args) => OptionSelected(args)">Continuar</button>
     </div>
 }
 else
 {
-     foreach (var option in Interaction.Choices.Options)
-    {
-        <div role="option">
-            <button class="btn btn-primary" @onclick="(args)=> OptionSelected(args, option.Index)">@option.Value</button>
-        </div>
-    }
+    <ChoiceSelector Choices="@Interaction.Choices" OnOptionSelected="@OnOptionSelected" />
 }
 
 @code {
@@ -21,13 +16,13 @@ else
     public GameInteraction? Interaction { get; set; } = null;
 
     [Parameter]
-    public Action OnContinue { get; set; } = () => { };
+    public EventCallback OnContinue { get; set; }
 
     [Parameter]
-    public EventCallback<int> OnOptionSelected { get; set; }
+    public Action<int> OnOptionSelected { get; set; } = (index) => {};
 
-    private async Task OptionSelected(MouseEventArgs e, int index)
+    private async Task OptionSelected(MouseEventArgs e)
     {
-        await OnOptionSelected.InvokeAsync(index);
+        await OnContinue.InvokeAsync();
     }
 }

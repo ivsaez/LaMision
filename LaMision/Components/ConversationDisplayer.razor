@@ -1,0 +1,11 @@
+﻿@using Outputer
+
+@foreach (var item in Output.All)
+{
+	<Sentence Value="@item.ToString()" />
+}
+
+@code {
+	[Parameter]
+	public Conversation Output { get; set; } = new Conversation();
+}

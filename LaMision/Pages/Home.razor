@@ -36,48 +36,7 @@
         </div>
 
         <div class="col-md-6 border p-3 overflow-auto h-75">
-            @if (outputs.Any())
-            {
-                var firstOutput = outputs.First();
-                <div class="bg-light border border-2 shadow rounded m-2 p-2">
-                    @foreach (var item in firstOutput.All)
-                    {
-                        if (item is Conversation)
-                        {
-                            var conversation = item as Conversation;
-                            foreach (var subitem in conversation!.All)
-                            {
-                                <p role="contentinfo">@subitem.ToString()</p>
-                            }
-                        }
-                        else
-                        {
-                            <p role="contentinfo">@item.ToString()</p>
-                        }
-                    }
-                </div>
-
-                foreach (var output in outputs.Skip(1))
-                {
-                    <div class="text-secondary rounded border m-2 p-2">
-                        @foreach (var item in output.All)
-                        {
-                            if (item is Conversation)
-                            {
-                                var conversation = item as Conversation;
-                                foreach (var subitem in conversation!.All)
-                                {
-                                    <p role="contentinfo">@subitem.ToString()</p>
-                                }
-                            }
-                            else
-                            {
-                                <p role="contentinfo">@item.ToString()</p>
-                            }
-                        }
-                    </div>
-                }
-            }
+            <Outputs Elements="@outputs" />
         </div>
     </div>
 </div>

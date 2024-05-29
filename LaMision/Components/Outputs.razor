@@ -1,0 +1,16 @@
+﻿@using Outputer
+
+@if (Elements.Any())
+{
+    <OutputDisplayer Element="@Elements.First()" IsActive="@true" />
+
+    foreach (var output in Elements.Skip(1))
+    {
+        <OutputDisplayer Element="@output" />
+    }
+}
+
+@code {
+	[Parameter]
+	public List<Output> Elements { get; set; } = new List<Output>();
+}

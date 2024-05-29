@@ -1,0 +1,35 @@
+﻿@using Outputer
+
+<div class="@classValue">
+    @foreach (var item in Element.All)
+    {
+        if (item is Conversation)
+        {
+            var conversation = item as Conversation;
+            <ConversationDisplayer Output="@conversation" />
+        }
+        else
+        {
+            <Sentence Value="@item.ToString()" />
+        }
+    }
+</div>
+
+@code {
+    [Parameter]
+    public Output Element { get; set; } = Output.Empty;
+
+    [Parameter]
+    public bool IsActive { get; set; } = false;
+
+    private string classValue = inactiveClass;
+
+    protected override void OnInitialized()
+    {
+        if (IsActive)
+            classValue = activeClass;
+    }
+
+	private const string inactiveClass = "text-secondary rounded border m-2 p-2";
+	private const string activeClass = "bg-light border border-2 shadow rounded m-2 p-2";
+}

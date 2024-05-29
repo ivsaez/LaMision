@@ -15,43 +15,47 @@
 
 <Timer Time=@game.GetTime()></Timer>
 
-<div>
-    @if (output is not null)
-    {
-        foreach (var item in output.All)
-        {
-            if (item is Conversation)
+<div class="container mt-3">
+    <div class="row vh-100">
+        <div class="col-md-6 bg-light border p-3 h-75">
+            @if (interaction is null || !interaction.HasChoices || interaction.Choices.IsEmpty)
             {
-                var conversation = item as Conversation;
-                foreach (var subitem in conversation!.All)
-                {
-                    <p role="contentinfo">@subitem.ToString()</p>
-                }
+                <div role="option">
+                    <button class="btn btn-primary" @onclick="Continue">Continuar</button>
+                </div>
             }
             else
             {
-                <p role="contentinfo">@item.ToString()</p>
+                foreach (var option in interaction.Choices.Options)
+                {
+                    <div role="option">
+                        <button class="btn btn-primary" @onclick="() => onOptionSelected(option.Index)">@option.Value</button>
+                    </div>
+                }
             }
-        }
-    }
-</div>
-
-<div>
-    @if (interaction is null || !interaction.HasChoices || interaction.Choices.IsEmpty)
-    {
-        <div role="option">
-            <button class="btn btn-primary" @onclick="Continue">Continuar</button>
         </div>
-    }
-    else
-    {
-        foreach (var option in interaction.Choices.Options)
-        {
-            <div role="option">
-                <button class="btn btn-primary" @onclick="() => onOptionSelected(option.Index)">@option.Value</button>
-            </div>
-        }
-    }
+
+        <div class="col-md-6 bg-light border p-3 overflow-auto h-75">
+            @if (output is not null)
+            {
+                foreach (var item in output.All)
+                {
+                    if (item is Conversation)
+                    {
+                        var conversation = item as Conversation;
+                        foreach (var subitem in conversation!.All)
+                        {
+                            <p role="contentinfo">@subitem.ToString()</p>
+                        }
+                    }
+                    else
+                    {
+                        <p role="contentinfo">@item.ToString()</p>
+                    }
+                }
+            }
+        </div>
+    </div>
 </div>
 
 @code {

@@ -17,22 +17,8 @@
 
 <div class="container mt-3">
     <div class="row vh-100">
-        <div class="col-md-6 border p-3 h-75">
-            @if (interaction is null || !interaction.HasChoices || interaction.Choices.IsEmpty)
-            {
-                <div role="option">
-                    <button class="btn btn-primary" @onclick="Continue">Continuar</button>
-                </div>
-            }
-            else
-            {
-                foreach (var option in interaction.Choices.Options)
-                {
-                    <div role="option">
-                        <button class="btn btn-primary" @onclick="() => onOptionSelected(option.Index)">@option.Value</button>
-                    </div>
-                }
-            }
+        <div class="col-md-6 border p-3 overflow-auto h-75">
+            <InteractionDisplayer Interaction="@interaction" OnContinue="@Continue" OnOptionSelected="SelectOption" />
         </div>
 
         <div class="col-md-6 border p-3 overflow-auto h-75">
@@ -76,7 +62,7 @@
         outputs.Add(game.Start());
     }
 
-    private void onOptionSelected(int index)
+    private void SelectOption(int index)
     {
         input = new Input(index, interaction!.Choices.Range);
         interaction = game.NextAction(input);

@@ -1,0 +1,33 @@
+﻿@using LaMision.Core
+
+@if (Interaction is null || !Interaction.HasChoices || Interaction.Choices.IsEmpty)
+{
+    <div role="option">
+        <button class="btn btn-primary" @onclick="OnContinue">Continuar</button>
+    </div>
+}
+else
+{
+     foreach (var option in Interaction.Choices.Options)
+    {
+        <div role="option">
+            <button class="btn btn-primary" @onclick="(args)=> OptionSelected(args, option.Index)">@option.Value</button>
+        </div>
+    }
+}
+
+@code {
+    [Parameter]
+    public GameInteraction? Interaction { get; set; } = null;
+
+    [Parameter]
+    public Action OnContinue { get; set; } = () => { };
+
+    [Parameter]
+    public EventCallback<int> OnOptionSelected { get; set; }
+
+    private async Task OptionSelected(MouseEventArgs e, int index)
+    {
+        await OnOptionSelected.InvokeAsync(index);
+    }
+}

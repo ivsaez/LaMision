@@ -1,4 +1,5 @@
-﻿@using Outputer.Choicing
+﻿@using LaMision.Parsing
+@using Outputer.Choicing
 
 <div class="mb-2">
     <input type="text" @bind="@filterValue" @oninput="Filter" />
@@ -32,13 +33,12 @@
     private void Filter(ChangeEventArgs e)
     {
         filterValue = e.Value.ToString();
-        if (filterValue.Length < 3)
-        {
-            filteredOptions = new List<IndexedOption>();
-            return;
-        }
 
         filteredOptions = Choices.Options
-            .Where(indexedOption => indexedOption.Value.Contains(filterValue));
+            .Where(indexedOption =>
+            {
+                var filter = new Filter(indexedOption.Value);
+                return filter.Matches(filterValue!);
+            });
     }
 }

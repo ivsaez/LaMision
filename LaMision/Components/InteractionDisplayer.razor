@@ -3,7 +3,7 @@
 @if (Interaction is null || !Interaction.HasChoices || Interaction.Choices.IsEmpty)
 {
     <div role="option">
-        <button @ref="continueButton" class="btn btn-primary w-100 mt-1" @onclick="(args) => OptionSelected(args)">Continuar</button>
+        <button @ref="continueButton" class="btn btn-primary w-100 mt-1" @onclick="(args) => Continue(args)">Continuar</button>
     </div>
 }
 else
@@ -21,7 +21,7 @@ else
     [Parameter]
     public Action<int> OnOptionSelected { get; set; } = (index) => {};
 
-    private async Task OptionSelected(MouseEventArgs e)
+    private async Task Continue(MouseEventArgs e)
     {
         await OnContinue.InvokeAsync();
     }

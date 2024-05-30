@@ -2,7 +2,7 @@
 @using Outputer.Choicing
 
 <div class="mb-2">
-    <input class="w-100" type="text" @bind="@filterValue" @oninput="Filter" />
+    <input @ref="textInput" class="w-100" type="text" @bind="@filterValue" @oninput="Filter" />
 </div>
 
 <div>
@@ -26,6 +26,8 @@
         await OnOptionSelected.InvokeAsync(index);
     }
 
+    private ElementReference textInput;
+
     private string filterValue = string.Empty;
 
     private IEnumerable<IndexedOption> filteredOptions = new List<IndexedOption>();
@@ -40,5 +42,11 @@
                 var filter = new Filter(indexedOption.Value);
                 return filter.Matches(filterValue!);
             });
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+            await textInput.FocusAsync();
     }
 }

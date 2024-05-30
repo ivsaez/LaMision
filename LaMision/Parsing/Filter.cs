@@ -4,7 +4,7 @@
     {
         public bool Matches(string input)
         {
-            if(string.IsNullOrWhiteSpace(input))
+            if(string.IsNullOrWhiteSpace(input) || input.Length < 2)
                 return false;
 
             var sentenceTokens = new Tokens(sentence);

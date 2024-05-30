@@ -2,14 +2,14 @@
 @using Outputer.Choicing
 
 <div class="mb-2">
-    <input type="text" @bind="@filterValue" @oninput="Filter" />
+    <input class="w-100" type="text" @bind="@filterValue" @oninput="Filter" />
 </div>
 
 <div>
     @foreach (var option in @filteredOptions)
     {
         <div role="option">
-            <button class="btn btn-primary" @onclick="(args) => OptionSelected(args, option.Index)">@option.Value</button>
+            <button class="btn btn-primary w-100 mt-1" @onclick="(args) => OptionSelected(args, option.Index)">@option.Value</button>
         </div>
     }
 </div>

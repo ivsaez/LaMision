@@ -10,6 +10,9 @@
             var sentenceTokens = new Tokens(sentence);
             var inputTokens = new Tokens(input);
 
+            Console.WriteLine(sentenceTokens);
+            Console.WriteLine(inputTokens);
+
             return sentenceTokens.HasIncluded(inputTokens);
         }
     }

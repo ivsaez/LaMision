@@ -15,10 +15,14 @@ namespace LaMision.Parsing
                 .RemoveNonImportantWords());
         }
 
-        public bool HasIncluded(Tokens other) =>
-            other.tokens
+        public bool HasIncluded(Tokens other)
+        {
+            if(!other.tokens.Any())
+                return false;
+
+            return other.tokens
                 .All(inputToken => tokens
-                    .Any(sentenceToken => 
+                    .Any(sentenceToken =>
                     {
                         if (inputToken.Length < 2)
                             return false;
@@ -27,6 +31,8 @@ namespace LaMision.Parsing
                         else
                             return sentenceToken == inputToken || sentenceToken.Contains(inputToken);
                     }));
+        }
+            
 
         public override string ToString() =>
             $"[{string.Join(" ", tokens)}]";

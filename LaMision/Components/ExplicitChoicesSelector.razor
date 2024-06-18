@@ -1,0 +1,24 @@
+﻿@using LaMision.Parsing
+@using Outputer.Choicing
+
+<div>
+    @foreach (var option in @Choices.Options)
+    {
+        <div role="option">
+            <button class="btn btn-primary w-100 mt-1" @onclick="(args) => OptionSelected(args, option.Index)">@option.Value</button>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public Choices Choices { get; set; } = new Choices();
+
+    [Parameter]
+    public EventCallback<int> OnOptionSelected { get; set; }
+
+    private async Task OptionSelected(MouseEventArgs e, int index)
+    {
+        await OnOptionSelected.InvokeAsync(index);
+    }
+}

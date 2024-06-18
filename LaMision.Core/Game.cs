@@ -122,7 +122,7 @@ namespace LaMision.Core
             }
 
             if (onGoing.NextAnswererIsHuman)
-                return GameInteraction.New(onGoing.Step);
+                return GameInteraction.New(onGoing.Step, true);
 
             onGoing.SetAutomaticDecision(desires);
             return GameInteraction.Automatic(onGoing.Step);

@@ -10,14 +10,16 @@ namespace LaMision.Core
         private Output? output;
         private readonly Choices? choices;
 
-        private GameInteraction(Output? output, Choices? choices, bool isEnding)
+        private GameInteraction(Output? output, Choices? choices, bool isEnding, bool isSubInteraction)
         {
             this.output = output;
             this.choices = choices;
             IsEnding = isEnding;
+            IsSubInteraction = isSubInteraction;
         }
 
         public bool IsEnding { get; }
+        public bool IsSubInteraction { get; }
 
         public Output Output
         {
@@ -66,10 +68,13 @@ namespace LaMision.Core
             return builder.ToString();
         }
 
-        public static GameInteraction Ending => new GameInteraction(null, null, true);
+        public static GameInteraction Ending => 
+            new GameInteraction(null, null, true, false);
 
-        public static GameInteraction New(Step step) => new GameInteraction(step.Output, step.Choices, false);
+        public static GameInteraction New(Step step, bool isSubInteraction = false) => 
+            new GameInteraction(step.Output, step.Choices, false, isSubInteraction);
 
-        public static GameInteraction Automatic(Step step) => new GameInteraction(step.Output, null, false);
+        public static GameInteraction Automatic(Step step) => 
+            new GameInteraction(step.Output, null, false, false);
     }
 }

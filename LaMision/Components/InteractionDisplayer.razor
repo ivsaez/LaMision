@@ -6,6 +6,10 @@
         <button @ref="continueButton" class="btn btn-primary w-100 mt-1" @onclick="(args) => Continue(args)">Continuar</button>
     </div>
 }
+else if (Interaction.IsSubInteraction)
+{
+    <ExplicitChoicesSelector Choices="@Interaction.Choices" OnOptionSelected="@OnOptionSelected" />
+}
 else
 {
     <ChoiceSelector Choices="@Interaction.Choices" OnOptionSelected="@OnOptionSelected" />

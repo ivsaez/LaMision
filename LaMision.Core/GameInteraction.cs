@@ -74,7 +74,7 @@ namespace LaMision.Core
         public static GameInteraction New(Step step, bool isSubInteraction = false) => 
             new GameInteraction(step.Output, step.Choices, false, isSubInteraction);
 
-        public static GameInteraction Automatic(Step step) => 
-            new GameInteraction(step.Output, null, false, false);
+        public static GameInteraction Automatic(Step step, bool isSubInteraction = false) => 
+            new GameInteraction(step.Output, null, false, isSubInteraction);
     }
 }

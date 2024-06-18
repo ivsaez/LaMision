@@ -86,7 +86,7 @@ namespace LaMision.Core
 
                 onGoing.SelectRandomStorylet();
 
-                var gameInteraction = GameInteraction.New(onGoing.Step);
+                var gameInteraction = GameInteraction.New(onGoing.Step, !onGoing.IsStepEnding);
                 if (onGoing.IsStepEnding)
                 {
                     var output = onGoing.PassTurnForMainAgent();
@@ -125,7 +125,7 @@ namespace LaMision.Core
                 return GameInteraction.New(onGoing.Step, true);
 
             onGoing.SetAutomaticDecision(desires);
-            return GameInteraction.Automatic(onGoing.Step);
+            return GameInteraction.Automatic(onGoing.Step, !onGoing.IsStepEnding);
         }
 
         public string GetTime()

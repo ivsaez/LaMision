@@ -9,10 +9,10 @@
   <ItemGroup>
     <PackageReference Include="isz-AgentStats" Version="1.3.3" />
     <PackageReference Include="isz-ClimaticsLang" Version="1.1.0" />
-    <PackageReference Include="isz-Desiring" Version="1.2.3" />
+    <PackageReference Include="isz-Desiring" Version="1.2.5" />
     <PackageReference Include="isz-ItemTypes" Version="1.1.0" />
     <PackageReference Include="isz-Languager" Version="3.1.0" />
-    <PackageReference Include="isz-Stories" Version="1.6.3" />
+    <PackageReference Include="isz-Stories" Version="2.0.0" />
   </ItemGroup>
 
 </Project>

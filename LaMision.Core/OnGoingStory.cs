@@ -54,7 +54,8 @@ namespace LaMision.Core
             get
             {
                 checkNotEmpty();
-                return story!.Answerer.Actioner == Actioner.Human;
+                var answerer = world.Agents.GetOne(story!.Answerer);
+                return answerer.Actioner == Actioner.Human;
             }
         }
 
@@ -62,7 +63,9 @@ namespace LaMision.Core
         {
             checkNotEmpty();
 
-            var desirer = story!.Driver.Cast<IDesirer>();
+            var driver = world.Agents.GetOne(story!.Driver);
+            var desirer = driver.Cast<IDesirer>();
+
             int decision = desirer!.Decider.Decide(
                 world, 
                 lastStep!.Choices, 

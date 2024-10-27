@@ -29,6 +29,7 @@ namespace LaMision.Core
 
             IWorldAgent? selectedAgent = null;
             var rolledStories = new RolledStories();
+            var deckSelection = deck.GetValidStories(world, historic);
 
             while (rolledStories.IsEmpty && alreadyChecked.Count != agents.Count())
             {
@@ -41,8 +42,7 @@ namespace LaMision.Core
                 remaining.RemoveAt(index);
 
                 alreadyChecked.Add(selectedAgent);
-
-                var deckSelection = deck.GetValidStories(world, historic);
+                
                 rolledStories = deckSelection.GetValidStories(selectedAgent, world, historic);
             }
 

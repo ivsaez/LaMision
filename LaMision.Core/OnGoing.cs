@@ -81,7 +81,7 @@ namespace LaMision.Core
             checkNotEmpty();
 
             var turneds = onGoingStory.PassTurn();
-            var context = new Context<IWorldAgent, IWorldItem, IWorldMapped>(agent!, world.Existents);
+            var context = Context<IWorldAgent, IWorldItem, IWorldMapped>.FromAgent(agent!, world.Existents);
             return turneds.GetManyCombined(context.All.Select(identifiable => identifiable.Id).ToArray());
         }
 
